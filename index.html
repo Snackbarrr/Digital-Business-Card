@@ -5,24 +5,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yusrizal Akbar Junaedi</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <meta name="color-scheme" content="light dark">
   <style>
-    body, html {
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
       overflow: hidden;
+      font-family: 'Inter', sans-serif;
     }
     video.bg-video {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover; /* Back to normal full-screen cover */
+      z-index: -2;
+    }
+    .bg-overlay::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.2);
       z-index: -1;
+    }
+    /* Tooltip styling */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: auto;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 4px 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      font-size: 0.75rem;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
     }
   </style>
 </head>
-<body class="text-gray-900 flex items-center justify-center min-h-screen relative">
+<body class="text-gray-900 dark:text-gray-100 dark:bg-black flex items-center justify-center min-h-screen relative bg-overlay">
+
+  <!-- Theme Toggle -->
+  <button onclick="document.documentElement.classList.toggle('dark')" class="absolute top-3 right-3 text-xs bg-white dark:bg-gray-700 text-black dark:text-white rounded px-2 py-1 shadow">
+    Toggle Theme
+  </button>
 
   <!-- Background Video -->
   <video autoplay muted loop playsinline class="bg-video">
@@ -31,8 +76,8 @@
   </video>
 
   <!-- Business Card -->
-  <main class="relative w-full max-w-xs p-5 pt-16 bg-white bg-opacity-90 backdrop-blur-lg rounded-2xl shadow-xl z-10">
-    
+  <main class="relative w-full max-w-xs p-5 pt-16 bg-white dark:bg-gray-800 bg-opacity-90 backdrop-blur-lg rounded-2xl shadow-xl z-10 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+
     <!-- Profile Picture (floating) -->
     <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <img src="Profile.jpeg" alt="Photo of Yusrizal Akbar Junaedi" class="w-20 h-20 rounded-full object-cover border-4 border-gray-300 shadow-md" />
@@ -44,26 +89,49 @@
     <!-- Quote and Contact -->
     <div class="space-y-4">
       <section>
-        <p class="text-sm text-gray-700 italic text-center">
+        <p class="text-sm text-gray-700 dark:text-gray-300 italic text-center">
           "Today is the youngest I'll ever be again."
         </p>
       </section>
 
       <section>
         <h2 class="text-lg font-semibold text-center">Contact</h2>
-        <p class="text-sm text-gray-700 space-y-1 text-center">
-          <span class="flex justify-center items-center gap-2">
-             <a href="mailto:YusrizalAkbar.j@gmail.com" class="text-blue-600 underline">YusrizalAkbar.j@gmail.com</a>
-          </span>
-          <span class="flex justify-center items-center gap-2">
-             <span>07706819769</span>
-          </span>
-        </p>
+        <div class="text-sm text-gray-700 dark:text-gray-300 space-y-2 text-center">
+          <div class="flex justify-center items-center gap-2 cursor-pointer" onclick="copyToClipboard('YusrizalAkbar.j@gmail.com')">
+            <i data-lucide="mail" class="w-4 h-4"></i>
+            <span class="text-blue-600 underline">YusrizalAkbar.j@gmail.com</span>
+          </div>
+          <div class="flex justify-center items-center gap-2 cursor-pointer" onclick="copyToClipboard('07706819769')">
+            <i data-lucide="phone" class="w-4 h-4"></i>
+            <span>07706819769</span>
+          </div>
+          <div class="flex justify-center gap-4 mt-2">
+            <div class="tooltip">
+              <a href="https://www.instagram.com/_snackbar._/" target="_blank" class="opacity-70 hover:opacity-100 transition">
+                <i data-lucide="instagram" class="w-4 h-4"></i>
+              </a>
+              <span class="tooltiptext">Instagram</span>
+            </div>
+            <div class="tooltip">
+              <a href="https://www.linkedin.com/in/yusrizal-junaedi-b9a67b249/" target="_blank" class="opacity-70 hover:opacity-100 transition">
+                <i data-lucide="linkedin" class="w-4 h-4"></i>
+              </a>
+              <span class="tooltiptext">LinkedIn</span>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
-
   </main>
+
+  <script>
+    lucide.createIcons();
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert(`Copied: ${text}`);
+      });
+    }
+  </script>
 
 </body>
 </html>
-
