@@ -6,9 +6,10 @@
   <title>Yusrizal Akbar Junaedi</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body, html {
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
       overflow: hidden;
     }
     video.bg-video {
@@ -26,7 +27,7 @@
 
   <!-- Background Video -->
   <video autoplay muted loop playsinline class="bg-video">
-    <source src="https://raw.githubusercontent.com/snackbarrr/Digital-Business-Card/main/C0027.mp4" type="video/mp4" />
+    <source src="C0027.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
@@ -38,31 +39,27 @@
       <img src="Profile.jpeg" alt="Photo of Yusrizal Akbar Junaedi" class="w-20 h-20 rounded-full object-cover border-4 border-yellow-300" />
     </div>
 
-    <div class="space-y-4">
+    <div class="space-y-4 text-sm text-gray-700">
       <section>
         <h2 class="text-lg font-semibold">About Me</h2>
-        <p class="text-sm text-gray-700">
-          Currently learning how to code.
-        </p>
+        <p>Currently learning how to code.</p>
       </section>
 
       <section>
         <h2 class="text-lg font-semibold">Projects</h2>
-        <p class="text-sm text-gray-700">
-          This digital business card.
-        </p>
+        <p>This digital business card.</p>
       </section>
 
       <section>
         <h2 class="text-lg font-semibold">Contact</h2>
-        <p class="text-sm text-gray-700 space-y-1">
-          <span class="flex items-center gap-2">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
             📧 <a href="mailto:YusrizalAkbar.j@gmail.com" class="text-blue-600 underline">YusrizalAkbar.j@gmail.com</a>
-          </span>
-          <span class="flex items-center gap-2">
+          </div>
+          <div class="flex items-center gap-2">
             📞 <span>07706819769</span>
-          </span>
-        </p>
+          </div>
+        </div>
       </section>
     </div>
   </main>
