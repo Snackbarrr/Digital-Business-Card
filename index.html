@@ -192,6 +192,7 @@
     let lastTouchX = 0;
     let lastTouchY = 0;
     let spinning = false;
+    let isFlipped = false;
 
     function copyToClipboard(text) {
       navigator.clipboard.writeText(text).then(() => {
@@ -203,7 +204,7 @@
       if (!spinning) return;
       rotateX += velocityX;
       rotateY += velocityY;
-      velocityX *= 0.98; // lighter friction for longer spin
+      velocityX *= 0.98;
       velocityY *= 0.98;
       cardInner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       if (Math.abs(velocityX) > 0.01 || Math.abs(velocityY) > 0.01) {
@@ -255,6 +256,13 @@
       card.addEventListener('mouseleave', () => {
         card.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
         card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+      });
+
+      // Desktop: Click to Flip
+      card.addEventListener('click', () => {
+        isFlipped = !isFlipped;
+        cardInner.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        cardInner.style.transform = isFlipped ? `rotateY(180deg)` : `rotateY(0deg)`;
       });
     }
 
