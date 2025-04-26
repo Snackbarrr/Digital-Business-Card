@@ -47,6 +47,16 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.15);
       cursor: pointer;
     }
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s ease;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    .card-inner.flipped {
+      transform: rotateY(180deg);
+    }
     .card-side {
       position: absolute;
       width: 100%;
@@ -107,59 +117,54 @@
   </video>
 
   <!-- Card -->
-  <div class="card-container" id="card" onclick="flipCard()">
+  <div class="card-container" id="card">
+    <div class="card-inner" id="cardInner">
+      <!-- Front -->
+      <div class="card-side card-front">
+        YAJ
+      </div>
 
-    <!-- Front -->
-    <div class="card-side card-front">
-      YAJ
-    </div>
-
-    <!-- Back -->
-    <div class="card-side card-back">
-      <img src="Profile.jpeg" alt="Photo of Yusrizal Akbar Junaedi" class="w-20 h-20 rounded-full object-cover border-4 border-gray-300 shadow-md mb-4" />
-      <h1 class="text-xl font-bold text-center mb-2">Yusrizal Akbar Junaedi</h1>
-      <p class="text-sm italic text-center mb-4">"Today is the youngest I'll ever be again."</p>
-      <h2 class="text-lg font-semibold text-center mb-2">Contact</h2>
-      <div class="text-sm space-y-2 text-center">
-        <div class="flex justify-center items-center gap-2 cursor-pointer" onclick="copyToClipboard('YusrizalAkbar.j@gmail.com')">
-          <i data-lucide="mail" class="w-4 h-4"></i>
-          <span class="underline">YusrizalAkbar.j@gmail.com</span>
-        </div>
-        <div class="flex justify-center items-center gap-2 cursor-pointer" onclick="copyToClipboard('07706819769')">
-          <i data-lucide="phone" class="w-4 h-4"></i>
-          <span>07706819769</span>
-        </div>
-        <div class="flex justify-center gap-4 mt-2">
-          <div class="tooltip">
-            <a href="https://www.instagram.com/_snackbar._/" target="_blank" class="opacity-70 hover:opacity-100 transition">
-              <i data-lucide="instagram" class="w-4 h-4"></i>
-            </a>
-            <span class="tooltiptext">Instagram</span>
+      <!-- Back -->
+      <div class="card-side card-back">
+        <img src="Profile.jpeg" alt="Photo of Yusrizal Akbar Junaedi" class="w-20 h-20 rounded-full object-cover border-4 border-gray-300 shadow-md mb-4" />
+        <h1 class="text-xl font-bold text-center mb-2">Yusrizal Akbar Junaedi</h1>
+        <p class="text-sm italic text-center mb-4">"Today is the youngest I'll ever be again."</p>
+        <h2 class="text-lg font-semibold text-center mb-2">Contact</h2>
+        <div class="text-sm space-y-2 text-center">
+          <div class="flex justify-center items-center gap-2 cursor-pointer" onclick="copyToClipboard('YusrizalAkbar.j@gmail.com')">
+            <i data-lucide="mail" class="w-4 h-4"></i>
+            <span class="underline">YusrizalAkbar.j@gmail.com</span>
           </div>
-          <div class="tooltip">
-            <a href="https://www.linkedin.com/in/yusrizal-junaedi-b9a67b249/" target="_blank" class="opacity-70 hover:opacity-100 transition">
-              <i data-lucide="linkedin" class="w-4 h-4"></i>
-            </a>
-            <span class="tooltiptext">LinkedIn</span>
+          <div class="flex justify-center items-center gap-2 cursor-pointer" onclick="copyToClipboard('07706819769')">
+            <i data-lucide="phone" class="w-4 h-4"></i>
+            <span>07706819769</span>
+          </div>
+          <div class="flex justify-center gap-4 mt-2">
+            <div class="tooltip">
+              <a href="https://www.instagram.com/_snackbar._/" target="_blank" class="opacity-70 hover:opacity-100 transition">
+                <i data-lucide="instagram" class="w-4 h-4"></i>
+              </a>
+              <span class="tooltiptext">Instagram</span>
+            </div>
+            <div class="tooltip">
+              <a href="https://www.linkedin.com/in/yusrizal-junaedi-b9a67b249/" target="_blank" class="opacity-70 hover:opacity-100 transition">
+                <i data-lucide="linkedin" class="w-4 h-4"></i>
+              </a>
+              <span class="tooltiptext">LinkedIn</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 
   <script>
     lucide.createIcons();
 
     const card = document.getElementById('card');
+    const cardInner = document.getElementById('cardInner');
     let rotateX = 0;
     let rotateY = 0;
-    let flipped = false;
-
-    function updateCardTransform() {
-      const flipAngle = flipped ? 180 : 0;
-      card.style.transform = `rotateY(${flipAngle}deg) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.07)`;
-    }
 
     function copyToClipboard(text) {
       navigator.clipboard.writeText(text).then(() => {
@@ -167,19 +172,36 @@
       });
     }
 
-    function flipCard() {
-      flipped = !flipped;
-      updateCardTransform();
-    }
+    card.addEventListener('click', () => {
+      cardInner.classList.toggle('flipped');
+      cardInner.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    });
 
-    if (window.DeviceOrientationEvent) {
-      window.addEventListener('deviceorientation', function(event) {
-        if (window.innerWidth < 768) {
+    function enableDeviceOrientation() {
+      window.addEventListener('deviceorientation', (event) => {
+        if (window.innerWidth < 768) { // Mobile only
           rotateX = (event.beta - 50) / 2.2;
           rotateY = (event.gamma) / 2.2;
-          updateCardTransform();
+          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.07)`;
         }
       });
+    }
+
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+      // iOS 13+ devices require permission
+      window.addEventListener('click', async () => {
+        try {
+          const response = await DeviceOrientationEvent.requestPermission();
+          if (response === 'granted') {
+            enableDeviceOrientation();
+          }
+        } catch (e) {
+          console.error('Device orientation permission error', e);
+        }
+      }, { once: true });
+    } else {
+      // Android or already available
+      enableDeviceOrientation();
     }
 
     if (window.innerWidth >= 768) {
@@ -191,12 +213,12 @@
         const centerY = rect.height / 2;
         rotateX = -(y - centerY) / 6;
         rotateY = (x - centerX) / 6;
-        updateCardTransform();
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.08)`;
       });
       card.addEventListener('mouseleave', () => {
         rotateX = 0;
         rotateY = 0;
-        updateCardTransform();
+        card.style.transform = '';
       });
     }
   </script>
