@@ -106,36 +106,58 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
+
+    /* Mobile scaling */
+    @media (max-width: 768px) {
+      .card-container {
+        transform: scale(0.85);
+      }
+      .card-side {
+        padding: 2rem 1rem 1rem;
+      }
+      .card-front {
+        font-size: 2rem;
+      }
+      .card-back h1 {
+        font-size: 1.25rem;
+      }
+      .card-back p {
+        font-size: 0.85rem;
+      }
+      .card-back h2 {
+        font-size: 1rem;
+      }
+      .card-back span {
+        font-size: 0.8rem;
+      }
+    }
   </style>
 </head>
 
 <body class="flex items-center justify-center min-h-screen bg-overlay">
 
   <!-- Background Video -->
-  <video autoplay muted loop playsinline class="bg-video">
+  <video autoplay muted loop playsinline preload="auto" class="bg-video">
     <source src="C0027.mp4" type="video/mp4" />
   </video>
 
   <!-- Card -->
-  <div class="card-container" id="card">
+  <div class="card-container" id="card" role="button" tabindex="0">
     <div class="card-inner" id="cardInner">
-      <!-- Front -->
       <div class="card-side card-front">
         YAJ
       </div>
-
-      <!-- Back -->
       <div class="card-side card-back">
         <img src="Profile.jpeg" alt="Photo of Yusrizal Akbar Junaedi" class="w-20 h-20 rounded-full object-cover border-4 border-gray-300 shadow-md mb-4" />
         <h1 class="text-xl font-bold text-center mb-2">Yusrizal Akbar Junaedi</h1>
         <p class="text-sm italic text-center mb-4">"Today is the youngest I'll ever be again."</p>
         <h2 class="text-lg font-semibold text-center mb-2">Contact</h2>
         <div class="text-sm space-y-2 text-center">
-          <div class="flex justify-center items-center gap-2 cursor-pointer" onclick="copyToClipboard('YusrizalAkbar.j@gmail.com')">
+          <div class="flex justify-center items-center gap-2 cursor-pointer" data-copy="YusrizalAkbar.j@gmail.com" onclick="copyToClipboard(this.dataset.copy)">
             <i data-lucide="mail" class="w-4 h-4"></i>
             <span class="underline">YusrizalAkbar.j@gmail.com</span>
           </div>
-          <div class="flex justify-center items-center gap-2 cursor-pointer" onclick="copyToClipboard('07706819769')">
+          <div class="flex justify-center items-center gap-2 cursor-pointer" data-copy="07706819769" onclick="copyToClipboard(this.dataset.copy)">
             <i data-lucide="phone" class="w-4 h-4"></i>
             <span>07706819769</span>
           </div>
@@ -158,9 +180,10 @@
     </div>
   </div>
 
-  <!-- Script -->
   <script>
-    lucide.createIcons();
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
 
     const card = document.getElementById('card');
     const cardInner = document.getElementById('cardInner');
@@ -174,14 +197,22 @@
       });
     }
 
-    card.addEventListener('click', () => {
+    function flipCard() {
       cardInner.classList.toggle('flipped');
       cardInner.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    }
+
+    card.addEventListener('click', flipCard);
+    card.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        flipCard();
+      }
     });
 
     function enableDeviceOrientation() {
       window.addEventListener('deviceorientation', (event) => {
-        if (window.innerWidth < 768) { // Mobile only
+        if (window.innerWidth < 768) {
           rotateX = (event.beta - 50) * 0.8;
           rotateY = (event.gamma) * 0.8;
           card.style.transition = 'transform 0.2s ease-out';
@@ -189,7 +220,7 @@
 
           clearTimeout(springTimeout);
           springTimeout = setTimeout(() => {
-            card.style.transition = 'transform 0.8s cubic-bezier(0.25, 1.5, 0.5, 1)';
+            card.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
             card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
           }, 3000);
         }
@@ -211,23 +242,33 @@
       enableDeviceOrientation();
     }
 
+    function handleMouseMove(e) {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      rotateX = -(y - centerY) / 6;
+      rotateY = (x - centerX) / 6;
+      card.style.transition = 'transform 0.2s ease-out';
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.04)`;
+    }
+
     if (window.innerWidth >= 768) {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        rotateX = -(y - centerY) / 6;
-        rotateY = (x - centerX) / 6;
-        card.style.transition = 'transform 0.2s ease-out';
-        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.08)`;
-      });
+      card.addEventListener('mousemove', handleMouseMove);
       card.addEventListener('mouseleave', () => {
-        card.style.transition = 'transform 0.8s cubic-bezier(0.25, 1.5, 0.5, 1)';
+        card.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
         card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
       });
     }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 768) {
+        card.removeEventListener('mousemove', handleMouseMove);
+      } else {
+        card.addEventListener('mousemove', handleMouseMove);
+      }
+    });
   </script>
 
 </body>
