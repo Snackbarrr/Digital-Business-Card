@@ -185,9 +185,12 @@
 
     const card = document.getElementById('card');
     const cardInner = document.getElementById('cardInner');
+    let rotateX = 0;
     let rotateY = 0;
-    let velocity = 0;
+    let velocityX = 0;
+    let velocityY = 0;
     let lastTouchX = 0;
+    let lastTouchY = 0;
     let spinning = false;
 
     function copyToClipboard(text) {
@@ -198,10 +201,12 @@
 
     function animateSpin() {
       if (!spinning) return;
-      rotateY += velocity;
-      velocity *= 0.95; // friction
-      cardInner.style.transform = `rotateY(${rotateY}deg)`;
-      if (Math.abs(velocity) > 0.01) {
+      rotateX += velocityX;
+      rotateY += velocityY;
+      velocityX *= 0.98; // lighter friction for longer spin
+      velocityY *= 0.98;
+      cardInner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      if (Math.abs(velocityX) > 0.01 || Math.abs(velocityY) > 0.01) {
         requestAnimationFrame(animateSpin);
       } else {
         spinning = false;
@@ -210,19 +215,25 @@
 
     card.addEventListener('touchstart', (e) => {
       lastTouchX = e.touches[0].clientX;
+      lastTouchY = e.touches[0].clientY;
       spinning = false;
     });
 
     card.addEventListener('touchmove', (e) => {
       const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
       const deltaX = currentX - lastTouchX;
+      const deltaY = currentY - lastTouchY;
       rotateY += deltaX * 0.5;
+      rotateX -= deltaY * 0.5;
       lastTouchX = currentX;
-      cardInner.style.transform = `rotateY(${rotateY}deg)`;
+      lastTouchY = currentY;
+      cardInner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
 
     card.addEventListener('touchend', (e) => {
-      velocity = (e.changedTouches[0].clientX - lastTouchX) * 0.3;
+      velocityY = (e.changedTouches[0].clientX - lastTouchX) * 0.15;
+      velocityX = -(e.changedTouches[0].clientY - lastTouchY) * 0.15;
       spinning = true;
       animateSpin();
     });
@@ -233,10 +244,10 @@
       const y = e.clientY - rect.top;
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      const rotateX = -(y - centerY) / 6;
+      const rotateXMouse = -(y - centerY) / 6;
       const rotateYMouse = (x - centerX) / 6;
       card.style.transition = 'transform 0.2s ease-out';
-      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateYMouse}deg) scale(1.04)`;
+      card.style.transform = `rotateX(${rotateXMouse}deg) rotateY(${rotateYMouse}deg) scale(1.04)`;
     }
 
     if (window.innerWidth >= 768) {
