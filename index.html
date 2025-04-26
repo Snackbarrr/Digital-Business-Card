@@ -158,6 +158,7 @@
     </div>
   </div>
 
+  <!-- Script -->
   <script>
     lucide.createIcons();
 
@@ -165,6 +166,7 @@
     const cardInner = document.getElementById('cardInner');
     let rotateX = 0;
     let rotateY = 0;
+    let springTimeout;
 
     function copyToClipboard(text) {
       navigator.clipboard.writeText(text).then(() => {
@@ -180,15 +182,21 @@
     function enableDeviceOrientation() {
       window.addEventListener('deviceorientation', (event) => {
         if (window.innerWidth < 768) { // Mobile only
-          rotateX = (event.beta - 50) / 2.2;
-          rotateY = (event.gamma) / 2.2;
+          rotateX = (event.beta - 50) * 0.8;
+          rotateY = (event.gamma) * 0.8;
+          card.style.transition = 'transform 0.2s ease-out';
           card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.07)`;
+
+          clearTimeout(springTimeout);
+          springTimeout = setTimeout(() => {
+            card.style.transition = 'transform 0.8s cubic-bezier(0.25, 1.5, 0.5, 1)';
+            card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+          }, 3000);
         }
       });
     }
 
     if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-      // iOS 13+ devices require permission
       window.addEventListener('click', async () => {
         try {
           const response = await DeviceOrientationEvent.requestPermission();
@@ -200,7 +208,6 @@
         }
       }, { once: true });
     } else {
-      // Android or already available
       enableDeviceOrientation();
     }
 
@@ -213,12 +220,12 @@
         const centerY = rect.height / 2;
         rotateX = -(y - centerY) / 6;
         rotateY = (x - centerX) / 6;
+        card.style.transition = 'transform 0.2s ease-out';
         card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.08)`;
       });
       card.addEventListener('mouseleave', () => {
-        rotateX = 0;
-        rotateY = 0;
-        card.style.transform = '';
+        card.style.transition = 'transform 0.8s cubic-bezier(0.25, 1.5, 0.5, 1)';
+        card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
       });
     }
   </script>
