@@ -1,0 +1,135 @@
+<!-- spur-of-the-moment.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spur of the Moment - Yusrizal Akbar Junaedi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #000;
+      color: #fff;
+    }
+    section {
+      width: 100%;
+      overflow: hidden;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+    }
+    img {
+      width: 100vw;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      background: #000;
+    }
+    .back-home {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(0,0,0,0.5);
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      text-decoration: none;
+      color: white;
+      z-index: 50;
+      transition: background 0.3s;
+    }
+    .back-home:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    .centered-title {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: "Times New Roman", Times, serif;
+      font-style: italic;
+      font-size: 2.5rem;
+      color: rgba(255,255,255,0.8); /* initial full opacity */
+      pointer-events: none;
+      z-index: 40;
+      white-space: nowrap;
+      user-select: none;
+      transition: opacity 0.5s ease;
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="index.html" class="back-home">Back Home</a>
+
+  <div class="centered-title" id="title">Spur of the Moment</div>
+
+  <!-- Images -->
+  <section><img src="IMG_8827.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_7863.JPG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_8928.JPG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="DSC01504.JPEG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="DSC01518.JPEG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="DSC01413.JPEG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="DSC00094.JPEG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="DSC02431.JPEG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="DSC02433.JPEG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="DSC01674.JPG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="DSC01732.JPG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_6947.JPG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_7874.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="DSC01970.JPEG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="DSC01983.JPEG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="DSC01986.JPEG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="DSC01937.JPEG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_2877.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_2863.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_2877.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_2878.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="DSC01897.JPEG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_8933.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_8931.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_8916.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_8865.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_8860.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_8812.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_8813.JPG" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_8830.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_8821.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_8810.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_7964.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_7864.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_7877.jpg" alt="Spur of the Moment" loading="lazy"></section>
+  <section><img src="IMG_7883.JPG" alt="Spur of the Moment" loading="lazy"></section>
+
+  <script>
+    const title = document.getElementById('title');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const fadeStart = 0;
+      const fadeUntil = 300;
+      const minOpacity = 0.1; // minimum opacity (never completely invisible)
+      let opacity = 1;
+
+      if (scrollTop <= fadeStart) {
+        opacity = 1;
+      } else if (scrollTop <= fadeUntil) {
+        opacity = 1 - (scrollTop / fadeUntil) * (1 - minOpacity);
+      } else {
+        opacity = minOpacity;
+      }
+
+      title.style.opacity = opacity;
+    });
+  </script>
+
+</body>
+</html>
