@@ -55,12 +55,21 @@
       font-family: "Times New Roman", Times, serif;
       font-style: italic;
       font-size: 2.5rem;
-      color: rgba(255,255,255,0.8); /* initial full opacity */
+      color: rgba(255,255,255,0.8);
       pointer-events: none;
       z-index: 40;
       white-space: nowrap;
       user-select: none;
       transition: opacity 0.5s ease;
+    }
+
+    /* Mobile-specific styling for the first image */
+    @media (max-width: 768px) {
+      .first-image img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+      }
     }
   </style>
 </head>
@@ -71,8 +80,12 @@
 
   <div class="centered-title" id="title">Spur of the Moment</div>
 
-  <!-- Images -->
-  <section><img src="https://storage.googleapis.com/spurofthemoment/IMG_8827.JPG" alt="Spur of the Moment" loading="lazy"></section>
+  <!-- First image with special class -->
+  <section class="first-image">
+    <img src="https://storage.googleapis.com/spurofthemoment/IMG_8827.JPG" alt="Spur of the Moment" loading="lazy">
+  </section>
+
+  <!-- Other images -->
   <section><img src="https://storage.googleapis.com/spurofthemoment/IMG_7863.jpg" alt="Spur of the Moment" loading="lazy"></section>
   <section><img src="https://storage.googleapis.com/spurofthemoment/IMG_8928.JPG" alt="Spur of the Moment" loading="lazy"></section>
   <section><img src="https://storage.googleapis.com/spurofthemoment/DSC01504.JPEG" alt="Spur of the Moment" loading="lazy"></section>
@@ -115,7 +128,7 @@
       const scrollTop = window.scrollY;
       const fadeStart = 0;
       const fadeUntil = 300;
-      const minOpacity = 0.1; // minimum opacity (never completely invisible)
+      const minOpacity = 0.1;
       let opacity = 1;
 
       if (scrollTop <= fadeStart) {
