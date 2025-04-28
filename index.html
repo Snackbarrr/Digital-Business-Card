@@ -4,12 +4,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yusrizal Akbar Junaedi</title>
+  
+  <title>Yusrizal Akbar Junaedi - Media, Film and Photography</title>
 
+  <meta name="description" content="Yusrizal Akbar Junaedi's media brand landing page, business card style with contacts and links. Gateway to portfolio. Akbar's films playing in the background.">
+
+  <!-- OpenGraph for social media sharing -->
+  <meta property="og:title" content="Yusrizal Akbar Junaedi - Media, Film and Photography">
+  <meta property="og:description" content="Yusrizal Akbar Junaedi's media brand landing page, business card style with contacts and links. Gateway to portfolio. Akbar's films playing in the background.">
+  <meta property="og:image" content="https://storage.googleapis.com/spurofthemoment/IMG_8827.JPG">
+  <meta property="og:url" content="https://www.yusrizalakbar.com">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card (optional but good) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Yusrizal Akbar Junaedi - Media, Film and Photography">
+  <meta name="twitter:description" content="Yusrizal Akbar Junaedi's media brand landing page, business card style with contacts and links. Gateway to portfolio. Akbar's films playing in the background.">
+  <meta name="twitter:image" content="https://storage.googleapis.com/spurofthemoment/IMG_8827.JPG">
+
+  <!-- (Optional) Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Your custom styles -->
   <style>
     html, body {
       margin: 0;
@@ -183,15 +208,11 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-
-      // Handle background video based on device size
       const video = document.getElementById('bgVideo');
       const source = document.createElement('source');
       if (window.innerWidth < 768) {
-        // Mobile
         source.src = 'https://storage.googleapis.com/spurofthemoment/BackgroundMobile.mp4';
       } else {
-        // Desktop
         source.src = 'https://storage.googleapis.com/spurofthemoment/Background.mp4';
       }
       source.type = 'video/mp4';
@@ -202,14 +223,7 @@
 
     const card = document.getElementById('card');
     const cardInner = document.getElementById('cardInner');
-    let rotateX = 0;
-    let rotateY = 0;
-    let velocityX = 0;
-    let velocityY = 0;
-    let lastTouchX = 0;
-    let lastTouchY = 0;
-    let spinning = false;
-    let isFlipped = false;
+    let rotateX = 0, rotateY = 0, velocityX = 0, velocityY = 0, lastTouchX = 0, lastTouchY = 0, spinning = false, isFlipped = false;
 
     function copyToClipboard(text) {
       navigator.clipboard.writeText(text).then(() => {
@@ -274,7 +288,6 @@
         card.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
         card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
       });
-
       card.addEventListener('click', () => {
         isFlipped = !isFlipped;
         cardInner.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
