@@ -1,3 +1,4 @@
+<!-- Digital Business Card with Portfolio Button -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,18 +16,25 @@
   <meta property="og:url" content="https://www.yusrizalakbar.com">
   <meta property="og:type" content="website">
 
-  <!-- Twitter Card -->
+  <!-- Twitter Card (optional but good) -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Yusrizal Akbar Junaedi - Media, Film and Photography">
   <meta name="twitter:description" content="Yusrizal Akbar Junaedi's media brand landing page, business card style with contacts and links. Gateway to portfolio. Akbar's films playing in the background.">
   <meta name="twitter:image" content="https://storage.googleapis.com/spurofthemoment/IMG_8827.JPG">
 
+  <!-- (Optional) Favicon -->
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Your custom styles -->
   <style>
     html, body {
       margin: 0;
@@ -197,16 +205,17 @@
     </div>
   </div>
 
-  <!-- Optimized Script -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
       const video = document.getElementById('bgVideo');
       const source = document.createElement('source');
+      if (window.innerWidth < 768) {
+        source.src = 'https://storage.googleapis.com/spurofthemoment/BackgroundMobile.mp4';
+      } else {
+        source.src = 'https://storage.googleapis.com/spurofthemoment/Background.mp4';
+      }
       source.type = 'video/mp4';
-      source.src = window.innerWidth < 768
-        ? 'https://storage.googleapis.com/spurofthemoment/BackgroundMobile.mp4'
-        : 'https://storage.googleapis.com/spurofthemoment/Background.mp4';
       video.appendChild(source);
       video.load();
       video.play();
@@ -214,15 +223,12 @@
 
     const card = document.getElementById('card');
     const cardInner = document.getElementById('cardInner');
-    let rotateX = 0, rotateY = 0, velocityX = 0, velocityY = 0;
-    let lastTouchX = 0, lastTouchY = 0, spinning = false;
+    let rotateX = 0, rotateY = 0, velocityX = 0, velocityY = 0, lastTouchX = 0, lastTouchY = 0, spinning = false, isFlipped = false;
 
     function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => alert(`Copied: ${text}`));
-    }
-
-    function updateCardTransform() {
-      cardInner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      navigator.clipboard.writeText(text).then(() => {
+        alert(`Copied: ${text}`);
+      });
     }
 
     function animateSpin() {
@@ -231,7 +237,7 @@
       rotateY += velocityY;
       velocityX *= 0.98;
       velocityY *= 0.98;
-      updateCardTransform();
+      cardInner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       if (Math.abs(velocityX) > 0.01 || Math.abs(velocityY) > 0.01) {
         requestAnimationFrame(animateSpin);
       } else {
@@ -240,40 +246,28 @@
     }
 
     card.addEventListener('touchstart', (e) => {
-      const touch = e.touches[0];
-      lastTouchX = touch.clientX;
-      lastTouchY = touch.clientY;
+      lastTouchX = e.touches[0].clientX;
+      lastTouchY = e.touches[0].clientY;
       spinning = false;
     });
 
     card.addEventListener('touchmove', (e) => {
-      const touch = e.touches[0];
-      rotateY += (touch.clientX - lastTouchX) * 0.5;
-      rotateX -= (touch.clientY - lastTouchY) * 0.5;
-      lastTouchX = touch.clientX;
-      lastTouchY = touch.clientY;
-      updateCardTransform();
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      const deltaX = currentX - lastTouchX;
+      const deltaY = currentY - lastTouchY;
+      rotateY += deltaX * 0.5;
+      rotateX -= deltaY * 0.5;
+      lastTouchX = currentX;
+      lastTouchY = currentY;
+      cardInner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
 
     card.addEventListener('touchend', (e) => {
-      const touch = e.changedTouches[0];
-      const deltaX = touch.clientX - lastTouchX;
-      const deltaY = touch.clientY - lastTouchY;
-      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-      if (distance < 10) {
-        const normalizedRotationY = ((rotateY % 360) + 360) % 360;
-        rotateX = 0;
-        rotateY = (normalizedRotationY < 90 || normalizedRotationY > 270) ? 0 : 180;
-        cardInner.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        updateCardTransform();
-        spinning = false;
-      } else {
-        velocityY = deltaX * 0.15;
-        velocityX = -deltaY * 0.15;
-        spinning = true;
-        animateSpin();
-      }
+      velocityY = (e.changedTouches[0].clientX - lastTouchX) * 0.15;
+      velocityX = -(e.changedTouches[0].clientY - lastTouchY) * 0.15;
+      spinning = true;
+      animateSpin();
     });
 
     function handleMouseMove(e) {
@@ -282,38 +276,31 @@
       const y = e.clientY - rect.top;
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
+      const rotateXMouse = -(y - centerY) / 6;
+      const rotateYMouse = (x - centerX) / 6;
       card.style.transition = 'transform 0.2s ease-out';
-      card.style.transform = `rotateX(${-(y - centerY) / 6}deg) rotateY(${(x - centerX) / 6}deg) scale(1.04)`;
-    }
-
-    function resetCardTilt() {
-      card.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
-      card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
-    }
-
-    function handleDesktopSetup(enable) {
-      if (enable) {
-        card.addEventListener('mousemove', handleMouseMove);
-        card.addEventListener('mouseleave', resetCardTilt);
-        card.addEventListener('click', () => {
-          const normalizedRotationY = ((rotateY % 360) + 360) % 360;
-          rotateY = (normalizedRotationY < 90 || normalizedRotationY > 270) ? 180 : 0;
-          rotateX = 0;
-          cardInner.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
-          updateCardTransform();
-        });
-      } else {
-        card.removeEventListener('mousemove', handleMouseMove);
-        card.removeEventListener('mouseleave', resetCardTilt);
-      }
+      card.style.transform = `rotateX(${rotateXMouse}deg) rotateY(${rotateYMouse}deg) scale(1.04)`;
     }
 
     if (window.innerWidth >= 768) {
-      handleDesktopSetup(true);
+      card.addEventListener('mousemove', handleMouseMove);
+      card.addEventListener('mouseleave', () => {
+        card.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
+        card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+      });
+      card.addEventListener('click', () => {
+        isFlipped = !isFlipped;
+        cardInner.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        cardInner.style.transform = isFlipped ? `rotateY(180deg)` : `rotateY(0deg)`;
+      });
     }
 
     window.addEventListener('resize', () => {
-      handleDesktopSetup(window.innerWidth >= 768);
+      if (window.innerWidth < 768) {
+        card.removeEventListener('mousemove', handleMouseMove);
+      } else {
+        card.addEventListener('mousemove', handleMouseMove);
+      }
     });
   </script>
 
