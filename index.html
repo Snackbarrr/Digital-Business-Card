@@ -104,8 +104,6 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
-
-    /* Mobile scaling */
     @media (max-width: 768px) {
       .card-container {
         transform: scale(0.85);
@@ -136,9 +134,7 @@
 <body class="flex items-center justify-center min-h-screen bg-overlay">
 
   <!-- Background Video -->
-  <video autoplay muted loop playsinline preload="auto" class="bg-video">
-    <source src="Background.mp4" type="video/mp4" />
-  </video>
+  <video id="bgVideo" autoplay muted loop playsinline preload="auto" class="bg-video"></video>
 
   <!-- Card -->
   <div class="card-container" id="card" role="button" tabindex="0">
@@ -176,11 +172,10 @@
           </div>
         </div>
 
-        <!-- New Portfolio Button -->
+        <!-- Portfolio Button -->
         <a href="spurofthemoment.html" class="mt-6 inline-block bg-black text-white text-sm font-semibold px-4 py-2 rounded-full hover:bg-gray-800 transition">
           View Portfolio
         </a>
-
       </div>
     </div>
   </div>
@@ -188,6 +183,21 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+
+      // Handle background video based on device size
+      const video = document.getElementById('bgVideo');
+      const source = document.createElement('source');
+      if (window.innerWidth < 768) {
+        // Mobile
+        source.src = 'https://storage.googleapis.com/spurofthemoment/BackgroundMobile.mp4';
+      } else {
+        // Desktop
+        source.src = 'https://storage.googleapis.com/spurofthemoment/Background.mp4';
+      }
+      source.type = 'video/mp4';
+      video.appendChild(source);
+      video.load();
+      video.play();
     });
 
     const card = document.getElementById('card');
