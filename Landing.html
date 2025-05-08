@@ -169,6 +169,65 @@
       font-weight: 500;
       letter-spacing: 0.03em;
     }
+
+    .form-heading {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-subtext {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 600px;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+.contact-grid input,
+.contact-grid textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fafafa;
+}
+
+.contact-grid button {
+  padding: 0.9rem;
+  width: 100%;
+  background-color: #111;
+  color: white;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.contact-grid .half {
+  width: 48%;
+}
+
+.contact-grid .full {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .contact-grid .half {
+    width: 100%;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -190,22 +249,30 @@
   </section>
 
   <section class="form-section" id="contact">
-    <form
-      action="https://formspree.io/f/xnndvvgd"
-      method="POST"
-      class="form-container"
-    >
-      <label>
-        Your email:
-        <input type="email" name="email" required>
-      </label>
-      <label>
-        Your message:
-        <textarea name="message" rows="5" required></textarea>
-      </label>
-      <button type="submit">Send</button>
+    <h2 class="form-heading">Contact Me</h2>
+    <p class="form-subtext">Get in touch with me. Let's make it happen.</p>
+    <form action="https://formspree.io/f/xnndvvgd" method="POST" class="contact-grid">
+      <div class="half">
+        <input type="text" name="first-name" placeholder="First Name" required>
+      </div>
+      <div class="half">
+        <input type="text" name="last-name" placeholder="Last Name" required>
+      </div>
+      <div class="full">
+        <input type="email" name="email" placeholder="Email Address" required>
+      </div>
+      <div class="full">
+        <input type="text" name="subject" placeholder="Subject" required>
+      </div>
+      <div class="full">
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+      </div>
+      <div class="full">
+        <button type="submit">Send Message</button>
+      </div>
     </form>
   </section>
+  
 
   <!-- Newsletter popup -->
   <div id="newsletter-popup" class="popup">
