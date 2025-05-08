@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Yusrizalakbar Studio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -40,14 +40,12 @@
       max-height: 90vh;
       overflow: hidden;
     }
-
     .hero-image {
       width: 100%;
       height: auto;
       display: block;
       object-fit: cover;
     }
-
     .hero-text {
       position: absolute;
       top: 50%;
@@ -64,7 +62,6 @@
       padding: 4rem 2rem;
       background-color: #ffffff;
     }
-
     .form-container {
       max-width: 480px;
       margin: 0 auto;
@@ -72,13 +69,11 @@
       flex-direction: column;
       gap: 1.5rem;
     }
-
     .form-container label {
       font-size: 0.9rem;
       font-weight: 500;
       color: #333;
     }
-
     .form-container input,
     .form-container textarea {
       padding: 0.85rem 1rem;
@@ -89,14 +84,12 @@
       border-radius: 0.25rem;
       transition: border-color 0.2s ease;
     }
-
     .form-container input:focus,
     .form-container textarea:focus {
       outline: none;
       border-color: #000;
       background-color: #fff;
     }
-
     .form-container button {
       padding: 0.85rem;
       background-color: #111;
@@ -110,7 +103,6 @@
       cursor: pointer;
       transition: background-color 0.2s ease;
     }
-
     .form-container button:hover {
       background-color: #333;
     }
@@ -121,6 +113,61 @@
       font-size: 0.85rem;
       color: #888;
       border-top: 1px solid #eaeaea;
+    }
+
+    /* Newsletter popup styles */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(17, 17, 17, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 9999;
+    }
+    .popup.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .popup-content {
+      background: #fff;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      border-radius: 6px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .popup-content input[type="email"] {
+      padding: 0.75rem;
+      width: 100%;
+      margin-top: 1rem;
+      border: 1px solid #ccc;
+    }
+    .popup-content button[type="submit"] {
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: #000;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      letter-spacing: 0.03em;
     }
   </style>
 </head>
@@ -134,13 +181,13 @@
     </nav>
   </header>
 
-<section class="hero-section">
-  <picture>
-    <source media="(max-width: 768px)" srcset="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-3.jpg">
-    <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-2.jpg" alt="Look 1" class="hero-image">
-  </picture>
-  <div class="hero-text">Always another angle</div>
-</section>
+  <section class="hero-section">
+    <picture>
+      <source media="(max-width: 768px)" srcset="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-3.jpg">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-2.jpg" alt="Look 1" class="hero-image">
+    </picture>
+    <div class="hero-text">Always another angle</div>
+  </section>
 
   <section class="form-section" id="contact">
     <form
@@ -160,23 +207,38 @@
     </form>
   </section>
 
-  <section class="form-section">
-    <form
-      action="https://YOUR-MAILCHIMP-URL-HERE" 
-      method="POST" 
-      class="form-container"
-      target="_blank"
-    >
-      <label>
-        Sign up for updates:
+  <!-- Newsletter popup -->
+  <div id="newsletter-popup" class="popup">
+    <div class="popup-content">
+      <button id="close-popup" class="close-btn">&times;</button>
+      <h2>Join the newsletter</h2>
+      <p>Be the first to hear about new projects, drops, and updates.</p>
+      <form action="https://YOUR-MAILCHIMP-URL-HERE" method="POST" target="_blank">
         <input type="email" name="EMAIL" placeholder="Enter your email" required>
-      </label>
-      <button type="submit">Subscribe</button>
-    </form>
-  </section>
+        <button type="submit">Subscribe</button>
+      </form>
+      <small>We respect your privacy.</small>
+    </div>
+  </div>
 
   <footer>
     &copy; 2025 Yusrizalakbar. All rights reserved.
   </footer>
+
+  <!-- JavaScript for popup -->
+  <script>
+    window.addEventListener("load", () => {
+      const popup = document.getElementById("newsletter-popup");
+      const closeBtn = document.getElementById("close-popup");
+
+      setTimeout(() => {
+        popup.classList.add("active");
+      }, 2000); // delay in ms
+
+      closeBtn.addEventListener("click", () => {
+        popup.classList.remove("active");
+      });
+    });
+  </script>
 </body>
 </html>
