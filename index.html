@@ -22,16 +22,43 @@
       align-items: center;
       padding: 1.5rem 2rem;
       border-bottom: 1px solid #eaeaea;
+      position: relative;
     }
     .logo {
       font-size: 1.2rem;
       font-weight: 600;
     }
-    nav a {
+    .desktop-nav a {
       margin-left: 1.5rem;
       text-decoration: none;
       color: #111;
       font-weight: 400;
+    }
+    .menu-btn {
+      display: none;
+      background: none;
+      font-size: 1.5rem;
+      border: none;
+      cursor: pointer;
+    }
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background: white;
+      position: absolute;
+      top: 100%;
+      right: 2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      padding: 1rem;
+    }
+    .mobile-nav a {
+      margin: 0.5rem 0;
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+    }
+    .mobile-nav.active {
+      display: flex;
     }
 
     .hero-section {
@@ -56,66 +83,77 @@
       font-weight: 600;
       text-align: center;
       letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+      .desktop-nav {
+        display: none;
+      }
+      .menu-btn {
+        display: block;
+      }
+      .hero-text {
+        font-size: 1.8rem;
+        white-space: normal;
+        padding: 0 1rem;
+      }
     }
 
     .form-section {
       padding: 4rem 2rem;
       background-color: #ffffff;
     }
-    .form-container {
-      max-width: 480px;
-      margin: 0 auto;
+    .form-heading {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .form-subtext {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+    .contact-grid {
       display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+      flex-wrap: wrap;
+      max-width: 600px;
+      margin: 0 auto;
+      gap: 1rem;
     }
-    .form-container label {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: #333;
-    }
-    .form-container input,
-    .form-container textarea {
-      padding: 0.85rem 1rem;
-      border: 1px solid #ddd;
-      background-color: #f9f9f9;
-      font-family: inherit;
+    .contact-grid input,
+    .contact-grid textarea {
+      width: 100%;
+      padding: 0.9rem 1rem;
       font-size: 1rem;
-      border-radius: 0.25rem;
-      transition: border-color 0.2s ease;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #fafafa;
     }
-    .form-container input:focus,
-    .form-container textarea:focus {
-      outline: none;
-      border-color: #000;
-      background-color: #fff;
-    }
-    .form-container button {
-      padding: 0.85rem;
+    .contact-grid button {
+      padding: 0.9rem;
+      width: 100%;
       background-color: #111;
       color: white;
-      border: none;
       font-size: 0.95rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 500;
-      border-radius: 0.25rem;
+      border: none;
       cursor: pointer;
-      transition: background-color 0.2s ease;
+      border-radius: 6px;
+      font-weight: 500;
     }
-    .form-container button:hover {
-      background-color: #333;
+    .contact-grid .half {
+      width: 48%;
+    }
+    .contact-grid .full {
+      width: 100%;
+    }
+    @media (max-width: 600px) {
+      .contact-grid .half {
+        width: 100%;
+      }
     }
 
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.85rem;
-      color: #888;
-      border-top: 1px solid #eaeaea;
-    }
-
-    /* Newsletter popup styles */
     .popup {
       position: fixed;
       top: 0;
@@ -169,75 +207,29 @@
       font-weight: 500;
       letter-spacing: 0.03em;
     }
-
-    .form-heading {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.form-subtext {
-  text-align: center;
-  font-size: 0.95rem;
-  color: #555;
-  margin-bottom: 2rem;
-}
-
-.contact-grid {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 600px;
-  margin: 0 auto;
-  gap: 1rem;
-}
-
-.contact-grid input,
-.contact-grid textarea {
-  width: 100%;
-  padding: 0.9rem 1rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background-color: #fafafa;
-}
-
-.contact-grid button {
-  padding: 0.9rem;
-  width: 100%;
-  background-color: #111;
-  color: white;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-  font-weight: 500;
-}
-
-.contact-grid .half {
-  width: 48%;
-}
-
-.contact-grid .full {
-  width: 100%;
-}
-
-@media (max-width: 600px) {
-  .contact-grid .half {
-    width: 100%;
-  }
-}
-
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eaeaea;
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">Yusrizalakbar</div>
-    <nav>
+    <nav class="desktop-nav">
       <a href="#Projects">Projects</a>
       <a href="spurofthemoment.html">Portfolio</a>
-      <a href="Digitalcard.html">Contact</a>
+      <a href="#contact">Contact</a>
     </nav>
+    <button id="menu-toggle" class="menu-btn">&#9776;</button>
+    <div class="mobile-nav" id="mobileMenu">
+      <a href="#Projects">Projects</a>
+      <a href="spurofthemoment.html">Portfolio</a>
+      <a href="#contact">Contact</a>
+    </div>
   </header>
 
   <section class="hero-section">
@@ -272,9 +264,7 @@
       </div>
     </form>
   </section>
-  
 
-  <!-- Newsletter popup -->
   <div id="newsletter-popup" class="popup">
     <div class="popup-content">
       <button id="close-popup" class="close-btn">&times;</button>
@@ -292,18 +282,23 @@
     &copy; 2025 Yusrizalakbar. All rights reserved.
   </footer>
 
-  <!-- JavaScript for popup -->
   <script>
     window.addEventListener("load", () => {
       const popup = document.getElementById("newsletter-popup");
       const closeBtn = document.getElementById("close-popup");
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobileMenu");
 
       setTimeout(() => {
         popup.classList.add("active");
-      }, 2000); // delay in ms
+      }, 2000);
 
       closeBtn.addEventListener("click", () => {
         popup.classList.remove("active");
+      });
+
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("active");
       });
     });
   </script>
