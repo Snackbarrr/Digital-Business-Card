@@ -27,6 +27,8 @@
     .logo {
       font-size: 1.2rem;
       font-weight: 600;
+      text-decoration: none;
+      color: #111;
     }
     .desktop-nav a {
       margin-left: 1.5rem;
@@ -236,7 +238,7 @@
 </head>
 <body>
   <header>
-    <div class="logo">Yusrizalakbar</div>
+    <a href="index.html" class="logo">Yusrizalakbar</a>
     <nav class="desktop-nav">
       <a href="about.html">About</a>
       <a href="comingsoon.html">Projects</a>
@@ -251,8 +253,6 @@
       <a href="Digitalcard.html">Contact</a>
     </div>
   </header>
-
-  
 
   <section class="hero-section">
     <picture>
@@ -270,24 +270,12 @@
     <h2 class="form-heading">Contact Me</h2>
     <p class="form-subtext">Get in touch with me. Let's make it happen.</p>
     <form action="https://formspree.io/f/xnndvvgd" method="POST" class="contact-grid">
-      <div class="half">
-        <input type="text" name="first-name" placeholder="First Name" required>
-      </div>
-      <div class="half">
-        <input type="text" name="last-name" placeholder="Last Name" required>
-      </div>
-      <div class="full">
-        <input type="email" name="email" placeholder="Email Address" required>
-      </div>
-      <div class="full">
-        <input type="text" name="subject" placeholder="Subject" required>
-      </div>
-      <div class="full">
-        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-      </div>
-      <div class="full">
-        <button type="submit">Send Message</button>
-      </div>
+      <div class="half"><input type="text" name="first-name" placeholder="First Name" required></div>
+      <div class="half"><input type="text" name="last-name" placeholder="Last Name" required></div>
+      <div class="full"><input type="email" name="email" placeholder="Email Address" required></div>
+      <div class="full"><input type="text" name="subject" placeholder="Subject" required></div>
+      <div class="full"><textarea name="message" placeholder="Your Message" rows="5" required></textarea></div>
+      <div class="full"><button type="submit">Send Message</button></div>
     </form>
   </section>
 
@@ -315,9 +303,12 @@
       const menuToggle = document.getElementById("menu-toggle");
       const mobileMenu = document.getElementById("mobileMenu");
 
-      setTimeout(() => {
-        popup.classList.add("active");
-      }, 2000);
+      if (!sessionStorage.getItem('newsletterShown')) {
+        setTimeout(() => {
+          popup.classList.add("active");
+          sessionStorage.setItem('newsletterShown', 'true');
+        }, 2000);
+      }
 
       closeBtn.addEventListener("click", () => {
         popup.classList.remove("active");
