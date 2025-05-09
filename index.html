@@ -109,10 +109,12 @@
       letter-spacing: 0.03em;
       margin-top: 0.5rem;
       opacity: 0.85;
+      white-space: normal; /* this enables wrapping */
     }
-    @media (max-width: 768px) {
+    
+      @media (max-width: 768px) {
       .desktop-nav {
-        display: none;
+      display: none;
       }
       .menu-btn {
         display: block;
