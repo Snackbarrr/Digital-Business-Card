@@ -18,10 +18,13 @@
       align-items: center;
       padding: 1.5rem 2rem;
       border-bottom: 1px solid #eaeaea;
+      position: relative;
     }
     .logo {
       font-size: 1.2rem;
       font-weight: 600;
+      text-decoration: none;
+      color: #111;
     }
     .desktop-nav a {
       margin-left: 1.5rem;
@@ -29,6 +32,44 @@
       color: #111;
       font-weight: 400;
     }
+    .menu-btn {
+      display: none;
+      background: none;
+      font-size: 1.5rem;
+      border: none;
+      cursor: pointer;
+      color: #111;
+    }
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background: white;
+      position: absolute;
+      top: 100%;
+      right: 2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      padding: 1rem;
+      z-index: 10000;
+    }
+    .mobile-nav a {
+      margin: 0.5rem 0;
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+    }
+    .mobile-nav.show {
+      display: flex;
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav {
+        display: none;
+      }
+      .menu-btn {
+        display: block;
+      }
+    }
+
     .container {
       max-width: 900px;
       margin: 5rem auto;
@@ -50,21 +91,42 @@
 </head>
 <body>
   <header>
-    <div class="logo">Yusrizalakbar</div>
+    <a href="index.html" class="logo">Yusrizalakbar</a>
     <nav class="desktop-nav">
       <a href="about.html">About</a>
       <a href="comingsoon.html">Projects</a>
       <a href="spurofthemoment.html">Portfolio</a>
       <a href="Digitalcard.html">Contact</a>
     </nav>
+    <button id="menu-toggle" class="menu-btn">&#9776;</button>
+    <div class="mobile-nav" id="mobileMenu">
+      <a href="about.html">About</a>
+      <a href="comingsoon.html">Projects</a>
+      <a href="spurofthemoment.html">Portfolio</a>
+      <a href="Digitalcard.html">Contact</a>
+    </div>
   </header>
 
   <div class="container">
     <h1>About</h1>
     <p class="about-text">
-        Always Another Angle is a media project by Yusrizal Akbar Junaedi. It’s built on a simple belief: that perspective changes everything. Through film, photography, and clothing, the project invites a second look at the everyday the familiar things we pass by without noticing. </p>
-    <p class= "about-text">    
-        <strong>It’s not about loud branding. The value lies in the angle you take in how you choose to see.</strong>    </p>
+      Always Another Angle is a media project by Yusrizal Akbar Junaedi. It’s built on a simple belief: that perspective changes everything. Through film, photography, and clothing, the project invites a second look at the everyday — the familiar things we pass by without noticing.
+    </p>
+    <p class="about-text">
+      <strong>It’s not about loud branding. The value lies in the angle you take — in how you choose to see.</strong>
+    </p>
   </div>
+
+  <script>
+    // Mobile menu toggle
+    window.addEventListener("load", () => {
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("show");
+      });
+    });
+  </script>
 </body>
 </html>
