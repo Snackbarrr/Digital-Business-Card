@@ -12,17 +12,17 @@
       background: #fff;
       color: #111;
     }
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 2rem;
-  border-bottom: 1px solid #eaeaea;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background-color: #fff;
-}
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid #eaeaea;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #fff;
+    }
     .logo {
       font-size: 1.2rem;
       font-weight: 600;
@@ -90,6 +90,12 @@ header {
       text-align: center;
       color: #333;
     }
+    .about-image {
+      display: block;
+      width: 100%;
+      margin-top: 3rem;
+      border-radius: 8px;
+    }
   </style>
 </head>
 <body>
@@ -118,10 +124,10 @@ header {
     <p class="about-text">
       <strong>It’s not about loud branding. The value lies in the angle you take — in how you choose to see.</strong>
     </p>
+    <img class="about-image" src="https://storage.googleapis.com/spurofthemoment/about/DSC02916.jpg" alt="About Visual">
   </div>
 
   <script>
-    // Mobile menu toggle
     window.addEventListener("load", () => {
       const menuToggle = document.getElementById("menu-toggle");
       const mobileMenu = document.getElementById("mobileMenu");
