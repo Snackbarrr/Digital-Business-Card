@@ -68,17 +68,32 @@
       display: flex;
     }
 
+    /* Slideshow styles */
     .hero-section {
       position: relative;
       width: 100%;
-      max-height: 90vh;
+      height: 90vh;
       overflow: hidden;
     }
-    .hero-image {
+    .hero-slideshow {
       width: 100%;
-      height: auto;
-      display: block;
+      height: 100%;
+      position: relative;
+    }
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+      z-index: 0;
+    }
+    .slide.active {
+      opacity: 1;
+      z-index: 1;
     }
     .hero-overlay {
       position: absolute;
@@ -87,7 +102,7 @@
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.25);
-      z-index: 1;
+      z-index: 2;
     }
     .hero-text {
       position: absolute;
@@ -100,7 +115,7 @@
       text-align: center;
       letter-spacing: 0.05em;
       padding: 0 1rem;
-      z-index: 2;
+      z-index: 3;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -112,12 +127,12 @@
       letter-spacing: 0.03em;
       margin-top: 0.5rem;
       opacity: 0.85;
-      white-space: normal; /* this enables wrapping */
+      white-space: normal;
     }
-    
-      @media (max-width: 768px) {
+
+    @media (max-width: 768px) {
       .desktop-nav {
-      display: none;
+        display: none;
       }
       .menu-btn {
         display: block;
@@ -260,14 +275,19 @@
   </header>
 
   <section class="hero-section">
-    <picture>
-      <source media="(max-width: 768px)" srcset="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-3.jpg">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-2.jpg" alt="Look 1" class="hero-image">
-    </picture>
-    <div class="hero-overlay"></div>
-    <div class="hero-text">
-      Always another angle<br>
-      <span class="hero-subtext">Things you see a million times, for the first time.</span>
+    <div class="hero-slideshow">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-2.jpg" alt="Look 1" class="slide active">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-3.jpg" alt="Look 2" class="slide">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03198.jpg" alt="Look 3" class="slide">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03319.jpg" alt="Look 4" class="slide">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03330.jpg" alt="Look 5" class="slide">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03417.jpg" alt="Look 6" class="slide">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03502.jpg" alt="Look 7" class="slide">
+      <div class="hero-overlay"></div>
+      <div class="hero-text">
+        Always another angle<br>
+        <span class="hero-subtext">Things you see a million times, for the first time.</span>
+      </div>
     </div>
   </section>
 
@@ -323,6 +343,16 @@
         mobileMenu.classList.toggle("show");
       });
     });
+
+    // Slideshow script
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+    function showNextSlide() {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }
+    setInterval(showNextSlide, 5000); // 5 seconds interval
   </script>
 </body>
 </html>
