@@ -1,78 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spur of the Moment - Yusrizal Akbar Junaedi</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yusrizalakbar Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #000;
-      color: #fff;
+      padding: 0;
+      box-sizing: border-box;
     }
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 2rem;
-  border-bottom: 1px solid #eaeaea;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background-color: #000;
-}
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fff;
+      color: #111;
+    }
+    header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 1.5rem 2rem;
+     border-bottom: 1px solid #eaeaea;
+     position: sticky;
+     top: 0;
+     z-index: 1000;
+     background-color: #fff;
+    }
     .logo {
       font-size: 1.2rem;
       font-weight: 600;
-      color: white;
+      text-decoration: none;
+      color: #111;
     }
     .desktop-nav a {
       margin-left: 1.5rem;
       text-decoration: none;
-      color: white;
+      color: #111;
       font-weight: 400;
     }
-    section {
+    .menu-btn {
+      display: none;
+      background: none;
+      font-size: 1.5rem;
+      border: none;
+      cursor: pointer;
+      color: #111;
+    }
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background: white;
+      position: absolute;
+      top: 100%;
+      right: 2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      padding: 1rem;
+      z-index: 10000;
+    }
+    .mobile-nav a {
+      margin: 0.5rem 0;
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+    }
+    .mobile-nav.show {
+      display: flex;
+    }
+
+    /* Slideshow styles */
+    .hero-section {
+      position: relative;
       width: 100%;
+      height: 90vh;
       overflow: hidden;
-      background: #000;
+    }
+    .hero-slideshow {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+      z-index: 0;
+    }
+    .slide.active {
+      opacity: 1;
+      z-index: 1;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.25);
+      z-index: 2;
+    }
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 70%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: clamp(1rem, 5vw, 2.5rem);
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: 0.05em;
+      padding: 0 1rem;
+      z-index: 3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hero-subtext {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      margin-top: 0.5rem;
+      opacity: 0.85;
+      white-space: normal;
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav {
+        display: none;
+      }
+      .menu-btn {
+        display: block;
+      }
+    }
+
+    .form-section {
+      padding: 4rem 2rem;
+      background-color: #ffffff;
+    }
+    .form-heading {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .form-subtext {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 600px;
+      margin: 0 auto;
+      gap: 1rem;
+    }
+    .contact-grid input,
+    .contact-grid textarea {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #fafafa;
+    }
+    .contact-grid button {
+      padding: 0.9rem;
+      width: 100%;
+      background-color: #111;
+      color: white;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .contact-grid .half {
+      width: 48%;
+    }
+    .contact-grid .full {
+      width: 100%;
+    }
+    @media (max-width: 600px) {
+      .contact-grid .half {
+        width: 100%;
+      }
+    }
+
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(17, 17, 17, 0.5);
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 0;
-      margin: 0;
-    }
-    img {
-      width: 100vw;
-      height: auto;
-      object-fit: contain;
-      display: block;
-      background: #000;
-    }
-    .centered-title {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: "Times New Roman", Times, serif;
-      font-style: italic;
-      font-size: 2.5rem;
-      color: rgba(255,255,255,0.8);
+      opacity: 0;
       pointer-events: none;
-      z-index: 40;
-      white-space: nowrap;
-      user-select: none;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.4s ease;
+      z-index: 9999;
     }
-    @media (max-width: 768px) {
-      .first-image img {
-        width: 100vw;
-        height: 100vh;
-        object-fit: cover;
-      }
+    .popup.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .popup-content {
+      background: #fff;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      border-radius: 6px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .popup-content input[type="email"] {
+      padding: 0.75rem;
+      width: 100%;
+      margin-top: 1rem;
+      border: 1px solid #ccc;
+    }
+    .popup-content button[type="submit"] {
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: #000;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eaeaea;
     }
   </style>
 </head>
@@ -81,42 +261,93 @@ header {
     <a href="index.html" class="logo">Yusrizalakbar</a>
     <nav class="desktop-nav">
       <a href="about.html">About</a>
-      <a href="projects.html">Projects</a>
+      <a href="comingsoon.html">Projects</a>
       <a href="spurofthemoment.html">Portfolio</a>
       <a href="Digitalcard.html">Contact</a>
     </nav>
+    <button id="menu-toggle" class="menu-btn">&#9776;</button>
+    <div class="mobile-nav" id="mobileMenu">
+      <a href="about.html">About</a>
+      <a href="comingsoon.html">Projects</a>
+      <a href="spurofthemoment.html">Portfolio</a>
+      <a href="Digitalcard.html">Contact</a>
+    </div>
   </header>
 
-  <div class="centered-title" id="title">Spur of the Moment</div>
-
-  <section class="first-image">
-    <img src="https://storage.googleapis.com/spurofthemoment/IMG_8827.JPG" alt="Spur of the Moment" loading="lazy">
+  <section class="hero-section">
+    <div class="hero-slideshow">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-2.jpg" alt="Look 1" class="slide active">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-3.jpg" alt="Look 2" class="slide">
+      <div class="hero-overlay"></div>
+      <div class="hero-text">
+        Always another angle<br>
+        <span class="hero-subtext">Things you see a million times, for the first time.</span>
+      </div>
+    </div>
   </section>
 
-  <section><img src="https://storage.googleapis.com/spurofthemoment/IMG_7863.jpg" alt="Spur of the Moment" loading="lazy"></section>
-  <section><img src="https://storage.googleapis.com/spurofthemoment/IMG_8928.JPG" alt="Spur of the Moment" loading="lazy"></section>
-  <!-- [REMAINING IMAGES UNCHANGED FOR BREVITY] -->
-  <section><img src="https://storage.googleapis.com/spurofthemoment/IMG_7883.JPG" alt="Spur of the Moment" loading="lazy"></section>
+  <section class="form-section" id="contact">
+    <h2 class="form-heading">Contact Me</h2>
+    <p class="form-subtext">Get in touch with me. Let's make it happen.</p>
+    <form action="https://formspree.io/f/xnndvvgd" method="POST" class="contact-grid">
+      <div class="half"><input type="text" name="first-name" placeholder="First Name" required></div>
+      <div class="half"><input type="text" name="last-name" placeholder="Last Name" required></div>
+      <div class="full"><input type="email" name="email" placeholder="Email Address" required></div>
+      <div class="full"><input type="text" name="subject" placeholder="Subject" required></div>
+      <div class="full"><textarea name="message" placeholder="Your Message" rows="5" required></textarea></div>
+      <div class="full"><button type="submit">Send Message</button></div>
+    </form>
+  </section>
+
+  <div id="newsletter-popup" class="popup">
+    <div class="popup-content">
+      <button id="close-popup" class="close-btn">&times;</button>
+      <h2>(Don't) Join the newsletter (...yet.)</h2>
+      <p>Be the first to hear about new projects, drops, and updates.</p>
+      <form action="https://YOUR-MAILCHIMP-URL-HERE" method="POST" target="_blank">
+        <input type="email" name="EMAIL" placeholder="Enter your email" required>
+        <button type="submit">Nothing happens when you click</button>
+      </form>
+      <small>We respect your privacy.</small>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Yusrizalakbar. All rights reserved.
+  </footer>
 
   <script>
-    const title = document.getElementById('title');
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.scrollY;
-      const fadeStart = 0;
-      const fadeUntil = 300;
-      const minOpacity = 0.1;
-      let opacity = 1;
+    window.addEventListener("load", () => {
+      const popup = document.getElementById("newsletter-popup");
+      const closeBtn = document.getElementById("close-popup");
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobileMenu");
 
-      if (scrollTop <= fadeStart) {
-        opacity = 1;
-      } else if (scrollTop <= fadeUntil) {
-        opacity = 1 - (scrollTop / fadeUntil) * (1 - minOpacity);
-      } else {
-        opacity = minOpacity;
+      if (!sessionStorage.getItem('newsletterShown')) {
+        setTimeout(() => {
+          popup.classList.add("active");
+          sessionStorage.setItem('newsletterShown', 'true');
+        }, 2000);
       }
 
-      title.style.opacity = opacity;
+      closeBtn.addEventListener("click", () => {
+        popup.classList.remove("active");
+      });
+
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("show");
+      });
     });
+
+    // Slideshow script
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+    function showNextSlide() {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }
+    setInterval(showNextSlide, 5000); // 5 seconds interval
   </script>
 </body>
 </html>
