@@ -68,18 +68,30 @@
       display: flex;
     }
 
-    /* Slideshow styles */
     .hero-section {
       position: relative;
       width: 100%;
       height: 90vh;
       overflow: hidden;
     }
+
+    .mobile-hero {
+      display: none;
+    }
+
+    .mobile-fallback {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+
     .hero-slideshow {
       width: 100%;
       height: 100%;
       position: relative;
     }
+
     .slide {
       position: absolute;
       top: 0;
@@ -91,10 +103,12 @@
       transition: opacity 1.2s ease-in-out;
       z-index: 0;
     }
+
     .slide.active {
       opacity: 1;
       z-index: 1;
     }
+
     .hero-overlay {
       position: absolute;
       top: 0;
@@ -104,6 +118,7 @@
       background: rgba(0, 0, 0, 0.25);
       z-index: 2;
     }
+
     .hero-text {
       position: absolute;
       top: 50%;
@@ -120,6 +135,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
     .hero-subtext {
       display: block;
       font-size: 0.85rem;
@@ -135,6 +151,12 @@
         display: none;
       }
       .menu-btn {
+        display: block;
+      }
+      .hero-slideshow {
+        display: none;
+      }
+      .mobile-hero {
         display: block;
       }
     }
@@ -275,14 +297,17 @@
   </header>
 
   <section class="hero-section">
+    <!-- Mobile only image -->
+    <picture class="mobile-hero">
+      <source media="(max-width: 768px)" srcset="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-2.jpg">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-2.jpg" alt="Mobile Hero" class="mobile-fallback">
+    </picture>
+
+    <!-- Desktop slideshow -->
     <div class="hero-slideshow">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-2.jpg" alt="Look 1" class="slide active">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-3.jpg" alt="Look 2" class="slide">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03198.jpg" alt="Look 3" class="slide">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03319.jpg" alt="Look 4" class="slide">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03330.jpg" alt="Look 5" class="slide">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03417.jpg" alt="Look 6" class="slide">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03502.jpg" alt="Look 7" class="slide">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-3.jpg" alt="Look 1" class="slide active">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8870.jpg" alt="Look 2" class="slide">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8880.jpg" alt="Look 3" class="slide">
       <div class="hero-overlay"></div>
       <div class="hero-text">
         Always another angle<br>
@@ -344,7 +369,7 @@
       });
     });
 
-    // Slideshow script
+    // Slideshow logic
     const slides = document.querySelectorAll('.slide');
     let current = 0;
     function showNextSlide() {
@@ -352,7 +377,7 @@
       current = (current + 1) % slides.length;
       slides[current].classList.add('active');
     }
-    setInterval(showNextSlide, 5000); // 5 seconds interval
+    setInterval(showNextSlide, 5000); // 5 seconds
   </script>
 </body>
 </html>
