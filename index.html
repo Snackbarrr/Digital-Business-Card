@@ -75,15 +75,11 @@
       overflow: hidden;
     }
 
-    .mobile-hero {
+    .hero-mobile-image {
       display: none;
-    }
-
-    .mobile-fallback {
       width: 100%;
-      height: auto;
+      height: 100%;
       object-fit: cover;
-      display: block;
     }
 
     .hero-slideshow {
@@ -156,7 +152,7 @@
       .hero-slideshow {
         display: none;
       }
-      .mobile-hero {
+      .hero-mobile-image {
         display: block;
       }
     }
@@ -231,10 +227,12 @@
       transition: opacity 0.4s ease;
       z-index: 9999;
     }
+
     .popup.active {
       opacity: 1;
       pointer-events: auto;
     }
+
     .popup-content {
       background: #fff;
       padding: 2rem;
@@ -244,6 +242,7 @@
       position: relative;
       border-radius: 6px;
     }
+
     .close-btn {
       position: absolute;
       top: 1rem;
@@ -253,12 +252,14 @@
       font-size: 1.5rem;
       cursor: pointer;
     }
+
     .popup-content input[type="email"] {
       padding: 0.75rem;
       width: 100%;
       margin-top: 1rem;
       border: 1px solid #ccc;
     }
+
     .popup-content button[type="submit"] {
       margin-top: 1rem;
       padding: 0.75rem 1.5rem;
@@ -269,6 +270,7 @@
       font-weight: 500;
       letter-spacing: 0.03em;
     }
+
     footer {
       text-align: center;
       padding: 2rem;
@@ -297,15 +299,12 @@
   </header>
 
   <section class="hero-section">
-    <!-- Mobile only image -->
-    <picture class="mobile-hero">
-      <source media="(max-width: 768px)" srcset="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-2.jpg">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-2.jpg" alt="Mobile Hero" class="mobile-fallback">
-    </picture>
+    <!-- Mobile Image -->
+    <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-3.jpg" alt="Mobile Look" class="hero-mobile-image">
 
-    <!-- Desktop slideshow -->
+    <!-- Desktop Slideshow -->
     <div class="hero-slideshow">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-3.jpg" alt="Look 1" class="slide active">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-2.jpg" alt="Look 1" class="slide active">
       <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8870.jpg" alt="Look 2" class="slide">
       <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8880.jpg" alt="Look 3" class="slide">
       <div class="hero-overlay"></div>
@@ -369,15 +368,17 @@
       });
     });
 
-    // Slideshow logic
+    // Fade Slideshow Script
     const slides = document.querySelectorAll('.slide');
     let current = 0;
+
     function showNextSlide() {
       slides[current].classList.remove('active');
       current = (current + 1) % slides.length;
       slides[current].classList.add('active');
     }
-    setInterval(showNextSlide, 5000); // 5 seconds
+
+    setInterval(showNextSlide, 5000);
   </script>
 </body>
 </html>
