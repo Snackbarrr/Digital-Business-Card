@@ -16,6 +16,7 @@
       background-color: #fff;
       color: #111;
     }
+
     header {
      display: flex;
      justify-content: space-between;
@@ -27,18 +28,21 @@
      z-index: 1000;
      background-color: #fff;
     }
+
     .logo {
       font-size: 1.2rem;
       font-weight: 600;
       text-decoration: none;
       color: #111;
     }
+
     .desktop-nav a {
       margin-left: 1.5rem;
       text-decoration: none;
       color: #111;
       font-weight: 400;
     }
+
     .menu-btn {
       display: none;
       background: none;
@@ -47,6 +51,7 @@
       cursor: pointer;
       color: #111;
     }
+
     .mobile-nav {
       display: none;
       flex-direction: column;
@@ -58,12 +63,14 @@
       padding: 1rem;
       z-index: 10000;
     }
+
     .mobile-nav a {
       margin: 0.5rem 0;
       text-decoration: none;
       color: #111;
       font-weight: 500;
     }
+
     .mobile-nav.show {
       display: flex;
     }
@@ -121,7 +128,7 @@
       left: 70%;
       transform: translate(-50%, -50%);
       color: white;
-      font-size: clamp(1rem, 5vw, 2.5rem);
+      font-size: clamp(1rem, 3vw, 1.8rem);
       font-weight: 600;
       text-align: center;
       letter-spacing: 0.05em;
@@ -159,8 +166,7 @@
         left: 50%;
         top: 60%;
         transform: translate(-50%, -50%);
-        padding: 0 1rem;
-        font-size: 1.3rem;
+        font-size: clamp(0.9rem, 4vw, 1.2rem);
         white-space: normal;
       }
     }
@@ -169,17 +175,20 @@
       padding: 4rem 2rem;
       background-color: #ffffff;
     }
+
     .form-heading {
       text-align: center;
       font-size: 2rem;
       margin-bottom: 0.5rem;
     }
+
     .form-subtext {
       text-align: center;
       font-size: 0.95rem;
       color: #555;
       margin-bottom: 2rem;
     }
+
     .contact-grid {
       display: flex;
       flex-wrap: wrap;
@@ -187,6 +196,7 @@
       margin: 0 auto;
       gap: 1rem;
     }
+
     .contact-grid input,
     .contact-grid textarea {
       width: 100%;
@@ -196,6 +206,7 @@
       border-radius: 6px;
       background-color: #fafafa;
     }
+
     .contact-grid button {
       padding: 0.9rem;
       width: 100%;
@@ -208,12 +219,15 @@
       border-radius: 6px;
       font-weight: 500;
     }
+
     .contact-grid .half {
       width: 48%;
     }
+
     .contact-grid .full {
       width: 100%;
     }
+
     @media (max-width: 600px) {
       .contact-grid .half {
         width: 100%;
@@ -307,18 +321,21 @@
   </header>
 
   <section class="hero-section">
-    <!-- Mobile Image -->
-    <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-3.jpg" alt="Mobile Look" class="hero-mobile-image">
-
-    <!-- Desktop Slideshow -->
+    <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-3.jpg" alt="Mobile Look 1" class="slide active">
+    <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03502-2.jpg" alt="Mobile Look 2" class="slide">
+    <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03175.jpg" alt="Mobile Look 3" class="slide">
+    <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03144.jpg" alt="Mobile Look 4" class="slide">
+    <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03175.jpg" alt="Mobile Look 5" class="slide">
+    <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03319-2.jpg" alt="Mobile Look 6" class="slide">
+    <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03426.jpg" alt="Mobile Look 7" class="slide">
+    <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03543.jpg" alt="Mobile Look 8" class="slide">
+    
     <div class="hero-slideshow">
       <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-2.jpg" alt="Look 1" class="slide active">
       <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03198.jpg" alt="Look 2" class="slide">
       <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03417.jpg" alt="Look 3" class="slide">
       <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03502.jpg" alt="Look 4" class="slide">
     </div>
-
-    <!-- Overlay and Text visible on all devices -->
     <div class="hero-overlay"></div>
     <div class="hero-text">
       Always another angle<br>
@@ -379,7 +396,6 @@
       });
     });
 
-    // Fade Slideshow Script
     const slides = document.querySelectorAll('.slide');
     let current = 0;
 
