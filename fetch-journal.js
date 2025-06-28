@@ -1,123 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Photo Journal – Yusrizalakbar</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #fafafa;
-      color: #111;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 2rem;
-      border-bottom: 1px solid #eaeaea;
-      background-color: #fff;
-    }
-    .logo {
-      font-size: 1.2rem;
-      font-weight: 600;
-      text-decoration: none;
-      color: #111;
-    }
-    .desktop-nav a {
-      margin-left: 1.5rem;
-      text-decoration: none;
-      color: #111;
-      font-weight: 400;
-    }
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    article {
-      background: white;
-      padding: 1.5rem;
-      border: 1px solid #eaeaea;
-      border-radius: 6px;
-      margin-bottom: 1.5rem;
-    }
-    article h2 {
-      margin: 0 0 0.5rem 0;
-      font-size: 1.3rem;
-    }
-    article p {
-      margin: 0;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <a href="index.html" class="logo">Yusrizalakbar</a>
-    <nav class="desktop-nav">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="journal.html">Journal</a>
-      <a href="spurofthemoment.html">Portfolio</a>
-      <a href="Digitalcard.html">Contact</a>
-    </nav>
-  </header>
+<script type="module">
+  import { createClient } from "https://esm.sh/@sanity/client";
 
-  <main>
-    <h1>Photo Journal</h1>
-    <div id="journal">Loading entries...</div>
-  </main>
+  const client = createClient({
+    projectId: "ibe92zgg",
+    dataset: "production",
+    apiVersion: "2023-01-01",
+    useCdn: false,
+    token: "sk4gDAkyA8lngW0l6IIpM3zL01aUrBQly6q876sSm9bus4WgCvzrNCsTbFMKK5sgpNOEfT1EY9gQcMt4VHE4d7mhHQ6ujxGrUb0UnRYmAzjRU8rRLjanw1WX5PVOGAqgtQPXmZkZVLgBoNH9rKRiv9EXTJb0M169j05LcWCMPAXW2Cjm9C5x"
+  });
 
-  <script type="module">
-    import { createClient } from "https://esm.sh/@sanity/client";
-
-    const client = createClient({
-      projectId: "ibe92zgg",         // ✅ your project ID
-      dataset: "production",         // ✅ your dataset
-      apiVersion: "2023-01-01",      // ✅ lock API version
-      useCdn: false                  // ✅ avoid CORS issues
-      token: "sk4gDAkyA8lngW0l6IIpM3zL01aUrBQly6q876sSm9bus4WgCvzrNCsTbFMKK5sgpNOEfT1EY9gQcMt4VHE4d7mhHQ6ujxGrUb0UnRYmAzjRU8rRLjanw1WX5PVOGAqgtQPXmZkZVLgBoNH9rKRiv9EXTJb0M169j05LcWCMPAXW2Cjm9C5x" // ✅ your read-only token
-    });
-
-    client
-      .fetch(`*[_type == "post"] | order(_createdAt desc){
-        _id,
-        title,
-        body,
-        "imageUrl": mainImage.asset->url
-      }`)
-      .then(posts => {
-        const container = document.getElementById('journal');
-        container.innerHTML = "";
-
-        posts.forEach(post => {
-          let bodyText = '';
-          if (post.body && Array.isArray(post.body)) {
-            bodyText = post.body
-              .map(block => block.children.map(child => child.text).join(''))
-              .join('\n');
-          }
-
-          const article = document.createElement('article');
-          article.innerHTML = `
-            <h2>${post.title}</h2>
-            ${post.imageUrl ? `<img src="${post.imageUrl}" alt="${post.title}" style="max-width:100%;height:auto;margin:0.5rem 0;">` : ''}
-            <p>${bodyText}</p>
-          `;
-          container.appendChild(article);
-        });
-      })
-      .catch(err => {
-        console.error('Fetch error:', err);
-        document.getElementById('journal').innerText = 'Failed to load entries.';
+  client
+    .fetch(`*[_type == "post"] | order(_createdAt desc){
+      _id,
+      title,
+      body,
+      "imageUrl": mainImage.asset->url
+    }`)
+    .then(posts => {
+      const container = document.getElementById('journal');
+      container.innerHTML = "";
+      posts.forEach(post => {
+        let bodyText = '';
+        if (post.body && Array.isArray(post.body)) {
+          bodyText = post.body
+            .map(block => block.children.map(child => child.text).join(''))
+            .join('\n');
+        }
+        const article = document.createElement('article');
+        article.innerHTML = `
+          <h2>${post.title}</h2>
+          ${post.imageUrl ? `<img src="${post.imageUrl}" alt="${post.title}" style="max-width:100%;height:auto;">` : ''}
+          <p>${bodyText}</p>
+        `;
+        container.appendChild(article);
       });
-  </script>
-</body>
-</html>
+    })
+    .catch(err => {
+      console.error('Fetch error:', err);
+      document.getElementById('journal').innerText = 'Failed to load entries.';
+    });
+</script>
