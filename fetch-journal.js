@@ -2,7 +2,7 @@
 // <script src="https://cdn.jsdelivr.net/npm/@sanity/client@latest"></script>
 
 // Create the client
-const client = sanityClient({
+const client = sanity.Client({
   projectId: 'ibe92zgg',       // ✅ Your projectId
   dataset: 'production',       // ✅ Your dataset name
   apiVersion: '2023-01-01',    // ✅ Any date works; this locks the API version
