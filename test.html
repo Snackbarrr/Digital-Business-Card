@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Sanity Fetch</title>
+  <script type="module">
+    async function load() {
+      const res = await fetch(
+        'https://poq3nu02f.api.sanity.io/v2023-01-01/data/query/production?query=*[_type=="post"]{_id,title,body}'
+      );
+      const data = await res.json();
+      console.log('Sanity data:', data);
+      document.body.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+    }
+    load();
+  </script>
+</head>
+<body>
+  <h1>Test Fetch</h1>
+</body>
+</html>
