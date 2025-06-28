@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Photo Journal – Yusrizalakbar</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- ✅ Load Sanity Client first -->
-  <script src="https://cdn.jsdelivr.net/npm/@sanity/client@latest"></script>
-
-  <!-- ✅ Load your fetch script second (only ONCE, no type="module") -->
-  <script src="fetch-journal.js"></script>
-
   <style>
     body, html {
       margin: 0;
@@ -86,6 +79,49 @@
     </div>
   </main>
 
-  <!-- ✅ DO NOT include another script tag here -->
+  <!-- ✅ ES Module Sanity Client -->
+  <script type="module">
+    import { createClient } from "https://esm.sh/@sanity/client";
+
+    const client = createClient({
+      projectId: "ibe92zgg",
+      dataset: "production",
+      apiVersion: "2023-01-01",
+      useCdn: true
+    });
+
+    client
+      .fetch(`*[_type == "post"] | order(_createdAt desc){
+        _id,
+        title,
+        body,
+        "imageUrl": mainImage.asset->url
+      }`)
+      .then(posts => {
+        const container = document.getElementById('journal');
+        container.innerHTML = ""; // Clear loading text
+
+        posts.forEach(post => {
+          let bodyText = '';
+          if (post.body && Array.isArray(post.body)) {
+            bodyText = post.body
+              .map(block => block.children.map(child => child.text).join(''))
+              .join('\n');
+          }
+
+          const article = document.createElement('article');
+          article.innerHTML = `
+            <h2>${post.title}</h2>
+            ${post.imageUrl ? `<img src="${post.imageUrl}" alt="${post.title}" style="max-width:100%;height:auto;margin:0.5rem 0;">` : ''}
+            <p>${bodyText}</p>
+          `;
+          container.appendChild(article);
+        });
+      })
+      .catch(err => {
+        console.error('Fetch error:', err);
+        document.getElementById('journal').innerText = 'Failed to load entries.';
+      });
+  </script>
 </body>
 </html>
