@@ -6,7 +6,7 @@ const client = sanity.Client({
   projectId: 'ibe92zgg',       // ✅ Your projectId
   dataset: 'production',       // ✅ Your dataset name
   apiVersion: '2023-01-01',    // ✅ Any date works; this locks the API version
-  useCdn: true                 // ✅ Use CDN for faster reads
+  useCdn: false               // ✅ Use CDN for faster reads
 });
 
 // Fetch posts
