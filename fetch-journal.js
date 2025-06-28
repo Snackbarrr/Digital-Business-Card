@@ -1,4 +1,4 @@
-const client = sanityClient({
+const client = sanity.client({
   projectId: 'poq3Nu02f', // <<-- Replace this!
   dataset: 'production',
   apiVersion: '2023-01-01',
