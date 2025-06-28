@@ -1,7 +1,7 @@
 import sanityClient from 'https://cdn.skypack.dev/@sanity/client';
 
 const client = sanityClient({
-  projectId: 'poq3Nu02F', // << your project ID
+  projectId: 'ibe92zg9', // << your project ID
   dataset: 'production',
   apiVersion: '2023-01-01',
   useCdn: true
