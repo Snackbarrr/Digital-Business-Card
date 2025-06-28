@@ -82,7 +82,7 @@
       projectId: "ibe92zgg",         // ✅ your project ID
       dataset: "production",         // ✅ your dataset
       apiVersion: "2023-01-01",      // ✅ lock API version
-      useCdn: false,                 // ✅ avoid CORS issues
+      useCdn: false                  // ✅ avoid CORS issues
       token: "sk4gDAkyA8lngW0l6IIpM3zL01aUrBQly6q876sSm9bus4WgCvzrNCsTbFMKK5sgpNOEfT1EY9gQcMt4VHE4d7mhHQ6ujxGrUb0UnRYmAzjRU8rRLjanw1WX5PVOGAqgtQPXmZkZVLgBoNH9rKRiv9EXTJb0M169j05LcWCMPAXW2Cjm9C5x" // ✅ your read-only token
     });
 
