@@ -3,14 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projects – Yusrizalakbar</title>
+  <title>Photo Journal – Yusrizalakbar</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Load Sanity Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@sanity/client@latest"></script>
+
   <style>
     body, html {
       margin: 0;
       padding: 0;
-      height: 100%;
       font-family: 'Inter', sans-serif;
+      background-color: #fafafa;
+      color: #111;
     }
     header {
       display: flex;
@@ -34,22 +39,28 @@
       color: #111;
       font-weight: 400;
     }
-    .hero {
-      position: relative;
-      width: 100%;
-      height: calc(100vh - 80px); /* subtract header height */
-      background-image: url('https://storage.googleapis.com/spurofthemoment/Comingsoon/DSC02774.JPG');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
     }
-    .coming-soon {
-      color: white;
-      font-size: clamp(1.5rem, 5vw, 3rem);
-      font-weight: 600;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    article {
+      background: white;
+      padding: 1.5rem;
+      border: 1px solid #eaeaea;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+    article h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.3rem;
+    }
+    article p {
+      margin: 0;
     }
   </style>
 </head>
@@ -57,6 +68,7 @@
   <header>
     <a href="index.html" class="logo">Yusrizalakbar</a>
     <nav class="desktop-nav">
+      <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="projects.html">Projects</a>
       <a href="spurofthemoment.html">Portfolio</a>
@@ -64,8 +76,13 @@
     </nav>
   </header>
 
-  <div class="hero">
-    <div class="coming-soon">Coming Soon</div>
-  </div>
+  <main>
+    <h1>Photo Journal</h1>
+    <div id="journal">
+      Loading entries...
+    </div>
+  </main>
+
+  <script src="fetch-journal.js"></script>
 </body>
 </html>
