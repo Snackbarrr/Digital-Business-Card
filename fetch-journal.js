@@ -7,6 +7,7 @@ const client = sanity.Client({
   dataset: 'production',       // ✅ Your dataset name
   apiVersion: '2023-01-01',    // ✅ Any date works; this locks the API version
   useCdn: false               // ✅ Use CDN for faster reads
+  token: "sk4gDAkyA8lngW0l6IIpM3zL01aUrBQly6q876sSm9bus4WgCvzrNCsTbFMKK5sgpNOEfT1EY9gQcMt4VHE4d7mhHQ6ujxGrUb0UnRYmAzjRU8rRLjanw1WX5PVOGAqgtQPXmZkZVLgBoNH9rKRiv9EXTJb0M169j05LcWCMPAXW2Cjm9C5x"
 });
 
 // Fetch posts
