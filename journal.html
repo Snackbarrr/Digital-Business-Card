@@ -6,9 +6,11 @@
   <title>Photo Journal – Yusrizalakbar</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
+  <!-- ✅ Load Sanity Client first -->
   <script src="https://cdn.jsdelivr.net/npm/@sanity/client@latest"></script>
 
-    <script src="fetch-journal.js"></script>
+  <!-- ✅ Load your fetch script second (only ONCE, no type="module") -->
+  <script src="fetch-journal.js"></script>
 
   <style>
     body, html {
@@ -84,6 +86,6 @@
     </div>
   </main>
 
- <script type="module" src="fetch-journal.js"></script>
+  <!-- ✅ DO NOT include another script tag here -->
 </body>
 </html>
