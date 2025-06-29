@@ -14,22 +14,31 @@
       _id,
       title,
       body,
+      _createdAt,
+      "authorName": author->name,
       "imageUrl": mainImage.asset->url
     }`)
     .then(posts => {
       const container = document.getElementById('journal');
       container.innerHTML = "";
       posts.forEach(post => {
+        // Format date
+        const date = new Date(post._createdAt).toLocaleDateString();
+
+        // Convert Portable Text to plain text
         let bodyText = '';
         if (post.body && Array.isArray(post.body)) {
           bodyText = post.body
             .map(block => block.children.map(child => child.text).join(''))
             .join('\n');
         }
+
+        // Build article
         const article = document.createElement('article');
         article.innerHTML = `
           <h2>${post.title}</h2>
-          ${post.imageUrl ? `<img src="${post.imageUrl}" alt="${post.title}" style="max-width:100%;height:auto;">` : ''}
+          <p><em>By ${post.authorName || 'Unknown Author'} on ${date}</em></p>
+          ${post.imageUrl ? `<img src="${post.imageUrl}" alt="${post.title}" style="max-width:100%;height:auto;margin:0.5rem 0;">` : ''}
           <p>${bodyText}</p>
         `;
         container.appendChild(article);
