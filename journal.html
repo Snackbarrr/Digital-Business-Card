@@ -56,7 +56,12 @@
       font-size: 1.3rem;
     }
     article p {
-      margin: 0;
+      margin: 0.25rem 0;
+    }
+    .meta {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
     }
   </style>
 </head>
@@ -96,6 +101,8 @@
         _id,
         title,
         body,
+        _createdAt,
+        "authorName": author->name,
         "imageUrl": mainImage.asset->url
       }`)
       .then(posts => {
@@ -103,6 +110,10 @@
         container.innerHTML = ""; // Clear loading text
 
         posts.forEach(post => {
+          // Format date
+          const date = new Date(post._createdAt).toLocaleDateString();
+
+          // Convert Portable Text to plain text
           let bodyText = '';
           if (post.body && Array.isArray(post.body)) {
             bodyText = post.body
@@ -113,6 +124,7 @@
           const article = document.createElement('article');
           article.innerHTML = `
             <h2>${post.title}</h2>
+            <div class="meta">By ${post.authorName || 'Unknown Author'} • ${date}</div>
             ${post.imageUrl ? `<img src="${post.imageUrl}" alt="${post.title}" style="max-width:100%;height:auto;margin:0.5rem 0;">` : ''}
             <p>${bodyText}</p>
           `;
