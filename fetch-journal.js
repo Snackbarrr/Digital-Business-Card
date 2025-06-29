@@ -10,10 +10,11 @@
   });
 
   client
-    .fetch(`*[_type == "post"] | order(_createdAt desc){
+    .fetch(`*[_type == "post"] | order(coalesce(publishedAt, _createdAt) desc){
       _id,
       title,
       body,
+      publishedAt,
       _createdAt,
       "authorName": author->name,
       "imageUrl": mainImage.asset->url
@@ -21,9 +22,11 @@
     .then(posts => {
       const container = document.getElementById('journal');
       container.innerHTML = "";
+
       posts.forEach(post => {
-        // Format date
-        const date = new Date(post._createdAt).toLocaleDateString();
+        // Use publishedAt if set, else fallback to createdAt
+        const dateRaw = post.publishedAt || post._createdAt;
+        const date = new Date(dateRaw).toLocaleDateString();
 
         // Convert Portable Text to plain text
         let bodyText = '';
