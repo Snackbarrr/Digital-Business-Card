@@ -204,6 +204,7 @@
         width: 100%;
       }
     }
+    /* Note: popup styles remain in CSS but are harmless without HTML/JS */
     .popup {
       position: fixed;
       top: 0;
@@ -286,19 +287,19 @@
 
   <section class="hero-section">
     <div class="hero-mobile-slideshow">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-3.jpg" class="slide-mobile active">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03502-2.jpg" class="slide-mobile">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03175.jpg" class="slide-mobile">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03144.jpg" class="slide-mobile">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03319-2.jpg" class="slide-mobile">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03426.jpg" class="slide-mobile">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03543.jpg" class="slide-mobile">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-3.jpg" class="slide-mobile active" loading="lazy">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03502-2.jpg" class="slide-mobile" loading="lazy">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03175.jpg" class="slide-mobile" loading="lazy">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03144.jpg" class="slide-mobile" loading="lazy">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03319-2.jpg" class="slide-mobile" loading="lazy">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03426.jpg" class="slide-mobile" loading="lazy">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03543.jpg" class="slide-mobile" loading="lazy">
     </div>
     <div class="hero-slideshow">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-2.jpg" class="slide-desktop active">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03198.jpg" class="slide-desktop">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03417.jpg" class="slide-desktop">
-      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03502.jpg" class="slide-desktop">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/IMG_8865-2.jpg" class="slide-desktop active" loading="lazy">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03198.jpg" class="slide-desktop" loading="lazy">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03417.jpg" class="slide-desktop" loading="lazy">
+      <img src="https://storage.googleapis.com/spurofthemoment/Landing/DSC03502.jpg" class="slide-desktop" loading="lazy">
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-text">
@@ -319,19 +320,6 @@
       <div class="full"><button type="submit">Send Message</button></div>
     </form>
   </section>
-
-  <div id="newsletter-popup" class="popup">
-    <div class="popup-content">
-      <button id="close-popup" class="close-btn">&times;</button>
-      <h2>(Don't) Join the newsletter (...yet.)</h2>
-      <p>Be the first to hear about new projects, drops, and updates.</p>
-      <form action="https://YOUR-MAILCHIMP-URL-HERE" method="POST" target="_blank">
-        <input type="email" name="EMAIL" placeholder="Enter your email" required>
-        <button type="submit">Nothing happens when you click</button>
-      </form>
-      <small>We respect your privacy.</small>
-    </div>
-  </div>
 
   <footer>
     &copy; 2025 Yusrizalakbar. All rights reserved.
@@ -357,21 +345,8 @@
     setInterval(showNextDesktopSlide, 5000);
 
     window.addEventListener("load", () => {
-      const popup = document.getElementById("newsletter-popup");
-      const closeBtn = document.getElementById("close-popup");
       const menuToggle = document.getElementById("menu-toggle");
       const mobileMenu = document.getElementById("mobileMenu");
-
-      if (!sessionStorage.getItem('newsletterShown')) {
-        setTimeout(() => {
-          popup.classList.add("active");
-          sessionStorage.setItem('newsletterShown', 'true');
-        }, 2000);
-      }
-
-      closeBtn.addEventListener("click", () => {
-        popup.classList.remove("active");
-      });
 
       menuToggle.addEventListener("click", () => {
         mobileMenu.classList.toggle("show");
