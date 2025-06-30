@@ -6,7 +6,264 @@
   <title>Yusrizalakbar Studio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* (All your CSS unchanged, you can keep it as-is) */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fff;
+      color: #111;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid #eaeaea;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #fff;
+    }
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #111;
+    }
+    .desktop-nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: #111;
+      font-weight: 400;
+    }
+    .menu-btn {
+      display: none;
+      background: none;
+      font-size: 1.5rem;
+      border: none;
+      cursor: pointer;
+      color: #111;
+    }
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background: white;
+      position: absolute;
+      top: 100%;
+      right: 2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      padding: 1rem;
+      z-index: 10000;
+    }
+    .mobile-nav a {
+      margin: 0.5rem 0;
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+    }
+    .mobile-nav.show {
+      display: flex;
+    }
+    .hero-section {
+      position: relative;
+      width: 100%;
+      height: 90vh;
+      overflow: hidden;
+    }
+    .hero-mobile-slideshow, .hero-slideshow {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .slide-mobile, .slide-desktop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+      z-index: 1;
+    }
+    .slide-mobile.active,
+    .slide-desktop.active {
+      opacity: 1;
+      z-index: 2;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.25);
+      z-index: 3;
+    }
+    .hero-text {
+      position: absolute;
+      top: 60%;
+      right: 5%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: clamp(1rem, 3vw, 1.8rem);
+      font-weight: 600;
+      text-align: right;
+      letter-spacing: 0.05em;
+      padding: 0 1rem;
+      z-index: 4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hero-subtext {
+      display: -webkit-box;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      margin-top: 0.5rem;
+      opacity: 0.85;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    @media (max-width: 768px) {
+      .desktop-nav {
+        display: none;
+      }
+      .menu-btn {
+        display: block;
+      }
+      .hero-slideshow {
+        display: none;
+      }
+      .hero-mobile-slideshow {
+        display: block;
+      }
+      .hero-text {
+        font-size: clamp(0.9rem, 4vw, 1.2rem);
+        white-space: normal;
+      }
+    }
+    .form-section {
+      padding: 3rem 1.5rem;
+      background-color: #ffffff;
+    }
+    .form-heading {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .form-subtext {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 600px;
+      margin: 0 auto;
+      gap: 1rem;
+    }
+    .contact-grid input,
+    .contact-grid textarea {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #fafafa;
+    }
+    .contact-grid button {
+      padding: 1rem;
+      width: 100%;
+      background-color: #111;
+      color: white;
+      font-size: 1rem;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .contact-grid .half {
+      width: 48%;
+    }
+    .contact-grid .full {
+      width: 100%;
+    }
+    @media (max-width: 600px) {
+      .contact-grid .half {
+        width: 100%;
+      }
+    }
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(17, 17, 17, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 9999;
+    }
+    .popup.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .popup-content {
+      background: #fff;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      border-radius: 6px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .popup-content input[type="email"] {
+      padding: 0.75rem;
+      width: 100%;
+      margin-top: 1rem;
+      border: 1px solid #ccc;
+    }
+    .popup-content button[type="submit"] {
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: #000;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eaeaea;
+    }
   </style>
 </head>
 <body>
@@ -63,6 +320,19 @@
     </form>
   </section>
 
+  <div id="newsletter-popup" class="popup">
+    <div class="popup-content">
+      <button id="close-popup" class="close-btn">&times;</button>
+      <h2>(Don't) Join the newsletter (...yet.)</h2>
+      <p>Be the first to hear about new projects, drops, and updates.</p>
+      <form action="https://YOUR-MAILCHIMP-URL-HERE" method="POST" target="_blank">
+        <input type="email" name="EMAIL" placeholder="Enter your email" required>
+        <button type="submit">Nothing happens when you click</button>
+      </form>
+      <small>We respect your privacy.</small>
+    </div>
+  </div>
+
   <footer>
     &copy; 2025 Yusrizalakbar. All rights reserved.
   </footer>
@@ -87,8 +357,21 @@
     setInterval(showNextDesktopSlide, 5000);
 
     window.addEventListener("load", () => {
+      const popup = document.getElementById("newsletter-popup");
+      const closeBtn = document.getElementById("close-popup");
       const menuToggle = document.getElementById("menu-toggle");
       const mobileMenu = document.getElementById("mobileMenu");
+
+      if (!sessionStorage.getItem('newsletterShown')) {
+        setTimeout(() => {
+          popup.classList.add("active");
+          sessionStorage.setItem('newsletterShown', 'true');
+        }, 2000);
+      }
+
+      closeBtn.addEventListener("click", () => {
+        popup.classList.remove("active");
+      });
 
       menuToggle.addEventListener("click", () => {
         mobileMenu.classList.toggle("show");
