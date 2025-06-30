@@ -85,6 +85,93 @@
   </main>
 
   <!-- ✅ ES Module Sanity Client -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Photo Journal – Yusrizalakbar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #fafafa;
+      color: #111;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid #eaeaea;
+      background-color: #fff;
+      position: relative;
+      z-index: 10;
+    }
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #111;
+    }
+    .desktop-nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: #111;
+      font-weight: 400;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    article {
+      background: white;
+      padding: 1.5rem;
+      border: 1px solid #eaeaea;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+    article h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.3rem;
+    }
+    article p {
+      margin: 0.25rem 0;
+    }
+    .meta {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">Yusrizalakbar</a>
+    <nav class="desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="journal.html">Journal</a>
+      <a href="spurofthemoment.html">Portfolio</a>
+      <a href="Digitalcard.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Photo Journal</h1>
+    <div id="journal">
+      Loading entries...
+    </div>
+  </main>
+
+  <!-- ✅ ES Module Sanity Client -->
   <script type="module">
     import { createClient } from "https://esm.sh/@sanity/client";
 
