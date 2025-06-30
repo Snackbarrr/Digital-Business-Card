@@ -119,6 +119,14 @@
       margin: 1.5rem 0;
       border-radius: 4px;
     }
+    .loader {
+      text-align: center;
+      margin: 2rem 0;
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    /* MOBILE OPTIMIZATION */
     @media (max-width: 600px) {
       .desktop-nav {
         display: none;
@@ -126,17 +134,28 @@
       .menu-btn {
         display: block;
       }
+      main {
+        padding: 0 0.5rem;
+      }
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
+      article {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+      }
+      article h2 {
+        font-size: 1.4rem;
+      }
+      article p {
+        font-size: 0.95rem;
+      }
       article img {
         width: 90%;
         margin-left: auto;
         margin-right: auto;
       }
-    }
-    .loader {
-      text-align: center;
-      margin: 2rem 0;
-      color: #999;
-      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -158,7 +177,7 @@
 
   <main>
     <h1>Photo Journal</h1>
-    <div id="journal"></div> <!-- Removed the "Loading entries..." here -->
+    <div id="journal"></div>
   </main>
 
   <script type="module">
@@ -225,7 +244,7 @@
           const isMobile = window.innerWidth <= 600;
           const direction = Math.random() < 0.5 ? -1 : 1;
           const percent = isMobile
-            ? (3 + Math.random() * 7) * direction
+            ? (8 + Math.random() * 10) * direction // increased offset range on mobile
             : (10 + Math.random() * 10) * direction;
           article.style.transform = `translateX(${percent}%)`;
 
