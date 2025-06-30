@@ -32,6 +32,9 @@
       letter-spacing: 0.03em;
       text-transform: uppercase;
     }
+    .desktop-nav {
+      display: flex;
+    }
     .desktop-nav a {
       margin-left: 1.5rem;
       text-decoration: none;
@@ -40,6 +43,35 @@
       font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
+    }
+    .menu-btn {
+      display: none;
+      font-size: 1.4rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      right: 2rem;
+      background: white;
+      border: 1px solid #eaeaea;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .mobile-nav a {
+      text-decoration: none;
+      color: #111;
+      font-weight: 400;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      margin: 0.5rem 0;
+    }
+    .mobile-nav.show {
+      display: flex;
     }
     main {
       max-width: 900px;
@@ -87,8 +119,14 @@
       border-radius: 4px;
     }
     @media (max-width: 600px) {
+      .desktop-nav {
+        display: none;
+      }
+      .menu-btn {
+        display: block;
+      }
       article img {
-        width: 80%;
+        width: 90%;
         margin-left: auto;
         margin-right: auto;
       }
@@ -109,6 +147,12 @@
       <a href="journal.html">Journal</a>
       <a href="Digitalcard.html">Contact</a>
     </nav>
+    <button class="menu-btn" id="menuToggle">&#9776;</button>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="about.html">About</a>
+      <a href="journal.html">Journal</a>
+      <a href="Digitalcard.html">Contact</a>
+    </div>
   </header>
 
   <main>
@@ -174,9 +218,13 @@
 
           const article = document.createElement('article');
 
-          // Bigger random horizontal offset (10–20% left/right)
+          // Detect mobile
+          const isMobile = window.innerWidth <= 600;
+          // Offset: smaller on mobile
           const direction = Math.random() < 0.5 ? -1 : 1;
-          const percent = (10 + Math.random() * 10) * direction; // -20% to +20%
+          const percent = isMobile
+            ? (3 + Math.random() * 7) * direction // -10% to +10%
+            : (10 + Math.random() * 10) * direction; // -20% to +20%
           article.style.transform = `translateX(${percent}%)`;
 
           article.innerHTML = `
@@ -208,6 +256,13 @@
       ) {
         loadPosts();
       }
+    });
+
+    // Burger menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    menuToggle.addEventListener('click', () => {
+      mobileNav.classList.toggle('show');
     });
   </script>
 </body>
