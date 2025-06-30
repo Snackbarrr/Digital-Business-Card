@@ -57,6 +57,7 @@
       margin-bottom: 4rem;
       border-bottom: 1px solid #eaeaea;
       padding-bottom: 3rem;
+      transition: transform 0.3s ease;
     }
     article h2 {
       margin: 0 0 0.75rem 0;
@@ -165,6 +166,11 @@
           }
 
           const article = document.createElement('article');
+
+          // Add random horizontal offset
+          const offset = Math.floor(Math.random() * 61) - 30; // -30px to +30px
+          article.style.transform = `translateX(${offset}px)`;
+
           article.innerHTML = `
             <h2>${post.title}</h2>
             <div class="meta">By ${post.authorName || 'Unknown Author'} • ${date}</div>
