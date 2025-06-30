@@ -80,10 +80,18 @@
     }
     article img {
       width: 100%;
+      max-width: 100%;
       height: auto;
       display: block;
       margin: 1.5rem 0;
       border-radius: 4px;
+    }
+    @media (max-width: 600px) {
+      article img {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
     .loader {
       text-align: center;
@@ -97,7 +105,6 @@
   <header>
     <a href="index.html" class="logo">Yusrizalakbar</a>
     <nav class="desktop-nav">
-      <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="journal.html">Journal</a>
       <a href="Digitalcard.html">Contact</a>
@@ -167,9 +174,10 @@
 
           const article = document.createElement('article');
 
-          // Add random horizontal offset
-          const offset = Math.floor(Math.random() * 61) - 30; // -30px to +30px
-          article.style.transform = `translateX(${offset}px)`;
+          // Bigger random horizontal offset (10–20% left/right)
+          const direction = Math.random() < 0.5 ? -1 : 1;
+          const percent = (10 + Math.random() * 10) * direction; // -20% to +20%
+          article.style.transform = `translateX(${percent}%)`;
 
           article.innerHTML = `
             <h2>${post.title}</h2>
