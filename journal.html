@@ -1,104 +1,288 @@
-<script type="module">
-  import { createClient } from "https://esm.sh/@sanity/client";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Photo Journal – Yusrizalakbar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #fff;
+      color: #111;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #eaeaea;
+      background-color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #111;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .desktop-nav {
+      display: flex;
+    }
+    .desktop-nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: #111;
+      font-weight: 400;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .menu-btn {
+      display: none;
+      font-size: 1.4rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #111;
+    }
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      right: 2rem;
+      background: white;
+      border: 1px solid #eaeaea;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .mobile-nav a {
+      text-decoration: none;
+      color: #111;
+      font-weight: 400;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      margin: 0.5rem 0;
+    }
+    .mobile-nav.show {
+      display: flex;
+    }
+    main {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 500;
+      margin-bottom: 3rem;
+      text-align: center;
+      letter-spacing: -0.02em;
+    }
+    article {
+      margin-bottom: 4rem;
+      border-bottom: 1px solid #eaeaea;
+      padding-bottom: 3rem;
+      transition: transform 0.3s ease;
+    }
+    article h2 {
+      margin: 0 0 0.75rem 0;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    article p {
+      margin: 1rem 0;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #333;
+    }
+    .meta {
+      color: #999;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    article img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5rem 0;
+      border-radius: 4px;
+    }
+    .loader {
+      text-align: center;
+      margin: 2rem 0;
+      color: #999;
+      font-size: 0.9rem;
+    }
 
-  const client = createClient({
-    projectId: "ibe92zg9",
-    dataset: "production",
-    apiVersion: "2023-01-01",
-    useCdn: false,
-    token: "sk4gDAkyA8lngW0l6IIpM3zL01aUrBQly6q876sSm9bus4WgCvzrNCsTbFMKK5sgpNOEfT1EY9gQcMt4VHE4d7mhHQ6ujxGrUb0UnRYmAzjRU8rRLjanw1WX5PVOGAqgtQPXmZkZVLgBoNH9rKRiv9EXTJb0M169j05LcWCMPAXW2Cjm9C5x"
-  });
-
-  const container = document.getElementById('journal');
-  const pageSize = 5;
-  let loadedCount = 0;
-  let isLoading = false;
-  let allLoaded = false;
-
-  async function loadPosts() {
-    if (isLoading || allLoaded) return;
-    isLoading = true;
-
-    const loader = document.createElement('div');
-    loader.className = 'loader';
-    loader.textContent = "Loading...";
-    container.appendChild(loader);
-
-    try {
-      const posts = await client.fetch(`*[_type == "post"] | order(coalesce(publishedAt, _createdAt) desc)[${loadedCount}...${loadedCount + pageSize}]{
-        _id,
-        title,
-        body,
-        publishedAt,
-        _createdAt,
-        "authorName": author->name,
-        "imageUrl": mainImage.asset->url
-      }`);
-
-      loader.remove();
-
-      if (posts.length === 0) {
-        allLoaded = true;
-        const endMsg = document.createElement('div');
-        endMsg.className = 'loader';
-        endMsg.textContent = "No more entries.";
-        container.appendChild(endMsg);
-        return;
+    /* MOBILE OPTIMIZATION */
+    @media (max-width: 600px) {
+      .desktop-nav {
+        display: none;
       }
+      .menu-btn {
+        display: block;
+      }
+      main {
+        padding: 0 0.5rem;
+      }
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
+      article {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+      }
+      article h2 {
+        font-size: 1.4rem;
+      }
+      article p {
+        font-size: 0.95rem;
+      }
+      article img {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">Yusrizalakbar</a>
+    <nav class="desktop-nav">
+      <a href="about.html">About</a>
+      <a href="journal.html">Journal</a>
+      <a href="Digitalcard.html">Contact</a>
+    </nav>
+    <button class="menu-btn" id="menuToggle">&#9776;</button>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="about.html">About</a>
+      <a href="journal.html">Journal</a>
+      <a href="Digitalcard.html">Contact</a>
+    </div>
+  </header>
 
-      posts.forEach(post => {
-        const dateRaw = post.publishedAt || post._createdAt;
-        const date = new Date(dateRaw).toLocaleDateString();
+  <main>
+    <h1>Photo Journal</h1>
+    <div id="journal"></div>
+  </main>
 
-        let bodyText = '';
-        if (post.body && Array.isArray(post.body)) {
-          bodyText = post.body
-            .map(block => block.children.map(child => child.text).join(''))
-            .join('\n');
+  <script type="module">
+    import { createClient } from "https://esm.sh/@sanity/client";
+
+    const client = createClient({
+      projectId: "ibe92zg9",
+      dataset: "production",
+      apiVersion: "2023-01-01",
+      useCdn: false,
+      token: "sk4gDAkyA8lngW0l6IIpM3zL01aUrBQly6q876sSm9bus4WgCvzrNCsTbFMKK5sgpNOEfT1EY9gQcMt4VHE4d7mhHQ6ujxGrUb0UnRYmAzjRU8rRLjanw1WX5PVOGAqgtQPXmZkZVLgBoNH9rKRiv9EXTJb0M169j05LcWCMPAXW2Cjm9C5x"
+    });
+
+    const container = document.getElementById('journal');
+    const pageSize = 5;
+    let loadedCount = 0;
+    let isLoading = false;
+    let allLoaded = false;
+
+    async function loadPosts() {
+      if (isLoading || allLoaded) return;
+      isLoading = true;
+
+      const loader = document.createElement('div');
+      loader.className = 'loader';
+      loader.textContent = "Loading...";
+      container.appendChild(loader);
+
+      try {
+        const posts = await client.fetch(`*[_type == "post"] | order(coalesce(publishedAt, _createdAt) desc)[${loadedCount}...${loadedCount + pageSize}]{
+          _id,
+          title,
+          body,
+          publishedAt,
+          _createdAt,
+          "authorName": author->name,
+          "imageUrl": mainImage.asset->url
+        }`);
+
+        loader.remove();
+
+        if (posts.length === 0) {
+          allLoaded = true;
+          const endMsg = document.createElement('div');
+          endMsg.className = 'loader';
+          endMsg.textContent = "No more entries.";
+          container.appendChild(endMsg);
+          return;
         }
 
-        const article = document.createElement('article');
+        posts.forEach(post => {
+          const dateRaw = post.publishedAt || post._createdAt;
+          const date = new Date(dateRaw).toLocaleDateString();
 
-        const isMobile = window.innerWidth <= 600;
-        if (!isMobile) {
-          const direction = Math.random() < 0.5 ? -1 : 1;
-          const percent = (10 + Math.random() * 10) * direction;
-          article.style.transform = `translateX(${percent}%)`;
-        } else {
-          article.style.transform = "none";
-        }
+          let bodyText = '';
+          if (post.body && Array.isArray(post.body)) {
+            bodyText = post.body
+              .map(block => block.children.map(child => child.text).join(''))
+              .join('\n');
+          }
 
-        article.innerHTML = `
-          <h2>${post.title}</h2>
-          <div class="meta">By ${post.authorName || 'Unknown Author'} • ${date}</div>
-          ${post.imageUrl ? `<img src="${post.imageUrl}" alt="${post.title}">` : ''}
-          <p>${bodyText}</p>
-        `;
-        container.appendChild(article);
-      });
+          const article = document.createElement('article');
 
-      loadedCount += posts.length;
-    } catch (err) {
-      console.error('Fetch error:', err);
-      loader.textContent = "Failed to load entries.";
-    } finally {
-      isLoading = false;
+          const isMobile = window.innerWidth <= 600;
+          if (!isMobile) {
+            const direction = Math.random() < 0.5 ? -1 : 1;
+            const percent = (10 + Math.random() * 10) * direction;
+            article.style.transform = `translateX(${percent}%)`;
+          } else {
+            article.style.transform = "none";
+          }
+
+          article.innerHTML = `
+            <h2>${post.title}</h2>
+            <div class="meta">By ${post.authorName || 'Unknown Author'} • ${date}</div>
+            ${post.imageUrl ? `<img src="${post.imageUrl}" alt="${post.title}">` : ''}
+            <p>${bodyText}</p>
+          `;
+          container.appendChild(article);
+        });
+
+        loadedCount += posts.length;
+      } catch (err) {
+        console.error('Fetch error:', err);
+        loader.textContent = "Failed to load entries.";
+      } finally {
+        isLoading = false;
+      }
     }
-  }
 
-  loadPosts();
+    loadPosts();
 
-  window.addEventListener('scroll', () => {
-    if (
-      window.innerHeight + window.scrollY >= document.body.offsetHeight - 300
-    ) {
-      loadPosts();
-    }
-  });
+    window.addEventListener('scroll', () => {
+      if (
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 300
+      ) {
+        loadPosts();
+      }
+    });
 
-  const menuToggle = document.getElementById('menuToggle');
-  const mobileNav = document.getElementById('mobileNav');
-  menuToggle.addEventListener('click', () => {
-    mobileNav.classList.toggle('show');
-  });
-</script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    menuToggle.addEventListener('click', () => {
+      mobileNav.classList.toggle('show');
+    });
+  </script>
+</body>
+</html>
