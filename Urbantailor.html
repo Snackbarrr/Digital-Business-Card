@@ -6,75 +6,59 @@
   <title>UrbanTailor Suits | Yusrizalakbar Studio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* ---- base (same vibe as your site) ---- */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Inter',sans-serif; background:#fff; color:#111; }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Inter',sans-serif;background:#fff;color:#111;}
 
+    /* Header (same as your site) */
     header{
-      display:flex; justify-content:space-between; align-items:center;
-      padding:1.5rem 2rem; border-bottom:1px solid #eaeaea;
-      position:sticky; top:0; z-index:1000; background:#fff;
+      display:flex;justify-content:space-between;align-items:center;
+      padding:1.5rem 2rem;border-bottom:1px solid #eaeaea;
+      position:sticky;top:0;z-index:1000;background:#fff;
     }
-    .logo{ font-size:1.2rem; font-weight:600; text-decoration:none; color:#111; }
-    .desktop-nav a{ margin-left:1.5rem; text-decoration:none; color:#111; font-weight:400; }
-    .menu-btn{ display:none; background:none; font-size:1.5rem; border:none; cursor:pointer; color:#111; }
+    .logo{font-size:1.2rem;font-weight:600;text-decoration:none;color:#111;}
+    .desktop-nav a{margin-left:1.5rem;text-decoration:none;color:#111;font-weight:400;}
+    .menu-btn{display:none;background:none;font-size:1.5rem;border:none;cursor:pointer;color:#111;}
     .mobile-nav{
-      display:none; flex-direction:column; background:#fff; position:absolute; top:100%; right:2rem;
-      box-shadow:0 4px 10px rgba(0,0,0,.05); padding:1rem; z-index:10000;
+      display:none;flex-direction:column;background:#fff;position:absolute;top:100%;right:2rem;
+      box-shadow:0 4px 10px rgba(0,0,0,.05);padding:1rem;z-index:10000;
     }
-    .mobile-nav a{ margin:.5rem 0; text-decoration:none; color:#111; font-weight:500; }
-    .mobile-nav.show{ display:flex; }
+    .mobile-nav a{margin:.5rem 0;text-decoration:none;color:#111;font-weight:500;}
+    .mobile-nav.show{display:flex;}
+    @media (max-width:768px){ .desktop-nav{display:none;} .menu-btn{display:block;} }
 
-    @media (max-width:768px){
-      .desktop-nav{ display:none; }
-      .menu-btn{ display:block; }
-    }
-
-    /* ---- page header/title (optional, minimalist) ---- */
+    /* Minimal project header */
     .project-head{
-      padding:2rem; border-bottom:1px solid #eaeaea;
-      display:flex; justify-content:space-between; align-items:flex-end; gap:1rem;
+      padding:1.25rem 2rem;border-bottom:1px solid #eaeaea;
+      display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;
     }
-    .project-title{ font-size:1.6rem; font-weight:600; }
-    .project-meta{ font-size:.95rem; color:#666; }
+    .project-title{font-size:1.4rem;font-weight:600;}
+    .project-meta{font-size:.95rem;color:#666;}
 
-    /* ---- collage grid ---- */
+    /* --- Simple artsy collage: CSS columns --- */
     .collage{
-      /* 12-column fluid grid; no gaps */
-      display:grid;
-      grid-template-columns:repeat(12, 1fr);
-      grid-auto-rows:8px;      /* base row height used for spanning math */
-      gap:0;
+      column-count: 5;       /* desktop density */
+      column-gap: 0;         /* NO space between images */
+      padding: 0;
     }
-    /* each item gets a random column span via JS; we also prevent breaks */
-    .item{ position:relative; break-inside:avoid; }
+    /* responsive column counts */
+    @media (max-width:1400px){ .collage{ column-count:4; } }
+    @media (max-width:1000px){ .collage{ column-count:3; } }
+    @media (max-width:700px){  .collage{ column-count:2; } }
+    @media (max-width:420px){  .collage{ column-count:1; } }
+
+    .item{ break-inside: avoid; margin:0; }
     .item img{
-      display:block; width:100%; height:auto; 
-      /* smooth rendering */
+      width:100%;
+      height:auto;
+      display:block;       /* prevents inline gaps */
       image-rendering:auto;
     }
 
-    /* responsive column counts */
-    @media (max-width:1200px){ .collage{ grid-template-columns:repeat(10,1fr); } }
-    @media (max-width:900px){  .collage{ grid-template-columns:repeat(8,1fr); } }
-    @media (max-width:700px){  .collage{ grid-template-columns:repeat(6,1fr); } }
-    @media (max-width:520px){  .collage{ grid-template-columns:repeat(4,1fr); } }
-    @media (max-width:380px){  .collage{ grid-template-columns:repeat(2,1fr); } }
-
-    /* subtle hover lift without re-scaling (keeps images crisp) */
-    .item:hover{ transform:translateY(-2px); transition:transform .2s ease; }
-
-    /* optional caption on hover (kept minimal / off by default) */
-    .cap{
-      position:absolute; left:0; bottom:0; right:0; padding:.6rem .8rem;
-      font-size:.9rem; color:#fff; background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0));
-      opacity:0; transition:opacity .2s ease;
-    }
-    .item:hover .cap{ opacity:1; }
+    /* Optional tiny hover lift, no resampling */
+    .item:hover{ transform:translateY(-2px); transition:transform .15s ease; }
   </style>
 </head>
 <body>
-  <!-- header (kept same, including Portfolio link) -->
   <header>
     <a href="index.html" class="logo">Yusrizalakbar</a>
     <nav class="desktop-nav">
@@ -97,123 +81,38 @@
     <div class="project-meta">Modern Gentlemen’s tailoring · 2025</div>
   </section>
 
-  <!-- Collage -->
-  <main class="collage" id="collage">
-    <!-- Example items. Replace src/srcset with your URLs. 
-         Tip: export ~1600px wide and ~1000px wide versions. -->
+  <main class="collage">
+    <!-- Drop each image in its own figure; no stray </picture> tags -->
     <figure class="item">
-        <img src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04360-Edit-Edit.jpg"
-             srcset="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04360-Edit-Edit.jpg 1000w, https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04360-Edit-Edit.jpg 1600w, https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04360-Edit-Edit.jpg 2200w"
-             sizes="(max-width:520px) 50vw, (max-width:900px) 33vw, 25vw"
-             loading="lazy" decoding="async" alt="" />
-      </picture>
-      <!-- <figcaption class="cap">Look 01</figcaption> -->
+      <img src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04360-Edit-Edit.jpg"
+           loading="lazy" decoding="async" alt="">
     </figure>
-
     <figure class="item">
-        <img src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04395-Edit-Edit.jpg"
-             srcset="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04395-Edit-Edit.jpg 1000w, https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04395-Edit-Edit.jpg 1600w, https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04395-Edit-Edit.jpg 2200w"
-             sizes="(max-width:520px) 50vw, (max-width:900px) 33vw, 25vw"
-             loading="lazy" decoding="async" alt="" />
-      </picture>
+      <img src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04395-Edit-Edit.jpg"
+           loading="lazy" decoding="async" alt="">
     </figure>
-
-        <figure class="item">
-        <img src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC05104-2.jpg"
-             srcset="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC05104-2.jpg 1000w, https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC05104-2.jpg 1600w, https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC05104-2.jpg 2200w"
-             sizes="(max-width:520px) 50vw, (max-width:900px) 33vw, 25vw"
-             loading="lazy" decoding="async" alt="" />
-      </picture>
+    <figure class="item">
+      <img src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC05104-2.jpg"
+           loading="lazy" decoding="async" alt="">
     </figure>
-
-        <figure class="item">
-        <img src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04653-Edit.jpg"
-             srcset="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04653-Edit.jpg 1000w, https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04653-Edit.jpg 1600w, https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04653-Edit.jpg 2200w"
-             sizes="(max-width:520px) 50vw, (max-width:900px) 33vw, 25vw"
-             loading="lazy" decoding="async" alt="" />
-      </picture>
+    <figure class="item">
+      <img src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04653-Edit.jpg"
+           loading="lazy" decoding="async" alt="">
     </figure>
-
-        <figure class="item">
-        <img src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04924-Edit.jpg"
-             srcset="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04924-Edit.jpg 1000w, https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04924-Edit.jpg 1600w, https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04924-Edit.jpg 2200w"
-             sizes="(max-width:520px) 50vw, (max-width:900px) 33vw, 25vw"
-             loading="lazy" decoding="async" alt="" />
-      </picture>
+    <figure class="item">
+      <img src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04924-Edit.jpg"
+           loading="lazy" decoding="async" alt="">
     </figure>
-
-        <figure class="item">
-        <img src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04395-Edit-Edit.jpg"
-             srcset="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04395-Edit-Edit.jpg 1000w, https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04395-Edit-Edit.jpg 1600w, https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/DSC04395-Edit-Edit.jpg 2200w"
-             sizes="(max-width:520px) 50vw, (max-width:900px) 33vw, 25vw"
-             loading="lazy" decoding="async" alt="" />
-      </picture>
-    </figure>
-
-    <!-- Duplicate <figure class="item">…</figure> blocks for all images -->
+    <!-- Add more <figure class="item"><img ...></figure> as needed -->
   </main>
 
   <script>
-    // Mobile menu toggle (same behavior as your site)
+    // mobile nav toggle (same as your site)
     window.addEventListener("load", () => {
-      const menuToggle = document.getElementById("menu-toggle");
-      const mobileMenu = document.getElementById("mobileMenu");
-      if(menuToggle){
-        menuToggle.addEventListener("click", () => {
-          mobileMenu.classList.toggle("show");
-        });
-      }
+      const btn = document.getElementById("menu-toggle");
+      const menu = document.getElementById("mobileMenu");
+      btn?.addEventListener("click", () => menu.classList.toggle("show"));
     });
-
-    // ---- Masonry math + “random dotted” feel ----
-    // 1) Randomly assign each item a column span (so widths vary)
-    // 2) Calculate the row span based on its rendered height (tight packing, no gaps)
-    (function(){
-      const grid = document.getElementById('collage');
-      const items = Array.from(grid.querySelectorAll('.item'));
-
-      function randomColSpan(){
-        const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
-        // keep items between 2–4 columns wide, clamped to grid size
-        const min = Math.min(2, cols);
-        const max = Math.min(4, cols);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-      }
-
-      function layout(){
-        const rowHeight = parseFloat(getComputedStyle(grid).gridAutoRows); // 8px
-        const gapY = 0; // we set gap: 0
-        items.forEach(it => {
-          // set a random column span each layout pass (but keep it stable once set)
-          if(!it.dataset.colspan){
-            const span = randomColSpan();
-            it.style.gridColumn = `span ${span}`;
-            it.dataset.colspan = span;
-          } else {
-            it.style.gridColumn = `span ${it.dataset.colspan}`;
-          }
-          const img = it.querySelector('img');
-          if(!img.complete){
-            img.addEventListener('load', () => sizeItem(it, rowHeight, gapY));
-          }
-          sizeItem(it, rowHeight, gapY);
-        });
-      }
-
-      function sizeItem(it, rowHeight, gapY){
-        // measure content height
-        const contentHeight = it.getBoundingClientRect().height;
-        const spanRows = Math.ceil((contentHeight + gapY) / (rowHeight + gapY));
-        it.style.gridRowEnd = `span ${spanRows}`;
-      }
-
-      window.addEventListener('load', layout);
-      window.addEventListener('resize', () => {
-        // Clear spans so we can re-randomize on breakpoint changes
-        items.forEach(it => { it.dataset.colspan = ''; });
-        layout();
-      });
-    })();
   </script>
 </body>
 </html>
