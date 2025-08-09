@@ -34,28 +34,62 @@
     .project-title{font-size:1.4rem;font-weight:600;}
     .project-meta{font-size:.95rem;color:#666;}
 
-    /* --- Simple artsy collage: CSS columns --- */
+    /* --- Artsy collage filling the screen --- */
     .collage{
-      column-count: 5;       /* desktop density */
-      column-gap: 0;         /* NO space between images */
+      /* change: use column-width so columns auto-fill the viewport (no right gap) */
+      column-width: 360px;   /* ideal column width; browser packs as many as fit */
+      column-gap: 0;         /* no space between images */
       padding: 0;
+      width: 100%;
     }
-    /* responsive column counts */
-    @media (max-width:1400px){ .collage{ column-count:4; } }
-    @media (max-width:1000px){ .collage{ column-count:3; } }
-    @media (max-width:700px){  .collage{ column-count:2; } }
-    @media (max-width:420px){  .collage{ column-count:1; } }
+    /* responsive: slightly smaller ideal column width on narrow screens */
+    @media (max-width:1200px){ .collage{ column-width: 320px; } }
+    @media (max-width:900px){  .collage{ column-width: 280px; } }
+    @media (max-width:700px){  .collage{ column-width: 240px; } }
+    @media (max-width:420px){  .collage{ column-width: 100%; } }
 
     .item{ break-inside: avoid; margin:0; }
     .item img{
       width:100%;
       height:auto;
-      display:block;       /* prevents inline gaps */
+      display:block; /* prevents inline gaps */
       image-rendering:auto;
     }
 
-    /* Optional tiny hover lift, no resampling */
+    /* Optional tiny hover lift */
     .item:hover{ transform:translateY(-2px); transition:transform .15s ease; }
+
+    /* ===== Floating info window (new) ===== */
+    .info-float{
+      position:fixed;
+      right:20px;
+      bottom:24px;
+      max-width:280px;
+      background:rgba(255,255,255,0.92);
+      border:1px solid #eaeaea;
+      border-radius:14px;
+      box-shadow:0 10px 30px rgba(0,0,0,.10);
+      backdrop-filter:saturate(150%) blur(6px);
+      -webkit-backdrop-filter:saturate(150%) blur(6px);
+      padding:14px 16px;
+      z-index:1100;
+      line-height:1.35;
+    }
+    .info-title{font-weight:600; font-size:1rem; margin-bottom:.35rem;}
+    .info-copy{font-size:.9rem; color:#333;}
+    .info-row{display:flex; align-items:center; justify-content:space-between; gap:.75rem;}
+    .pill{
+      font-size:.72rem; padding:.25rem .5rem; border:1px solid #ddd; border-radius:999px; color:#444;
+    }
+    .close-btn{
+      appearance:none; border:none; background:#111; color:#fff; cursor:pointer;
+      border-radius:10px; padding:.35rem .6rem; font-size:.75rem; font-weight:600;
+    }
+    .shy{ opacity:.9; }
+    .info-float.is-hidden{ display:none; }
+    @media (max-width:700px){
+      .info-float{ left:16px; right:16px; bottom:16px; max-width:none; }
+    }
   </style>
 </head>
 <body>
@@ -81,6 +115,19 @@
     <div class="project-meta">Your Finest Hour · 2025</div>
   </section>
 
+  <!-- Floating description panel -->
+  <aside class="info-float shy" id="infoFloat" aria-live="polite">
+    <div class="info-row" style="margin-bottom:.5rem;">
+      <div class="pill">Portrait Series</div>
+      <button class="close-btn" id="hideInfo" aria-label="Hide description">Hide</button>
+    </div>
+    <div class="info-title">Graduation</div>
+    <p class="info-copy">
+      A quiet celebration of an inflection point—family, place, and the moment you step forward.
+      Scroll the collage for the full story.
+    </p>
+  </aside>
+
   <main class="collage">
     <!-- Drop each image in its own figure; no stray </picture> tags -->
     <figure class="item">
@@ -103,16 +150,14 @@
       <img src="https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05259.jpg"
            loading="lazy" decoding="async" alt="">
     </figure>
-    
-        <figure class="item">
+    <figure class="item">
       <img src="https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05213-Edit.jpg"
            loading="lazy" decoding="async" alt="">
     </figure>
-        <figure class="item">
+    <figure class="item">
       <img src="https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05211-Edit.jpg"
            loading="lazy" decoding="async" alt="">
     </figure>
-  
     <!-- Add more <figure class="item"><img ...></figure> as needed -->
   </main>
 
@@ -122,6 +167,11 @@
       const btn = document.getElementById("menu-toggle");
       const menu = document.getElementById("mobileMenu");
       btn?.addEventListener("click", () => menu.classList.toggle("show"));
+
+      // floating panel hide
+      const info = document.getElementById('infoFloat');
+      const hide = document.getElementById('hideInfo');
+      hide?.addEventListener('click', () => info.classList.add('is-hidden'));
     });
   </script>
 </body>
