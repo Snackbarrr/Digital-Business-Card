@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -151,29 +151,49 @@
       }
     }
 
-    /* About Section */
+    /* About Section -> grid layout */
     .about-section {
-      padding: 6rem 1.5rem;
-      max-width: 900px;
-      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr min(32ch, 40%);
+      column-gap: clamp(2rem, 6vw, 4rem);
+      align-items: start;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
     }
+
     .about-title {
-      font-size: clamp(7.5rem, 18vw, 12rem);
+      grid-column: 1;
+      font-size: clamp(7rem, 18vw, 12rem);
       font-weight: 600;
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
-      text-align: left;
+      line-height: 1.05;
+      margin: 0;
       color: #111;
-      word-break: normal; /* allows long words to wrap */
-      overflow-wrap: break-word; /* allows breaking only if needed */
+      text-align: left;
+
+      word-break: normal;
+      overflow-wrap: break-word;
     }
+
     .about-text {
+      grid-column: 2;
       font-size: 1.05rem;
       line-height: 1.7;
       color: #444;
       text-align: left;
-      max-width: 700px;
+      max-width: 38ch;
       margin: 0;
+    }
+
+    @media (max-width: 900px) {
+      .about-section {
+        grid-template-columns: 1fr;
+      }
+      .about-text {
+        grid-column: 1;
+        max-width: 700px;
+        margin-top: 1.5rem;
+      }
     }
 
     .form-section {
@@ -286,8 +306,11 @@
   <section class="about-section">
     <h2 class="about-title">Yusrizalakbarstudios</h2>
     <p class="about-text">
-      How do you capture the attention of a community that already has heard of everything? An idea can only sell itself so far. Eventually, the desire fades. What truly sells is a dream. Pair your product with a vision, and you no longer just have a product — you’ve created a dream. Storytelling turns distant aspirations into something people can hold, wear, and live.
-      <bold> Yusrizal Akbar Studios </bold> focuses on storytelling, giving an edge to your products.
+      How do you capture the attention of a community that already has heard of everything? 
+      An idea can only sell itself so far. Eventually, the desire fades. What truly sells is a dream. 
+      Pair your product with a vision, and you no longer just have a product — you’ve created a dream. 
+      Storytelling turns distant aspirations into something people can hold, wear, and live. 
+      <strong>Yusrizal Akbar Studios</strong> focuses on storytelling, giving an edge to your products.
     </p>
   </section>
 
@@ -338,13 +361,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
