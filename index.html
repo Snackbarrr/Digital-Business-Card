@@ -151,23 +151,18 @@
       }
     }
 
-    /* About Section -> grid layout */
+    /* About Section -> stacked */
     .about-section {
-      display: grid;
-      grid-template-columns: 1fr min(32ch, 40%);
-      column-gap: clamp(2rem, 6vw, 4rem);
-      align-items: start;
       max-width: 1400px;
       margin: 0 auto;
-      padding: 6rem 2rem;
+      padding: 6rem 0; /* no side padding */
     }
 
     .about-title {
-      grid-column: 1;
       font-size: clamp(7rem, 18vw, 12rem);
       font-weight: 600;
       line-height: 1.05;
-      margin: 0;
+      margin: 0 0 2rem 0; /* only bottom margin */
       color: #111;
       text-align: left;
 
@@ -176,24 +171,12 @@
     }
 
     .about-text {
-      grid-column: 2;
       font-size: 1.05rem;
       line-height: 1.7;
       color: #444;
       text-align: left;
-      max-width: 38ch;
-      margin: 0;
-    }
-
-    @media (max-width: 900px) {
-      .about-section {
-        grid-template-columns: 1fr;
-      }
-      .about-text {
-        grid-column: 1;
-        max-width: 700px;
-        margin-top: 1.5rem;
-      }
+      max-width: 700px;
+      margin: 0 1.5rem; /* keep readable margins for paragraph */
     }
 
     .form-section {
