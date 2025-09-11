@@ -14,15 +14,14 @@
     "jsx": "preserve",
     "incremental": true,
     "plugins": [{ "name": "next" }],
-    "paths": {
-      "@/": ["./src/"]      // <-- wildcard path alias for "@/..."
-    }
+    "baseUrl": ".",                          // <-- add this
+    "paths": { "@/*": ["src/*"] }            // <-- wildcard alias that matches "@/..."
   },
   "include": [
     "next-env.d.ts",
-    "/*.ts",
-    "/.tsx",
-    ".next/types/**/.ts"
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

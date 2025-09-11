@@ -11,12 +11,14 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/spurofthemoment/**',
       },
+      { protocol: 'https', hostname: 'cdn.sanity.io' },
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
         port: '',
         pathname: '/**',
       },
+      
     ],
   },
 };
