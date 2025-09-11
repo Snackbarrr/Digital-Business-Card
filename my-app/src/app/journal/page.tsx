@@ -43,10 +43,10 @@ function PostCard({ post }: { post: JournalPost }) {
       className="mb-16 border-b border-zinc-200 pb-12 transition-transform"
       style={{ transform }}
     >
-      <h2 className="m-0 text-[1.4rem] md:text-[1.8rem] font-bold tracking-tight">
+      <h2 className="m-0 text-[1.4rem] md:text-[1.8rem] font-bold tracking-tight text-black">
         {post.title}
       </h2>
-      <div className="text-zinc-500 text-[0.85rem] uppercase tracking-wide mt-2">
+      <div className="text-zinc-700 text-[0.85rem] uppercase tracking-wide mt-2">
         By {post.authorName ?? "Unknown Author"} • {dateStr}
       </div>
 
@@ -65,7 +65,7 @@ function PostCard({ post }: { post: JournalPost }) {
       )}
 
       {post.body && (
-        <div className="prose prose-zinc max-w-none">
+        <div className="text-black max-w-none">
           <PortableText value={post.body} />
         </div>
       )}
@@ -123,11 +123,11 @@ export default function JournalPage() {
   }, [sentinelRef.current, loading, done]);
 
   return (
-    <div className={inter.className}>
+    <div className="bg-white">
       <Navbar />
 
       <main className="max-w-[900px] mx-auto mt-12 mb-24 px-2 sm:px-4">
-        <h1 className="text-center text-3xl md:text-4xl font-medium mb-12 tracking-tight">
+        <h1 className="text-center text-3xl md:text-4xl font-medium mb-12 tracking-tight text-black">
           Photo Journal
         </h1>
 
@@ -137,12 +137,12 @@ export default function JournalPage() {
           ))}
 
           {loading && (
-            <div className="text-center text-zinc-500 my-8 text-sm">
+            <div className="text-center text-black my-8 text-sm">
               Loading…
             </div>
           )}
           {done && (
-            <div className="text-center text-zinc-500 my-8 text-sm">
+            <div className="text-center text-black my-8 text-sm">
               No more entries.
             </div>
           )}
