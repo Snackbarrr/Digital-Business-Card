@@ -21,6 +21,9 @@ const nextConfig: NextConfig = {
       
     ],
   },
+  experimental: {
+    turbopackScopeHoisting: false,
+  },
 };
 
 export default nextConfig;
