@@ -132,7 +132,7 @@ const UrbanTailorPage = () => {
                 priority={i < 6} // only first row or so
                 fetchPriority={i < 6 ? "high" : "auto"}
                 loading={i < 6 ? "eager" : "lazy"}
-                quality={60} // lower quality = much smaller files, still looks great for photos
+                quality={80} // lower quality = much smaller files, still looks great for photos
                 placeholder="blur" // instant preview
                 blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCBmaWxsPSIjZWVlZWVlIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIi8+PC9zdmc+"
               />

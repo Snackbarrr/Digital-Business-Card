@@ -13,7 +13,6 @@ const mobileImages = [
   "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Mosesmobile.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Newborn.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/HkMarket.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/DSC03319-2.jpg",
   "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Guangzhou.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Chongqing.avif"
 ];
