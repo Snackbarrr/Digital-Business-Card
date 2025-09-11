@@ -72,7 +72,7 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <>
           {/* Backdrop */}
-          <div className="fixed inset-0 bg-black bg-opacity-20 z-40 md:hidden" />
+          <div className="fixed inset-0 z-40 md:hidden" />
           
           {/* Mobile Menu */}
           <div 
