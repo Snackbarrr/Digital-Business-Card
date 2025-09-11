@@ -3,16 +3,21 @@ import { groq } from 'next-sanity';
 import { client as baseClient } from '@/sanity/lib/client';
 
 
-const QUERY = groq`*[_type == "post"]
-| order(coalesce(publishedAt, _createdAt) desc)[$offset...$end]{
-_id,
-title,
-body,
-publishedAt,
-_createdAt,
-"authorName": author->name,
-"imageUrl": mainImage.asset->url
-}`;
+const QUERY = groq`*[_type == "post"] | order(coalesce(publishedAt, _createdAt) desc)[$offset...$end]{
+  _id,
+  title,
+  body,
+  publishedAt,
+  _createdAt,
+  "authorName": author->name,
+  mainImage{
+    asset->{
+      url,
+      metadata{ dimensions{ width, height, aspectRatio } }
+    }
+  }
+}
+`;
 
 
 export async function GET(req: Request) {

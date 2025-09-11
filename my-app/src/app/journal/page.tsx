@@ -16,7 +16,18 @@ export type JournalPost = {
   publishedAt?: string;
   _createdAt: string;
   authorName?: string;
-  imageUrl?: string;
+  mainImage?: {
+    asset?: {
+      url: string;
+      metadata?: {
+        dimensions?: {
+          width?: number;
+          height?: number;
+          aspectRatio?: number;
+        };
+      };
+    };
+  };
 };
 
 function PostCard({ post }: { post: JournalPost }) {
@@ -50,19 +61,34 @@ function PostCard({ post }: { post: JournalPost }) {
         By {post.authorName ?? "Unknown Author"} • {dateStr}
       </div>
 
-      {post.imageUrl && (
-        <div className="my-6">
-          <Image
-            src={post.imageUrl}
-            alt={post.title}
-            width={1600}
-            height={900}
-            className="w-full h-auto rounded"
-            sizes="(max-width: 640px) 90vw, 900px"
-            priority={false}
-          />
-        </div>
-      )}
+      {post.mainImage?.asset?.url &&
+        (() => {
+          const dims = post.mainImage?.asset?.metadata?.dimensions;
+          const ratio =
+            (dims?.aspectRatio ??
+              (dims?.width && dims?.height
+                ? dims.width / dims.height
+                : undefined)) ||
+            16 / 9; // fallback
+
+          return (
+            <div className="my-6">
+              <div
+                className="relative w-full overflow-hidden rounded"
+                style={{ aspectRatio: String(ratio) }}
+              >
+                <Image
+                  src={post.mainImage.asset.url}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 900px"
+                  priority={false}
+                />
+              </div>
+            </div>
+          );
+        })()}
 
       {post.body && (
         <div className="text-black max-w-none">
@@ -137,9 +163,7 @@ export default function JournalPage() {
           ))}
 
           {loading && (
-            <div className="text-center text-black my-8 text-sm">
-              Loading…
-            </div>
+            <div className="text-center text-black my-8 text-sm">Loading…</div>
           )}
           {done && (
             <div className="text-center text-black my-8 text-sm">
