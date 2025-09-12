@@ -14,7 +14,7 @@ const mobileImages = [
   "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Newborn.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/renaissance.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/HkMarket.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Guangzhou.avif",
+  "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/MosesBlueMobile.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Chongqing.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Library.avif",
 ];
@@ -24,9 +24,9 @@ const desktopImages = [
   "https://storage.googleapis.com/spurofthemoment/Landing/Moses.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Chongqingdesktop.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Beijing.avif",
+  "https://storage.googleapis.com/spurofthemoment/Landing/MosesBlueDesktop.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Italy.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Umbrellas.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/MosesBlueSuit.avif"
 ];
 
 export default function Home() {
