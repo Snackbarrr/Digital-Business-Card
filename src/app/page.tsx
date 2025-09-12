@@ -137,7 +137,7 @@ export default function Home() {
             <br />
             Storytelling turns distant aspirations into something people can hold, wear, and live.
             <br /><br />
-            <strong className="text-gray-900">Yusrizal Akbar Studios</strong> focuses on storytelling through photography. Visual storytelling turns your ideas into an experience, Capturing not just how it looks but how it makes people feel. It breathes life into business.
+            <strong className="text-gray-900">Yusrizal Akbar Studios</strong> is a UK-Based Production which focuses on storytelling through photography. Visual storytelling turns your ideas into an experience, Capturing not just how it looks but how it makes people feel. It breathes life into business.
             <br /><br />
             From fashion that evokes bespoke tailoring in a sartorial seaside, or surreal elegance of a graduation coming of age. 
             <br /><br />
