@@ -90,6 +90,31 @@ const UrbanTailorPage = () => {
       src: "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Urbantailorbags.avif",
       alt: "UrbanTailor bags",
     },
+    {
+      id: 18,
+      src: "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Editorial.avif",
+      alt: "Editorial",
+    },
+    {
+      id: 19,
+      src: "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Foliage.avif",
+      alt: "Foliage",
+    },
+    {
+      id: 20,
+      src: "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Harbour.avif",
+      alt: "Harbour",
+    },
+    {
+      id: 21,
+      src: "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Purposeful.avif",
+      alt: "Purposeful",
+    },
+    {
+      id: 22,
+      src: "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Restaurant.avif",
+      alt: "Restaurant",
+    },
   ];
 
   return (
@@ -108,7 +133,11 @@ const UrbanTailorPage = () => {
             A study of contemporary tailoring. Clean lines, Sharp details.
             Minimal Branding; The posture says it all.
             <br />
-            Scroll to explore the full series.
+            Scroll to explore:
+            <br></br>
+            Tailoring for the Urban Dweller.
+            <br></br>
+            Memoirs from a Sartorial Seaside.
           </p>
         </div>
       </section>

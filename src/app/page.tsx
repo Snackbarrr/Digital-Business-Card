@@ -110,7 +110,7 @@ export default function Home() {
         </h2>
         <div className="max-w-3xl mx-auto px-4">
           <p className="text-lg leading-relaxed text-gray-600 text-center">
-            How do you capture the attention of a community that already has heard of everything?
+            How do you capture the attention of a community that already has seen it all?
             <br /><br />
             An idea can only sell itself so far.
             <br /><br />
@@ -118,13 +118,29 @@ export default function Home() {
             <br /><br />
             What truly sells is a <strong className="text-gray-900">Dream</strong>.
             <br /><br />
-            Pair a product with a story and you no longer just have a product, you've created a <strong className="text-gray-900">Dream</strong>.
+            Pair a product with a story and it becomes more than material, you've created 
             <br />
+            <strong className="text-gray-900"> A Dream.</strong>
+            <br />
+            <br />
+            <strong>A following.</strong>
+            <br />
+            <br />
+            <strong>A lifestyle.</strong>
+            <br />
+            <br />
+            <strong>A culture.</strong>
+            <br />
+            <br />  
+            <strong>A Brand.</strong>
             Storytelling turns distant aspirations into something people can hold, wear, and live.
             <br /><br />
             <strong className="text-gray-900">Yusrizal Akbar Studios</strong> focuses on storytelling through photography. Visual storytelling turns your ideas into an experience, Capturing not just how it looks but how it makes people feel. It breathes life into business.
             <br /><br />
-            Whether it be fashion portraying bespoke tailoring in a sartorial seaside, or a surreal coming of age of your graduation. Breathe life into your world.
+            From fashion that evokes bespoke tailoring in a sartorial seaside, or surreal elegance of a graduation coming of age. 
+            <br /><br />
+            <br />
+            Breathe life into your world.
           </p>
         </div>
       </section>

@@ -14,7 +14,7 @@ const Footer = () => {
 
   const socialLinks = [
     { 
-      href: 'https://instagram.com/yusrizalakbar', 
+      href: 'https://instagram.com/_snapbar_', 
       label: 'Instagram',
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -23,7 +23,7 @@ const Footer = () => {
       )
     },
     { 
-      href: 'mailto:hello@yusrizalakbar.com', 
+      href: 'mailto:Yusrizalakbar.J@gmail.com', 
       label: 'Email',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -48,7 +48,7 @@ const Footer = () => {
               Yusrizalakbar Studio
             </Link>
             <p className="text-sm text-gray-600 leading-relaxed max-w-xs">
-              Visual storytelling through photography. Capturing not just how it looks but how it makes people feel.
+              Visual storytelling through photography. Bristol-Based photographer, Worldwide Operations.
             </p>
             
             {/* Social Links */}
