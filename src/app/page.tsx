@@ -12,7 +12,7 @@ const mobileImages = [
   "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Montblanc.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Mosesmobile.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Newborn.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/renaissance.avif"
+  "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/renaissance.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/HkMarket.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Guangzhou.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Chongqing.avif",
