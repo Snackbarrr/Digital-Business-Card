@@ -25,7 +25,8 @@ const desktopImages = [
   "https://storage.googleapis.com/spurofthemoment/Landing/Chongqingdesktop.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Beijing.avif",
   "https://storage.googleapis.com/spurofthemoment/Landing/Italy.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/Umbrellas.avif"
+  "https://storage.googleapis.com/spurofthemoment/Landing/Umbrellas.avif",
+  "https://storage.googleapis.com/spurofthemoment/Landing/MosesBlueSuit.avif"
 ];
 
 export default function Home() {
