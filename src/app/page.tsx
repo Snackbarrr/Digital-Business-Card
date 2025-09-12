@@ -123,16 +123,18 @@ export default function Home() {
             <strong className="text-gray-900"> A Dream.</strong>
             <br />
             <br />
-            <strong>A following.</strong>
+            <strong className="text-gray-900">A following.</strong>
             <br />
             <br />
-            <strong>A lifestyle.</strong>
+            <strong className="text-gray-900">A lifestyle.</strong>
             <br />
             <br />
-            <strong>A culture.</strong>
+            <strong className="text-gray-900">A culture.</strong>
             <br />
             <br />  
-            <strong>A Brand.</strong>
+            <strong className="text-gray-900">A Brand.</strong>
+            <br /><br />
+            <br />
             Storytelling turns distant aspirations into something people can hold, wear, and live.
             <br /><br />
             <strong className="text-gray-900">Yusrizal Akbar Studios</strong> focuses on storytelling through photography. Visual storytelling turns your ideas into an experience, Capturing not just how it looks but how it makes people feel. It breathes life into business.
