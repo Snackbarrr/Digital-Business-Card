@@ -677,7 +677,7 @@ export default function DomeGallery({
     img.style.width = "100%";
     img.style.height = "100%";
     img.style.objectFit = "cover";
-    img.style.filter = "none";
+    img.style.filter = grayscale ? "grayscale(1)" : "none";
     overlay.appendChild(img);
     viewerRef.current.appendChild(overlay);
 
@@ -748,16 +748,6 @@ export default function DomeGallery({
       --item-height: calc(var(--circ) / var(--segments-y));
     }
     
-.item__image[data-focused="true"] img,
-.item__image[data-focused="true"] span > img { /* Next/Image renders an inner <img> */
-  filter: none !important;
-}
-
-.enlarge img,
-.enlarge-closing img {
-  filter: none !important;
-}
-
     .sphere-root * {
       box-sizing: border-box;
     }
