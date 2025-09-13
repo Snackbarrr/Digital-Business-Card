@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/footer";
+import Rotatingtext from "@/app/components/rotatingtext";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -65,9 +66,8 @@ export default function Home() {
               sizes="(max-width: 767px) 100vw, 0vw"
               quality={85}
               priority={index === 0}
-              className={`transition-opacity duration-1000 ease-in-out ${
-                index === currentMobile ? 'opacity-100 z-20' : 'opacity-0 z-10'
-              }`}
+              className={`transition-opacity duration-1000 ease-in-out ${index === currentMobile ? 'opacity-100 z-20' : 'opacity-0 z-10'
+                }`}
               style={{ objectFit: 'cover' }}
               draggable={false}
             />
@@ -85,9 +85,8 @@ export default function Home() {
               sizes="(min-width: 768px) 100vw, 0vw"
               quality={85}
               priority={index === 0}
-              className={`transition-opacity duration-1000 ease-in-out ${
-                index === currentDesktop ? 'opacity-100 z-20' : 'opacity-0 z-10'
-              }`}
+              className={`transition-opacity duration-1000 ease-in-out ${index === currentDesktop ? 'opacity-100 z-20' : 'opacity-0 z-10'
+                }`}
               style={{ objectFit: 'cover' }}
               draggable={false}
             />
@@ -107,7 +106,7 @@ export default function Home() {
 
       {/* About Section */}
       <section className="w-full py-24 bg-white">
-        <h2 className="text-4xl sm:text-4xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[13rem] font-semibold leading-none mb-8 text-gray-900 text-center break-words">
+        <h2 className="text-4xl sm:text-4xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[12rem] font-semibold leading-none mb-8 text-gray-900 text-center break-words">
           Yusrizalakbarstudio
         </h2>
         <div className="max-w-3xl mx-auto px-4">
@@ -119,29 +118,35 @@ export default function Home() {
             Eventually, the desire fades.
             <br /><br />
             What truly sells is a <strong className="text-gray-900">Dream</strong>.
-            <br /><br />
-            Pair a product with a story and it becomes more than material, you've created 
-            <br />
-            <strong className="text-gray-900"> A Dream.</strong>
-            <br />
-            <br />
-            <strong className="text-gray-900">A following.</strong>
-            <br />
-            <br />
-            <strong className="text-gray-900">A lifestyle.</strong>
-            <br />
-            <br />
-            <strong className="text-gray-900">A culture.</strong>
-            <br />
-            <br />  
-            <strong className="text-gray-900">A Brand.</strong>
-            <br /><br />
-            <br />
+          </p>
+          <div>
+            <p className="text-lg leading-relaxed text-gray-600 text-center">
+              Pair a product with a story and it becomes more than material,
+            </p>
+            <div className="flex justify-center items-center mt-4 mb-8 space-x-2">
+              <span className="text-lg leading-relaxed text-gray-600 text-center">
+                You have created:
+              </span>
+              <Rotatingtext
+                texts={['A Dream', 'A Following', 'A Culture', 'A Brand']}
+                mainClassName="px-2 sm:px-2 md:px-3 bg-black text-white font-bold overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center w-[15vh] text-lg sm:text-lg md:text-lg"
+                staggerFrom={"last"}
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "-120%" }}
+                staggerDuration={0}
+                splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+                transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                rotationInterval={2000}
+              />
+            </div>
+          </div>
+          <p className="text-lg leading-relaxed text-gray-600 text-center">
             Storytelling turns distant aspirations into something people can hold, wear, and live.
             <br /><br />
             <strong className="text-gray-900">Yusrizal Akbar Studios</strong> is a UK-Based Production which focuses on storytelling through photography. Visual storytelling turns your ideas into an experience, Capturing not just how it looks but how it makes people feel. It breathes life into business.
             <br /><br />
-            From fashion that evokes bespoke tailoring in a sartorial seaside, or surreal elegance of a graduation coming of age. 
+            From fashion that evokes bespoke tailoring in a sartorial seaside, or surreal elegance of a graduation coming of age.
             <br /><br />
             <br />
             Breathe life into your world.

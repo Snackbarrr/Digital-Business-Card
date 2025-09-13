@@ -8,6 +8,7 @@ const Footer = () => {
   const footerLinks = [
     { href: '/about', label: 'About' },
     { href: '/portfolio', label: 'Portfolio' },
+    { href: '/Shop', label: 'Shop' },
     { href: '/journal', label: 'Journal' },
     { href: '/contact', label: 'Contact' }
   ];
@@ -48,7 +49,7 @@ const Footer = () => {
               Yusrizalakbar Studio
             </Link>
             <p className="text-sm text-gray-600 leading-relaxed max-w-xs">
-              Visual storytelling through photography. Bristol-Based photographer, Worldwide Operations.
+              Visual storytelling through photography. UK-Based photographer, Worldwide Operations.
             </p>
             
             {/* Social Links */}
