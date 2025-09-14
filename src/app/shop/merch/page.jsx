@@ -22,7 +22,7 @@ const cfg = {
       title: "Studio Cap",
       blurb: "Low profile, embroidered mark.",
       price: "£24",
-      href: "/product/studio-cap",
+      href: "/shop/merch/studio-cap",
       imageSrc:
         "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
       imageAlt: "Studio cap",
@@ -32,7 +32,7 @@ const cfg = {
       title: "Story Tee",
       blurb: "Heavyweight 220gsm, relaxed fit.",
       price: "£30",
-      href: "/product/story-tee",
+      href: "/shop/merch/story-tee",
       imageSrc:
         "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
       imageAlt: "Story tee",
@@ -42,7 +42,7 @@ const cfg = {
       title: "Everyday Tote",
       blurb: "12oz canvas, internal pocket.",
       price: "£18",
-      href: "/product/everyday-tote",
+      href: "/shop/merch/everyday-tote",
       imageSrc:
         "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
       imageAlt: "Everyday tote",

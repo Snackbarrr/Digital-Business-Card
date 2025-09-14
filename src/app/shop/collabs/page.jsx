@@ -24,7 +24,7 @@ const cfg = {
       title: "Leather Journal x Atelier N.",
       blurb: "Story-embossed cover, 120gsm paper.",
       price: "£48",
-      href: "/product/leather-journal-atelier",
+      href: "/shop/collabs/leather-journal-atelier",
       imageSrc:
         "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
       imageAlt: "Leather journal collaboration",
@@ -34,7 +34,7 @@ const cfg = {
       title: "Ceramic Mug x Studio H.",
       blurb: "Glazed with warm film tones.",
       price: "£32",
-      href: "/product/ceramic-mug-studioh",
+      href: "/shop/collabs/ceramic-mug-studio",
       imageSrc:
         "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
       imageAlt: "Ceramic mug collaboration",
@@ -44,7 +44,7 @@ const cfg = {
       title: "Linen Tote x Maker Co.",
       blurb: "Heavyweight canvas, stitched label.",
       price: "£28",
-      href: "/product/linen-tote-makerco",
+      href: "/shop/collabs/linen-tote-maker",
       imageSrc:
         "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
       imageAlt: "Tote bag collaboration",

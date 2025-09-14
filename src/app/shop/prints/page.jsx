@@ -24,7 +24,7 @@ const cfg = {
       title: "Autumn Light (A2)",
       blurb: "Edition of 30, signed & numbered.",
       price: "£120",
-      href: "/product/autumn-light-a2",
+      href: "/shop/prints/autumn-light",
       imageSrc:
         "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
       imageAlt: "Autumn light print",
@@ -35,7 +35,7 @@ const cfg = {
       title: "Morning Rituals (A3)",
       blurb: "Soft tones, uncoated Hahnemühle.",
       price: "£90",
-      href: "/product/morning-rituals-a3",
+      href: "/shop/prints/morning-rituals",
       imageSrc:
         "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
       imageAlt: "Morning rituals print",
@@ -45,7 +45,7 @@ const cfg = {
       title: "City Quiet (Framed)",
       blurb: "Black maple frame, ready to hang.",
       price: "£220",
-      href: "/product/city-quiet-framed",
+      href: "/shop/prints/city-quiet",
       imageSrc:
         "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
       imageAlt: "City quiet framed print",
