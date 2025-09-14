@@ -54,7 +54,7 @@ const ShopPage = () => {
             <div className="border border-gray-200 rounded-lg overflow-hidden transition-shadow group-hover:shadow-md">
               <div className="relative w-full h-56 bg-gray-100">
                 <Image
-                  src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif"
+                  src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Urbantailorbags.avif"
                   alt="Collaboration Products"
                   fill
                   className="object-cover"
@@ -80,7 +80,7 @@ const ShopPage = () => {
             <div className="border border-gray-200 rounded-lg overflow-hidden transition-shadow group-hover:shadow-md">
               <div className="relative w-full h-56 bg-gray-100">
                 <Image
-                  src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif"
+                  src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/tablewithroseandwine.avif"
                   alt="Merchandise"
                   fill
                   className="object-cover"
