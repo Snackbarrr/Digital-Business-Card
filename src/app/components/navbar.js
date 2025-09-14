@@ -29,7 +29,7 @@ const Navbar = () => {
   const navLinks = [
     { href: '/about', label: 'About' },
     { href: '/portfolio', label: 'Portfolio' },
-    { href: '/Shop', label: 'Shop' },
+    { href: '/shop', label: 'Shop' },
     { href: '/journal', label: 'Journal' },
     { href: '/contact', label: 'Contact' }
   ];

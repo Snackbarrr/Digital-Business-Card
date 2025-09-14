@@ -54,7 +54,7 @@ const ShopPage = () => {
             <div className="border border-gray-200 rounded-lg overflow-hidden transition-shadow group-hover:shadow-md">
               <div className="relative w-full h-56 bg-gray-100">
                 <Image
-                  src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1600&auto=format&fit=crop"
+                  src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif"
                   alt="Collaboration Products"
                   fill
                   className="object-cover"
@@ -80,7 +80,7 @@ const ShopPage = () => {
             <div className="border border-gray-200 rounded-lg overflow-hidden transition-shadow group-hover:shadow-md">
               <div className="relative w-full h-56 bg-gray-100">
                 <Image
-                  src="https://images.unsplash.com/photo-1520975922284-8b456906c813?q=80&w=1600&auto=format&fit=crop"
+                  src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif"
                   alt="Merchandise"
                   fill
                   className="object-cover"
