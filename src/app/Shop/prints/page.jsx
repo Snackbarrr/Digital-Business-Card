@@ -1,38 +1,21 @@
-// app/shop/[category]/page.tsx
 import React from "react";
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/footer";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
 
-// ---- Category data (edit this to add products/content) ----
-type Item = {
-  id: string;
-  title: string;
-  blurb?: string;
-  price?: string; // show if relevant
-  href: string;   // product/detail page
-  imageSrc: string;
-  imageAlt: string;
-  badge?: string; // e.g., "Limited", "New"
-};
-
-type CategoryConfig = {
-  title: string;
-  intro: string;
-  hero?: { src: string; alt: string };
-  items: Item[];
-};
-
-const CATEGORIES: Record<string, CategoryConfig> = {
+/**
+ * Category configuration (edit freely).
+ * Add/rename keys here and link to /shop/<key> from your main shop page.
+ */
+const CATEGORIES = {
   prints: {
     title: "Prints & Artwork",
     intro:
       "Limited edition fine-art prints from my storytelling series. Museum-grade papers, archival inks, and optional framing.",
     hero: {
       src: "https://storage.googleapis.com/spurofthemoment/about/6K5A0639.jpg",
-      alt: "Fine art photo print",
+      alt: "Fine art photography prints",
     },
     items: [
       {
@@ -76,7 +59,7 @@ const CATEGORIES: Record<string, CategoryConfig> = {
       "Small-batch objects created with artists, makers, and brands—each piece tied to a photo story.",
     hero: {
       src: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1600&auto=format&fit=crop",
-      alt: "Collaboration desk scene",
+      alt: "Collaboration items on a desk",
     },
     items: [
       {
@@ -106,7 +89,7 @@ const CATEGORIES: Record<string, CategoryConfig> = {
         price: "£28",
         href: "/product/linen-tote-makerco",
         imageSrc:
-          "https://images.unsplash.com/photo-1520975922284-8b456906c813?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=1600&auto=format&fit=crop",
         imageAlt: "Tote bag collaboration",
       },
     ],
@@ -118,7 +101,7 @@ const CATEGORIES: Record<string, CategoryConfig> = {
       "Studio tees, caps, and everyday goods—minimal, comfy, and built to last.",
     hero: {
       src: "https://images.unsplash.com/photo-1520975922284-8b456906c813?q=80&w=1600&auto=format&fit=crop",
-      alt: "Merch display",
+      alt: "Studio merchandise display",
     },
     items: [
       {
@@ -129,7 +112,7 @@ const CATEGORIES: Record<string, CategoryConfig> = {
         href: "/product/studio-cap",
         imageSrc:
           "https://images.unsplash.com/photo-1516826957135-700dedea698c?q=80&w=1600&auto=format&fit=crop",
-        imageAlt: "Studio cap merch",
+        imageAlt: "Studio cap",
       },
       {
         id: "m2",
@@ -139,7 +122,7 @@ const CATEGORIES: Record<string, CategoryConfig> = {
         href: "/product/story-tee",
         imageSrc:
           "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?q=80&w=1600&auto=format&fit=crop",
-        imageAlt: "Story tee merch",
+        imageAlt: "Story tee",
       },
       {
         id: "m3",
@@ -148,46 +131,50 @@ const CATEGORIES: Record<string, CategoryConfig> = {
         price: "£18",
         href: "/product/everyday-tote",
         imageSrc:
-          "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=1600&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1600&auto=format&fit=crop",
         imageAlt: "Everyday tote",
       },
     ],
   },
 };
 
-// ---- Metadata (SEO) ----
-export async function generateMetadata({
-  params,
-}: {
-  params: { category: string };
-}): Promise<Metadata> {
-  const key = params.category?.toLowerCase();
+/**
+ * Dynamic SEO per category (works in JS too).
+ */
+export async function generateMetadata({ params }) {
+  const key = (params?.category || "").toLowerCase();
   const cfg = CATEGORIES[key];
-  const title = cfg ? `${cfg.title} – Shop` : "Shop";
-  const description = cfg?.intro ?? "Story-driven photography goods and collaborations.";
-  return { title, description };
+  if (!cfg) {
+    return {
+      title: "Shop",
+      description: "Story-driven photography goods and collaborations.",
+    };
+  }
+  return {
+    title: `${cfg.title} – Shop`,
+    description: cfg.intro,
+    openGraph: {
+      title: `${cfg.title} – Shop`,
+      description: cfg.intro,
+      images: cfg.hero ? [{ url: cfg.hero.src, alt: cfg.hero.alt }] : [],
+    },
+  };
 }
 
-// ---- Page ----
-export default function CategoryPage({
-  params,
-}: {
-  params: { category: string };
-}) {
-  const key = params.category?.toLowerCase();
+export default function CategoryPage({ params }) {
+  const key = (params?.category || "").toLowerCase();
   const cfg = CATEGORIES[key];
 
   if (!cfg) {
-    // Simple 404 for unknown categories
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white flex flex-col">
         <Navbar />
-        <main className="max-w-6xl mx-auto px-6 pt-24 pb-20">
+        <main className="flex-1 max-w-6xl mx-auto px-6 pt-24 pb-20">
           <h1 className="text-3xl font-semibold text-gray-900">Category not found</h1>
           <p className="mt-3 text-gray-600">
             The page you’re looking for doesn’t exist.{" "}
             <Link href="/shop" className="underline underline-offset-4">
-              Go back to Shop
+              Back to Shop
             </Link>
             .
           </p>
@@ -198,10 +185,10 @@ export default function CategoryPage({
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white flex flex-col">
       <Navbar />
 
-      <main className="max-w-6xl mx-auto pt-20 pb-16 px-6">
+      <main className="flex-1 max-w-6xl mx-auto pt-20 pb-16 px-6">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="text-sm text-gray-500">
           <ol className="flex items-center gap-2">
@@ -239,7 +226,10 @@ export default function CategoryPage({
 
         {/* (Optional) Filters/Sort placeholder */}
         <div className="mb-6 flex flex-wrap items-center gap-3">
-          <select className="rounded-xl border px-3 py-2 text-sm">
+          <label className="sr-only" htmlFor="sort">
+            Sort
+          </label>
+          <select id="sort" className="rounded-xl border px-3 py-2 text-sm">
             <option value="">All</option>
             <option value="limited">Limited</option>
             <option value="new">New</option>
@@ -255,9 +245,12 @@ export default function CategoryPage({
         </div>
 
         {/* Items Grid */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <section
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          aria-label={`${cfg.title} items`}
+        >
           {cfg.items.map((item) => (
-            <Link key={item.id} href={item.href} className="group">
+            <Link key={item.id} href={item.href} className="group" aria-label={`View ${item.title}`}>
               <article className="border border-gray-200 rounded-xl overflow-hidden transition-shadow group-hover:shadow-md bg-white flex flex-col">
                 <div className="relative w-full aspect-[4/3] bg-gray-100 overflow-hidden">
                   <Image
@@ -285,7 +278,7 @@ export default function CategoryPage({
                     {item.price ? (
                       <span className="text-sm text-gray-800">{item.price}</span>
                     ) : (
-                      <span />
+                      <span aria-hidden />
                     )}
                     <span className="text-sm font-medium underline underline-offset-4">
                       View →
