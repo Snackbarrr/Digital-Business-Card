@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useMemo, useRef, useCallback } from "react";
 import { useGesture } from "@use-gesture/react";
 import Image from "next/image";
@@ -14,10 +15,6 @@ const DEFAULT_IMAGES = [
   {
     src: "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Editorial.avif",
     alt: "Editorial",
-  },
-  {
-    src: "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Foliage.avif",
-    alt: "Foliage",
   },
   {
     src: "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Greysuitcuffadjust.avif",

@@ -129,7 +129,7 @@ export default function Home() {
               </span>
               <Rotatingtext
                 texts={['A Dream', 'A Following', 'A Culture', 'A Brand']}
-                mainClassName="px-2 sm:px-2 md:px-3 bg-black text-white font-bold overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center w-[15vh] text-lg sm:text-lg md:text-lg"
+                mainClassName="px-2 sm:px-2 md:px-3 bg-black text-white font-bold overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center w-[18vh] text-lg sm:text-lg md:text-lg"
                 staggerFrom={"last"}
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}

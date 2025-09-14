@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import { Mail, Phone, Instagram, Linkedin } from 'lucide-react';
 
+
 export default function DigitalBusinessCard() {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
