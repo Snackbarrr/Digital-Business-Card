@@ -259,24 +259,14 @@ export default function DigitalBusinessCard() {
                 className="flex justify-center items-center gap-2 cursor-pointer hover:bg-gray-50 px-2 py-1 rounded transition-colors"
                 onClick={(e) => {
                   e.stopPropagation();
-                  copyToClipboard('YusrizalAkbar.j@gmail.com');
+                  copyToClipboard('akbar@yusrizalakbar.com');
                 }}
               >
                 <Mail className="w-4 h-4 text-gray-600" />
-                <span className="underline text-gray-700">YusrizalAkbar.j@gmail.com</span>
+                <span className="underline text-gray-700">akbar@yusrizalakbar.com</span>
               </div>
               
-              {/* Phone */}
-              <div 
-                className="flex justify-center items-center gap-2 cursor-pointer hover:bg-gray-50 px-2 py-1 rounded transition-colors"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  copyToClipboard('07706819769');
-                }}
-              >
-                <Phone className="w-4 h-4 text-gray-600" />
-                <span className="text-gray-700">07706819769</span>
-              </div>
+             
               
               {/* Social Links */}
               <div className="flex justify-center gap-4 mt-2 pt-2">
