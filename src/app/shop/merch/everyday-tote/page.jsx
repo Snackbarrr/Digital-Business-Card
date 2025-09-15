@@ -15,13 +15,13 @@ const product = {
   intro:
     "Durable cotton tote bag perfect for daily use. Features images from the Mont Blanc series.",
   images: [
-    "https://storage.googleapis.com/spurofthemoment/shop/my%20tote%20bag.avif",
-    "https://storage.googleapis.com/spurofthemoment/shop/my%20tote%20bag.avif",
+    "https://storage.googleapis.com/spurofthemoment/shop/updates-min.avif",
+    "https://storage.googleapis.com/spurofthemoment/shop/updates-min.avif",
   ],
   details: ["120gsm paper", "Lay-flat binding", "Embossed cover"],
   shipping: "Ships in 3–5 business days. Free UK returns within 14 days.",
   // Optional dropdown (delete if not needed)
-  options: { label: "Color", values: ["Black", "Tan"] },
+  options: { label: "Picture", values: ["1", "2", "3", "4 ",] },
 };
 
 export const metadata = {

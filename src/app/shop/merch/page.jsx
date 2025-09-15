@@ -6,14 +6,14 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Merchandise – Shop",
-  description: "Studio tees, caps, and everyday goods—minimal, comfy, and built to last.",
+  description: "Studio tees, caps, and everyday goods. minimal, comfy, and built to last.",
 };
 
 const cfg = {
   title: "Merchandise",
-  intro: "Studio tees, caps, and everyday goods—minimal, comfy, and built to last.",
+  intro: "Studio tees, caps, and everyday good. minimal, comfy, and built to last.",
   hero: {
-    src: "https://storage.googleapis.com/spurofthemoment/shop/my%20tote%20bag.avif",
+    src: "https://storage.googleapis.com/spurofthemoment/shop/updates-min.avif",
     alt: "Studio merchandise display",
   },
   items: [
@@ -41,10 +41,10 @@ const cfg = {
       id: "m3",
       title: "Everyday Tote",
       blurb: "12oz canvas, internal pocket.",
-      price: "£18",
+      price: "£10",
       href: "/shop/merch/everyday-tote",
       imageSrc:
-        "https://storage.googleapis.com/spurofthemoment/shop/my%20tote%20bag.avif",
+        "https://storage.googleapis.com/spurofthemoment/shop/updates-min.avif",
       imageAlt: "Everyday tote",
     },
   ],

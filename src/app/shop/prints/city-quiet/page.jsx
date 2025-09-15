@@ -8,12 +8,12 @@ import ProductPage from "@/app/components/product-page";
 
 // Edit these fields for THIS product
 const product = {
-  slug: "road-to-Courmayeur",
-  title: "Road to Courmayeur (A4)",
+  slug: "a1-prints",
+  title: "A1 Prints",
   price: "£100",
   category: "prints",
   intro:
-    "One Road. Smooth Wind. The road to the Italian city; Courmayeur.",
+    "Prints from the AlwaysAnotherAngle series. Limited edition fine-art prints. Museum-grade papers, archival inks, and optional framing.",
   images: [
     "https://storage.googleapis.com/spurofthemoment/shop/italy%20pictures.avif",
     "https://storage.googleapis.com/spurofthemoment/shop/italy%20pictures.avif",
@@ -21,7 +21,7 @@ const product = {
   details: ["120gsm paper", "Lay-flat binding", "Embossed cover"],
   shipping: "Ships in 3–5 business days. Free UK returns within 14 days.",
   // Optional dropdown (delete if not needed)
-  
+  options: { label: "Picture", values: ["Unframed", "Framed"] },
 };
 
 export const metadata = {

@@ -21,9 +21,9 @@ const cfg = {
   items: [
     {
       id: "p1",
-      title: "The Old Gateway (A2)",
-      blurb: "Saint Gervais les-Bains, France.",
-      price: "£70",
+      title: "A3 Prints",
+      blurb: "Poster style prints, Framed or unframed, From the AlwaysAnotherAngle series.",
+      price: "£30",
       href: "/shop/prints/autumn-light",
       imageSrc:
         "https://storage.googleapis.com/spurofthemoment/shop/camp%20grounds%20frame.avif",
@@ -32,8 +32,8 @@ const cfg = {
     },
     {
       id: "p2",
-      title: "The Morning of Mountains (A3)",
-      blurb: "Bourg-Saint-Maurice, France.",
+      title: "A2 Prints",
+      blurb: "Medium Prints, Framed or unframed, From the AlwaysAnotherAngle series.",
       price: "£50",
       href: "/shop/prints/morning-rituals",
       imageSrc:
@@ -43,9 +43,9 @@ const cfg = {
     },
     {
       id: "p3",
-      title: "Road to Courmayeur (Framed)",
-      blurb: "Courmayeur, Italy. Black maple frame",
-      price: "£100",
+      title: "A1 Prints",
+      blurb: "Large Prints, Framed or unframed, From the AlwaysAnotherAngle series.",
+      price: "£80",
       href: "/shop/prints/city-quiet",
       imageSrc:
         "https://storage.googleapis.com/spurofthemoment/shop/italy%20pictures.avif",

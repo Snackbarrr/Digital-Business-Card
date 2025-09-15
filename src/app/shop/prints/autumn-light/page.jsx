@@ -8,12 +8,12 @@ import ProductPage from "@/app/components/product-page";
 
 // Edit these fields for THIS product
 const product = {
-  slug: "The-old-gateway",
-  title: "The Old gateway (A2)",
-  price: "£70",
+  slug: "a3-prints",
+  title: "A3 Prints",
+  price: "£30",
   category: "prints",
   intro:
-    "A broken path to a long forgotten doorway. Long ago, this once led to something great, now it leads to nothing but the sky.",
+    "Prints from the AlwaysAnotherAngle series. Limited edition fine-art prints. Museum-grade papers, archival inks, and optional framing.",
   images: [
     "https://storage.googleapis.com/spurofthemoment/shop/camp%20grounds%20frame.avif",
     "https://storage.googleapis.com/spurofthemoment/shop/camp%20grounds%20frame.avif",
@@ -21,7 +21,7 @@ const product = {
   details: ["120gsm paper", "Lay-flat binding", "Embossed cover"],
   shipping: "Ships in 3–5 business days. Free UK returns within 14 days.",
   // Optional dropdown (delete if not needed)
-  
+  options: { label: "Picture", values: ["Unframed", "Framed"] },
 };
 
 export const metadata = {

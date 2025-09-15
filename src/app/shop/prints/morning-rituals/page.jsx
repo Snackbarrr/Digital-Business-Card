@@ -8,12 +8,12 @@ import ProductPage from "@/app/components/product-page";
 
 // Edit these fields for THIS product
 const product = {
-  slug: "the-morning-of-mountains",
-  title: "The Morning of Mountains (A3)",
+  slug: "a2-prints",
+  title: "A2 Prints",
   price: "£50",
   category: "prints",
   intro:
-    "The French-Italian Border: how sweet a life in the mountains.",
+    "Prints from the AlwaysAnotherAngle series. Limited edition fine-art prints. Museum-grade papers, archival inks, and optional framing.",
   images: [
     "https://storage.googleapis.com/spurofthemoment/shop/icon.avif",
     "https://storage.googleapis.com/spurofthemoment/shop/icon.avif",
@@ -21,7 +21,7 @@ const product = {
   details: ["120gsm paper", "Lay-flat binding", "Embossed cover"],
   shipping: "Ships in 3–5 business days. Free UK returns within 14 days.",
   // Optional dropdown (delete if not needed)
- 
+ options: { label: "Picture", values: ["Unframed", "Framed"] },
 };
 
 export const metadata = {
