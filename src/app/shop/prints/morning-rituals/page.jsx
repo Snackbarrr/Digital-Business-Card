@@ -8,20 +8,20 @@ import ProductPage from "@/app/components/product-page";
 
 // Edit these fields for THIS product
 const product = {
-  slug: "morning-rituals",
-  title: "Morning Rituals (A3)",
-  price: "£90",
+  slug: "the-morning-of-mountains",
+  title: "The Morning of Mountains (A3)",
+  price: "£50",
   category: "prints",
   intro:
-    "Artistic print capturing the essence of serene morning rituals.",
+    "The French-Italian Border: how sweet a life in the mountains.",
   images: [
-    "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
-    "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
+    "https://storage.googleapis.com/spurofthemoment/shop/icon.avif",
+    "https://storage.googleapis.com/spurofthemoment/shop/icon.avif",
   ],
   details: ["120gsm paper", "Lay-flat binding", "Embossed cover"],
   shipping: "Ships in 3–5 business days. Free UK returns within 14 days.",
   // Optional dropdown (delete if not needed)
-  options: { label: "Color", values: ["Black", "Tan"] },
+ 
 };
 
 export const metadata = {

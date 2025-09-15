@@ -28,7 +28,7 @@ const ShopPage = () => {
             <div className="border border-gray-200 rounded-lg overflow-hidden transition-shadow group-hover:shadow-md">
               <div className="relative w-full h-56 bg-gray-100">
                 <Image
-                  src="https://storage.googleapis.com/spurofthemoment/about/6K5A0639.jpg"
+                  src="https://storage.googleapis.com/spurofthemoment/shop/italy%20pictures.avif"
                   alt="Prints & Artwork"
                   fill
                   className="object-cover"
@@ -80,7 +80,7 @@ const ShopPage = () => {
             <div className="border border-gray-200 rounded-lg overflow-hidden transition-shadow group-hover:shadow-md">
               <div className="relative w-full h-56 bg-gray-100">
                 <Image
-                  src="https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/tablewithroseandwine.avif"
+                  src="https://storage.googleapis.com/spurofthemoment/shop/my%20tote%20bag.avif"
                   alt="Merchandise"
                   fill
                   className="object-cover"

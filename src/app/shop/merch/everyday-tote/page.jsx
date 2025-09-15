@@ -15,8 +15,8 @@ const product = {
   intro:
     "Durable cotton tote bag perfect for daily use. Features images from the Mont Blanc series.",
   images: [
-    "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
-    "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
+    "https://storage.googleapis.com/spurofthemoment/shop/my%20tote%20bag.avif",
+    "https://storage.googleapis.com/spurofthemoment/shop/my%20tote%20bag.avif",
   ],
   details: ["120gsm paper", "Lay-flat binding", "Embossed cover"],
   shipping: "Ships in 3–5 business days. Free UK returns within 14 days.",

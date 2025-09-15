@@ -13,7 +13,7 @@ const cfg = {
   title: "Merchandise",
   intro: "Studio tees, caps, and everyday goods—minimal, comfy, and built to last.",
   hero: {
-    src: "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
+    src: "https://storage.googleapis.com/spurofthemoment/shop/my%20tote%20bag.avif",
     alt: "Studio merchandise display",
   },
   items: [
@@ -44,7 +44,7 @@ const cfg = {
       price: "£18",
       href: "/shop/merch/everyday-tote",
       imageSrc:
-        "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
+        "https://storage.googleapis.com/spurofthemoment/shop/my%20tote%20bag.avif",
       imageAlt: "Everyday tote",
     },
   ],

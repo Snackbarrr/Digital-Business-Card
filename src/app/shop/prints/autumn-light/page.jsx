@@ -8,20 +8,20 @@ import ProductPage from "@/app/components/product-page";
 
 // Edit these fields for THIS product
 const product = {
-  slug: "autumn-light",
-  title: "Autumn Light (A2)",
-  price: "£120",
+  slug: "The-old-gateway",
+  title: "The Old gateway (A2)",
+  price: "£70",
   category: "prints",
   intro:
-    "Exquisite autumn-themed print capturing the essence of fall's beauty.",
+    "A broken path to a long forgotten doorway. Long ago, this once led to something great, now it leads to nothing but the sky.",
   images: [
-    "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
-    "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
+    "https://storage.googleapis.com/spurofthemoment/shop/camp%20grounds%20frame.avif",
+    "https://storage.googleapis.com/spurofthemoment/shop/camp%20grounds%20frame.avif",
   ],
   details: ["120gsm paper", "Lay-flat binding", "Embossed cover"],
   shipping: "Ships in 3–5 business days. Free UK returns within 14 days.",
   // Optional dropdown (delete if not needed)
-  options: { label: "Color", values: ["Black", "Tan"] },
+  
 };
 
 export const metadata = {

@@ -8,20 +8,20 @@ import ProductPage from "@/app/components/product-page";
 
 // Edit these fields for THIS product
 const product = {
-  slug: "city-quiet",
-  title: "City Quiet (A4)",
-  price: "£220",
+  slug: "road-to-Courmayeur",
+  title: "Road to Courmayeur (A4)",
+  price: "£100",
   category: "prints",
   intro:
-    "Serene cityscape print capturing urban tranquility.",
+    "One Road. Smooth Wind. The road to the Italian city; Courmayeur.",
   images: [
-    "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
-    "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
+    "https://storage.googleapis.com/spurofthemoment/shop/italy%20pictures.avif",
+    "https://storage.googleapis.com/spurofthemoment/shop/italy%20pictures.avif",
   ],
   details: ["120gsm paper", "Lay-flat binding", "Embossed cover"],
   shipping: "Ships in 3–5 business days. Free UK returns within 14 days.",
   // Optional dropdown (delete if not needed)
-  options: { label: "Color", values: ["Black", "Tan"] },
+  
 };
 
 export const metadata = {
