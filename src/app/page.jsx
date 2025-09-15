@@ -109,56 +109,41 @@ export default function Home() {
         <h2 className="text-4xl sm:text-4xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[12rem] font-semibold leading-none mb-8 text-gray-900 text-center break-words">
           Yusrizalakbarstudio
         </h2>
-        <div className="max-w-3xl mx-auto px-4">
-          <p className="text-lg leading-relaxed text-gray-600 text-center">
-            How do you capture the attention of a community that already has seen it all?
-            <br /><br />
-            An idea can only sell itself so far.
-            <br /><br />
-            Eventually, the desire fades.
-            <br /><br />
-            What truly sells is a <strong className="text-gray-900">Dream</strong>.
-          </p>
-          <div>
-            <p className="text-lg leading-relaxed text-gray-600 text-center">
-              Pair a product with a story and it becomes more than material,
-            </p>
-            <div className="flex justify-center items-center mt-4 mb-8 space-x-2">
-              <span className="text-lg leading-relaxed text-gray-600 text-center">
-                You have created:
-              </span>
-              <Rotatingtext
-                texts={['A Dream', 'A Following', 'A Culture', 'A Brand']}
-                mainClassName="px-2 sm:px-2 md:px-3 bg-black text-white font-bold overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center w-[18vh] text-lg sm:text-lg md:text-lg"
-                staggerFrom={"last"}
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                exit={{ y: "-120%" }}
-                staggerDuration={0}
-                splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-                transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                rotationInterval={2000}
-              />
-            </div>
-          </div>
-          <p className="text-lg leading-relaxed text-gray-600 text-center">
-            Storytelling turns distant aspirations into something people can hold, wear, and live.
-            <br /><br />
-            <strong className="text-gray-900">Yusrizal Akbar Studios</strong> is a UK-Based Production which focuses on storytelling through photography. Visual storytelling turns your ideas into an experience, Capturing not just how it looks but how it makes people feel. It breathes life into business.
-            <br /><br />
-            From fashion that evokes bespoke tailoring in a sartorial seaside, or surreal elegance of a graduation coming of age.
-            <br /><br />
-            <br />
-            Breathe life into your world.
-          </p>
-        </div>
+        <div className="max-w-3xl mx-auto px-6 text-center space-y-10">
+  <p className="text-xl text-gray-600">
+    How do you capture the attention of a community that already has seen it all? <br />
+    Trends fade. <span className="font-semibold text-gray-900">But dreams last.</span>
+  </p>
+
+  <p className="text-lg text-gray-600 leading-relaxed">
+    We turn products into stories. <br />
+    Stories into experiences and aspirations. <br />
+    Experiences and aspirations into something people can hold, wear, and live.
+  </p>
+
+  <p className="text-lg text-gray-600 leading-relaxed">
+    <span className="font-semibold text-gray-900">Yusrizal Akbar Studios</span> is a UK-based 
+    production house specializing in visual storytelling through photography.  
+    We capture not just how it looks, but how it feels. Breathing life into fashion, brands, and ideas.
+  </p>
+
+  <p className="text-lg text-gray-600 leading-relaxed">
+    From bespoke tailoring by the sea to the surreal elegance coming of age of a graduation,  
+    we create imagery that lives beyond the frame.
+  </p>
+
+  <p className="text-2xl font-bold text-gray-900 pt-6">
+    Breathe life into your world.
+  </p>
+</div>
+
       </section>
 
       {/* Contact Section */}
       <section className="py-12 px-6 bg-white" id="contact">
         <h2 className="text-center text-3xl font-semibold mb-2 text-zinc-950">Contact Me</h2>
         <p className="text-center text-base text-gray-600 mb-8">
-          Get in touch with me. Let's make it happen.
+          Let's make it happen.
         </p>
 
         <form

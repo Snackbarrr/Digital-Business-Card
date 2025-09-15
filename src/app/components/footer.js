@@ -6,9 +6,9 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = [
-    { href: '/about', label: 'About' },
+    { href: '/about', label: 'Updates' },
     { href: '/portfolio', label: 'Portfolio' },
-    { href: '/Shop', label: 'Shop' },
+    { href: '/shop', label: 'Shop' },
     { href: '/journal', label: 'Journal' },
     { href: '/contact', label: 'Contact' }
   ];
