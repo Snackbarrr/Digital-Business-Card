@@ -19,20 +19,20 @@ const cfg = {
   items: [
     {
       id: "m1",
-      title: "Studio Cap",
+      title: "Studio Cap (Coming soon)",
       blurb: "Low profile, embroidered mark.",
-      price: "£24",
-      href: "/shop/merch/studio-cap",
+      price: "",
+      href: "",
       imageSrc:
         "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
       imageAlt: "Studio cap",
     },
     {
       id: "m2",
-      title: "Story Tee",
-      blurb: "Heavyweight 220gsm, relaxed fit.",
-      price: "£30",
-      href: "/shop/merch/story-tee",
+      title: "Coming Soon",
+      blurb: "",
+      price: "",
+      href: "",
       imageSrc:
         "https://storage.googleapis.com/spurofthemoment/Portfolio/urbantailor/Balledupmoses.avif",
       imageAlt: "Story tee",

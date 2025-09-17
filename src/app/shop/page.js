@@ -17,7 +17,7 @@ const ShopPage = () => {
 
         {/* Intro blurb (optional) */}
         <p className="text-center text-gray-700 max-w-3xl mx-auto mb-12">
-          Curated items from my studio—limited prints, collaborative drops, and everyday
+          Curated items. limited prints, collaborative drops, and meaningful
           essentials. Thoughtful, minimal, and made to last.
         </p>
 
@@ -50,7 +50,7 @@ const ShopPage = () => {
           </Link>
 
           {/* Collaboration Products */}
-          <Link href="/shop/collabs" className="group">
+          <Link href="" className="group">
             <div className="border border-gray-200 rounded-lg overflow-hidden transition-shadow group-hover:shadow-md">
               <div className="relative w-full h-56 bg-gray-100">
                 <Image
@@ -63,7 +63,8 @@ const ShopPage = () => {
               </div>
               <div className="p-5">
                 <h2 className="text-lg font-semibold text-gray-900">
-                  Collaboration Products
+                  Collaboration Products 
+                  <br></br>(coming soon)
                 </h2>
                 <p className="text-sm text-gray-600 mt-2">
                   Limited drops with artists, makers, and brands.
@@ -80,7 +81,7 @@ const ShopPage = () => {
             <div className="border border-gray-200 rounded-lg overflow-hidden transition-shadow group-hover:shadow-md">
               <div className="relative w-full h-56 bg-gray-100">
                 <Image
-                  src="https://storage.googleapis.com/spurofthemoment/shop/my%20tote%20bag.avif"
+                  src="https://storage.googleapis.com/spurofthemoment/shop/updates-min.avif"
                   alt="Merchandise"
                   fill
                   className="object-cover"
