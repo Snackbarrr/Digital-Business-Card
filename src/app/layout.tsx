@@ -14,8 +14,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "YAJ",
-  description: "Yusrizal Akbar Junaedi",
+  title: "Yusrizal Akbar Studios – Photography & Visual Storytelling",
+  description:
+    "UK-based photography studio specializing in fashion, brand, and storytelling imagery.",
+  icons: {
+    icon: "/favicon.ico", // Make sure favicon.ico is inside /public
+  },
 };
 
 export default function RootLayout({

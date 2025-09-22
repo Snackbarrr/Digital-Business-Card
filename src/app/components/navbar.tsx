@@ -2,29 +2,23 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const mobileMenuRef = useRef(null);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
         setIsMobileMenuOpen(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Close mobile menu on route change
-  const handleLinkClick = () => {
-    setIsMobileMenuOpen(false);
-  };
+  const handleLinkClick = () => setIsMobileMenuOpen(false);
 
   const navLinks = [
     { href: '/about', label: 'Updates' },
@@ -36,14 +30,26 @@ const Navbar = () => {
 
   return (
     <header className="flex justify-between items-center px-8 py-6 border-b border-gray-200 sticky top-0 z-50 bg-white">
-      {/* Logo */}
-      <Link 
-        href="/" 
-        className="text-xl font-semibold text-gray-900 no-underline hover:text-gray-700 transition-colors duration-200"
+      {/* Brand (logo + wordmark) */}
+      <Link
+        href="/public/favicon.ico"
+        className="flex items-center gap-3 no-underline group"
+        aria-label="Go to homepage"
       >
-        Yusrizalakbar
+        {/* Use /public/favicon-32x32.png or /ya-mark.svg */}
+        <Image
+          src="/favicon-32x32.png"
+          alt="Yusrizal Akbar logo"
+          width={24}
+          height={24}
+          className="rounded-sm select-none"
+          priority
+        />
+        <span className="text-xl font-semibold text-gray-900 group-hover:text-gray-700 transition-colors duration-200">
+          Yusrizalakbar
+        </span>
       </Link>
-      
+
       {/* Desktop Navigation */}
       <nav className="hidden md:flex space-x-8">
         {navLinks.map((link) => (
@@ -53,13 +59,13 @@ const Navbar = () => {
             className="text-gray-900 no-underline font-normal hover:text-gray-600 transition-colors duration-200 relative group"
           >
             {link.label}
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-gray-900 group-hover:w-full transition-all duration-300 ease-out"></span>
+            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-gray-900 group-hover:w-full transition-all duration-300 ease-out" />
           </Link>
         ))}
       </nav>
 
       {/* Mobile Menu Button */}
-      <button 
+      <button
         className="md:hidden text-2xl text-gray-900 bg-none border-none cursor-pointer p-1 hover:text-gray-600 transition-colors duration-200"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         aria-label="Toggle mobile menu"
@@ -72,11 +78,8 @@ const Navbar = () => {
       {/* Mobile Navigation Menu */}
       {isMobileMenuOpen && (
         <>
-          {/* Backdrop */}
           <div className="fixed inset-0 z-40 md:hidden" />
-          
-          {/* Mobile Menu */}
-          <div 
+          <div
             ref={mobileMenuRef}
             className="md:hidden absolute top-full right-8 bg-white shadow-xl rounded-lg border border-gray-100 py-2 z-50 min-w-[160px] transform transition-all duration-200 ease-out"
           >
@@ -88,9 +91,7 @@ const Navbar = () => {
                   onClick={handleLinkClick}
                   className={`text-gray-900 no-underline font-medium hover:text-gray-600 hover:bg-gray-50 px-4 py-3 transition-colors duration-200 ${
                     index === 0 ? 'rounded-t-lg' : ''
-                  } ${
-                    index === navLinks.length - 1 ? 'rounded-b-lg' : ''
-                  }`}
+                  } ${index === navLinks.length - 1 ? 'rounded-b-lg' : ''}`}
                 >
                   {link.label}
                 </Link>
