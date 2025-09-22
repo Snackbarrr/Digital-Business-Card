@@ -32,22 +32,21 @@ const Navbar = () => {
     <header className="flex justify-between items-center px-8 py-6 border-b border-gray-200 sticky top-0 z-50 bg-white">
       {/* Brand (logo + wordmark) */}
       <Link
-        href="/public/favicon.ico"
-        className="flex items-center gap-3 no-underline group"
-        aria-label="Go to homepage"
-      >
-        {/* Use /public/favicon-32x32.png or /ya-mark.svg */}
-        <Image
-          src="/favicon-32x32.png"
-          alt="Yusrizal Akbar logo"
-          width={24}
-          height={24}
-          className="rounded-sm select-none"
-          priority
-        />
-        <span className="text-xl font-semibold text-gray-900 group-hover:text-gray-700 transition-colors duration-200">
-          Yusrizalakbar
-        </span>
+            href="/"
+  className="flex items-center gap-2 no-underline group"
+  aria-label="Go to homepage"
+>
+  <Image
+    src="/logo.png"          // or /logo.svg
+    alt="Yusrizal Akbar logo"
+    width={24}
+    height={24}
+    className="block h-6 w-6 object-contain -translate-y-[1px]" // try 0, -[0.5px], -[1px]
+    priority
+  />
+  <span className="text-xl font-semibold leading-none text-gray-900 group-hover:text-gray-700 transition-colors duration-200">
+    Yusrizalakbar
+  </span>
       </Link>
 
       {/* Desktop Navigation */}
