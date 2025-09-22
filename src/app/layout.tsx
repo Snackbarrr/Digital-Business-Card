@@ -23,7 +23,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const GA_ID = process.env.NEXT_PUBLIC_GTAG_ID; // make sure you added this in .env.local
+  const GA_ID = process.env.NEXT_PUBLIC_GTAG_ID;
 
   return (
     <html lang="en">
