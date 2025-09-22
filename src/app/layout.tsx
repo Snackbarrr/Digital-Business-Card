@@ -23,8 +23,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // 👇 For testing you can hardcode your GA ID here to confirm it's working
-  const GA_ID = process.env.NEXT_PUBLIC_GTAG_ID || "G-Z374HTPFE2";
+  // ✅ Only enable GA in production
+  const isProd = process.env.NODE_ENV === "production";
+  const GA_ID = process.env.NEXT_PUBLIC_GTAG_ID;
 
   return (
     <html lang="en">
@@ -35,8 +36,8 @@ export default function RootLayout({
           crossOrigin=""
         />
 
-        {/* ✅ Google Analytics Tag in <head> */}
-        {GA_ID && (
+        {/* Google Analytics Tag */}
+        {isProd && GA_ID && (
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
@@ -47,7 +48,7 @@ export default function RootLayout({
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${GA_ID}');
+                gtag('config', '${GA_ID}', { anonymize_ip: true });
               `}
             </Script>
           </>
