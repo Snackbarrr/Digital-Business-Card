@@ -11,7 +11,7 @@ const PortfolioPage = () => {
     {
       id: 1,
       href: '/portfolio/boaaa',
-      image: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Group-bus-long-exposure',
+      image: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Close_up_Portrait.avif',
       title: 'AlwaysAnotherAngle',
       subtitle: 'No agendas, Pure love of the game.',
       alt: 'AlwaysAnotherAngle'
@@ -34,7 +34,7 @@ const PortfolioPage = () => {
     },
     {
       id: 4,
-      href: '/portfolio/Nusaantara',
+      href: '/portfolio/boaaa',
       image: 'https://storage.googleapis.com/spurofthemoment/Portfolio/NusaAntara/Batik-Neck-tie-Close-up',
       title: 'Nusa Antara',
       subtitle: 'The Artisanal Cultural Exchange.',

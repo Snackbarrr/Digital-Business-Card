@@ -8,24 +8,74 @@ const AlwaysAnotherAnglePage = () => {
   const images = [
     {
       id: 1,
-      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05259.avif',
+      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Arvin_blur.avif',
       alt: 'Graduate portrait with diploma'
     },
     {
       id: 2,
-      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05531.avif',
+      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Bus_blur.avif',
       alt: 'Graduation ceremony moment'
     },
     {
       id: 3,
-      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05545.avif',
+      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Close_up_Portrait.avif',
       alt: 'Graduation celebration'
     },
     {
       id: 4,
-      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05583-Edit.avif',
+      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Distance_carpark.avif',
       alt: 'Graduate portrait outdoor'
-    }
+    },
+    {
+      id: 5,
+      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Face_away.avif',
+      alt: 'Graduate portrait outdoor'
+    },
+    {
+      id: 6,
+      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Graffiti.avif',
+      alt: 'Graduate portrait outdoor'
+    },
+    {
+      id: 7,
+      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Smoke_Blur.avif',
+      alt: 'Graduate portrait outdoor'
+    },
+    {
+      id: 8,
+      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Through_arm.avif',
+      alt: 'Graduate portrait outdoor'
+    },
+    {
+      id: 9,
+      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Through_window.avif',
+      alt: 'Graduate portrait outdoor'
+    },
+    {
+      id: 10,
+      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Vogue_apparently.avif',
+      alt: 'Graduate portrait outdoor'
+    },
+    {
+      id: 11,
+      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Walk_cross_blur.avif',
+      alt: 'Graduate portrait outdoor'
+    },
+    {
+      id: 12,
+      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/hands_on_face.avif',
+      alt: 'Graduate portrait outdoor'
+    },
+    {
+      id: 13,
+      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/stand_car.avif',
+      alt: 'Graduate portrait outdoor'
+    },
+    {
+      id: 14,
+      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Cafe_blur.avif',
+      alt: 'Graduate portrait outdoor'
+    },
   ];
 
   return (
