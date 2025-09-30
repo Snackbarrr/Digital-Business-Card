@@ -10,6 +10,14 @@ const PortfolioPage = () => {
   const portfolioItems = [
     {
       id: 1,
+      href: '/portfolio/boaaa',
+      image: 'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Group-bus-long-exposure',
+      title: 'AlwaysAnotherAngle',
+      subtitle: 'No agendas, Pure love of the game.',
+      alt: 'AlwaysAnotherAngle'
+    },
+    {
+      id: 2,
       href: '/portfolio/urbantailor',
       image: 'https://storage.googleapis.com/spurofthemoment/Portfolio/6K5A0836-Edit-Edit.jpg',
       title: 'UrbanTailor suits',
@@ -17,12 +25,20 @@ const PortfolioPage = () => {
       alt: 'UrbanTailor suits'
     },
     {
-      id: 2,
+      id: 3,
       href: '/portfolio/graduation',
       image: 'https://storage.googleapis.com/spurofthemoment/Portfolio/Grad.png',
       title: 'Graduation',
       subtitle: 'Years of sacrifice, in a final moment.',
       alt: 'Graduation'
+    },
+    {
+      id: 4,
+      href: '/portfolio/Nusaantara',
+      image: 'https://storage.googleapis.com/spurofthemoment/Portfolio/NusaAntara/Batik-Neck-tie-Close-up',
+      title: 'Nusa Antara',
+      subtitle: 'The Artisanal Cultural Exchange.',
+      alt: 'NusaAntara'
     },
   ];
 
