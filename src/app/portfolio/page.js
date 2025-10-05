@@ -19,7 +19,7 @@ const PortfolioPage = () => {
     {
       id: 2,
       href: '/portfolio/urbantailor',
-      image: 'https://storage.googleapis.com/spurofthemoment/Portfolio/6K5A0836-Edit-Edit.jpg',
+      image: 'https://storage.googleapis.com/spurofthemoment/Portfolio/Moses',
       title: 'UrbanTailor suits',
       subtitle: 'The Modern Gentleman, tailored to your experience.',
       alt: 'UrbanTailor suits'
@@ -27,7 +27,7 @@ const PortfolioPage = () => {
     {
       id: 3,
       href: '/portfolio/graduation',
-      image: 'https://storage.googleapis.com/spurofthemoment/Portfolio/Grad.png',
+      image: 'https://storage.googleapis.com/spurofthemoment/Portfolio/Grad',
       title: 'Graduation',
       subtitle: 'Years of sacrifice, in a final moment.',
       alt: 'Graduation'
