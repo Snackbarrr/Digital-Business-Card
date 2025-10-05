@@ -1,6 +1,6 @@
 "use client";
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/footer";
 
@@ -8,29 +8,30 @@ const GraduationPage = () => {
   const images = [
     {
       id: 1,
-      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05259.avif',
-      alt: 'Graduate portrait with diploma'
+      src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05259.avif",
+      alt: "Graduate portrait with diploma",
     },
     {
       id: 2,
-      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05531.avif',
-      alt: 'Graduation ceremony moment'
+      src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05531.avif",
+      alt: "Graduation ceremony moment",
     },
     {
       id: 3,
-      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05545.avif',
-      alt: 'Graduation celebration'
+      src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05545.avif",
+      alt: "Graduation celebration",
     },
     {
       id: 4,
-      src: 'https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05583-Edit.avif',
-      alt: 'Graduate portrait outdoor'
-    }
+      src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05583-Edit.avif",
+      alt: "Graduate portrait outdoor",
+    },
   ];
 
   return (
     <div className="min-h-screen bg-white">
-        <Navbar />
+      <Navbar />
+
       {/* Project Header */}
       <section className="px-8 py-5 border-b border-gray-200 flex justify-between items-end gap-4">
         <div>
@@ -44,15 +45,20 @@ const GraduationPage = () => {
         </div>
       </section>
 
-      {/* Masonry Gallery using column-width approach */}
-      <main 
-        className="p-0 gap-0"
+      {/* Masonry Gallery */}
+      <main
+        className="p-2 bg-white"
         style={{
-          columnWidth: '360px',
-          columnGap: 0,
+          columnWidth: "360px",
+          columnGap: "8px", // fine white space between columns
         }}
       >
         <style jsx>{`
+          figure {
+            margin-bottom: 8px; /* vertical spacing between images */
+            background-color: white;
+          }
+
           @media (max-width: 1200px) {
             main {
               column-width: 320px;
@@ -74,11 +80,11 @@ const GraduationPage = () => {
             }
           }
         `}</style>
-        
+
         {images.map((image) => (
-          <figure 
-            key={image.id} 
-            className="break-inside-avoid m-0 hover:-translate-y-0.5 transition-transform duration-150 ease-out"
+          <figure
+            key={image.id}
+            className="break-inside-avoid overflow-hidden hover:-translate-y-0.5 transition-transform duration-150 ease-out"
           >
             <div className="relative w-full">
               <Image
@@ -87,10 +93,7 @@ const GraduationPage = () => {
                 width={360}
                 height={540}
                 className="w-full h-auto block"
-                style={{ 
-                  width: '100%', 
-                  height: 'auto' 
-                }}
+                style={{ width: "100%", height: "auto" }}
                 sizes="(max-width: 420px) 100vw, (max-width: 700px) 240px, (max-width: 900px) 280px, (max-width: 1200px) 320px, 360px"
                 loading="lazy"
               />
@@ -98,7 +101,8 @@ const GraduationPage = () => {
           </figure>
         ))}
       </main>
-       <Footer />
+
+      <Footer />
     </div>
   );
 };

@@ -34,7 +34,7 @@ const PortfolioPage = () => {
     },
     {
       id: 4,
-      href: '/portfolio/boaaa',
+      href: '/portfolio/nusaantara',
       image: 'https://storage.googleapis.com/spurofthemoment/Portfolio/NusaAntara/Batik-Neck-tie-Close-up',
       title: 'Nusa Antara',
       subtitle: 'The Artisanal Cultural Exchange.',
