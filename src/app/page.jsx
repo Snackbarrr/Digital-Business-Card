@@ -1,47 +1,113 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
-import Navbar from "@/app/components/navbar";
-import Footer from "@/app/components/footer";
-import Rotatingtext from "@/app/components/rotatingtext";
+import Navbar from '@/app/components/navbar';
+import Footer from '@/app/components/footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
+/* -------------------------------------------------------------------------- */
+/*                               REVEAL LOGIC                                 */
+/* -------------------------------------------------------------------------- */
+
+// Hook that triggers fade-in when element enters viewport
+function useReveal() {
+  const elRef = useRef(null);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const el = elRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setShow(true);
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return { elRef, show };
+}
+
+// Standalone Reveal component
+function Reveal({ children }) {
+  const { elRef, show } = useReveal();
+  return (
+    <div
+      ref={elRef}
+      className={`transition-all duration-700 ${
+        show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+      }`}
+    >
+      {children}
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   HOME                                     */
+/* -------------------------------------------------------------------------- */
+
+// ---------- Image Arrays ----------
 const mobileImages = [
-  "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Montblanc.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Mosesmobile.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Newborn.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/renaissance.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/HkMarket.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/MosesBlueMobile.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Chongqing.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Library.avif",
+  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Montblanc.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Mosesmobile.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Newborn.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/renaissance.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/HkMarket.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/MosesBlueMobile.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Chongqing.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Library.avif',
 ];
 
 const desktopImages = [
-  "https://storage.googleapis.com/spurofthemoment/Landing/Montblancdesktop.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/Moses.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/Chongqingdesktop.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/Beijing.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/MosesBlueDesktop.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/Italy.avif",
-  "https://storage.googleapis.com/spurofthemoment/Landing/Umbrellas.avif",
+  'https://storage.googleapis.com/spurofthemoment/Landing/Montblancdesktop.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Moses.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Chongqingdesktop.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Beijing.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/MosesBlueDesktop.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Italy.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Umbrellas.avif',
 ];
 
+// ---------- Hero Captions ----------
+const captions = [
+  { h: 'Always another angle', p: 'Things you see a million times, for the first time.' },
+  { h: 'Where light meets intention', p: 'Images designed to be felt before they are understood.' },
+  { h: 'Stories that wear form', p: 'Fashion seen as narrative, not product.' },
+];
+
+/* -------------------------------------------------------------------------- */
+/*                              MAIN PAGE FUNCTION                            */
+/* -------------------------------------------------------------------------- */
+
 export default function Home() {
+  // ---------- State Variables ----------
   const [currentMobile, setCurrentMobile] = useState(0);
   const [currentDesktop, setCurrentDesktop] = useState(0);
+  const [captionIdx, setCaptionIdx] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const heroRef = useRef(null);
 
+  /* ----------------------------- Slideshow Logic ----------------------------- */
   useEffect(() => {
     const mobileInterval = setInterval(() => {
       setCurrentMobile((prev) => (prev + 1) % mobileImages.length);
-    }, 5000);
+      setCaptionIdx((c) => (c + 1) % captions.length);
+    }, 7000);
 
     const desktopInterval = setInterval(() => {
       setCurrentDesktop((prev) => (prev + 1) % desktopImages.length);
-    }, 5000);
+      setCaptionIdx((c) => (c + 1) % captions.length);
+    }, 7000);
 
     return () => {
       clearInterval(mobileInterval);
@@ -49,13 +115,34 @@ export default function Home() {
     };
   }, []);
 
+  /* --------------------------- Scroll-linked Fade --------------------------- */
+  useEffect(() => {
+    const onScroll = () => {
+      if (!heroRef.current) return;
+      const rect = heroRef.current.getBoundingClientRect();
+      const viewport = window.innerHeight || document.documentElement.clientHeight;
+      const progress = Math.min(1, Math.max(0, (viewport - rect.bottom) / viewport + 0.05));
+      setScrollProgress(progress);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const cap = captions[captionIdx];
+
+  /* -------------------------------------------------------------------------- */
+  /*                                   RENDER                                   */
+  /* -------------------------------------------------------------------------- */
   return (
     <div className={inter.className}>
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative w-full h-[90vh] overflow-hidden">
-        {/* Mobile Slideshow */}
+      {/* ---------------------------------------------------------------------- */}
+      {/*                              HERO SECTION                              */}
+      {/* ---------------------------------------------------------------------- */}
+      <section ref={heroRef} className="relative w-full h-[90vh] overflow-hidden" aria-label="Featured work">
+        {/* --- Mobile Slideshow --- */}
         <div className="md:hidden w-full h-full absolute inset-0">
           {mobileImages.map((src, index) => (
             <Image
@@ -66,15 +153,16 @@ export default function Home() {
               sizes="(max-width: 767px) 100vw, 0vw"
               quality={85}
               priority={index === 0}
-              className={`transition-opacity duration-1000 ease-in-out ${index === currentMobile ? 'opacity-100 z-20' : 'opacity-0 z-10'
-                }`}
+              className={`transition-opacity duration-1000 ease-in-out ${
+                index === currentMobile ? 'opacity-100 z-20' : 'opacity-0 z-10'
+              }`}
               style={{ objectFit: 'cover' }}
               draggable={false}
             />
           ))}
         </div>
 
-        {/* Desktop Slideshow */}
+        {/* --- Desktop Slideshow --- */}
         <div className="hidden md:block w-full h-full absolute inset-0">
           {desktopImages.map((src, index) => (
             <Image
@@ -85,120 +173,182 @@ export default function Home() {
               sizes="(min-width: 768px) 100vw, 0vw"
               quality={85}
               priority={index === 0}
-              className={`transition-opacity duration-1000 ease-in-out ${index === currentDesktop ? 'opacity-100 z-20' : 'opacity-0 z-10'
-                }`}
+              className={`transition-opacity duration-1000 ease-in-out ${
+                index === currentDesktop ? 'opacity-100 z-20' : 'opacity-0 z-10'
+              }`}
               style={{ objectFit: 'cover' }}
               draggable={false}
             />
           ))}
         </div>
 
-        {/* Hero Text */}
-        <div className="absolute top-[60%] right-[5%] -translate-y-1/2 text-white z-40 text-right px-4">
-          <h1 className="text-lg md:text-3xl font-semibold tracking-wide whitespace-nowrap overflow-hidden text-ellipsis md:whitespace-normal">
-            Always another angle
-          </h1>
-          <p className="text-sm font-normal tracking-wide mt-2 opacity-85 max-w-xs overflow-hidden line-clamp-2">
-            Things you see a million times, for the first time.
+        {/* --- Gradient for readability --- */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(to left, rgba(0,0,0,0.32), rgba(0,0,0,0.18) 20%, rgba(0,0,0,0.06) 45%, rgba(0,0,0,0) 70%)',
+            opacity: 0.65 * (1 - scrollProgress),
+          }}
+        />
+
+        {/* --- Hero Text --- */}
+        <div
+          className="absolute right-[5%] top-1/2 -translate-y-1/2 z-40 text-right px-4 select-none"
+          style={{
+            opacity: 1 - scrollProgress,
+            transform: `translateY(calc(-50% + ${scrollProgress * 16}px))`,
+          }}
+        >
+          <h1 className="text-lg md:text-3xl font-semibold tracking-wide text-white">{cap.h}</h1>
+          <p className="text-sm md:text-base font-normal tracking-wide mt-2 text-white/85 max-w-xs md:max-w-sm">
+            {cap.p}
           </p>
+        </div>
+
+        {/* --- Scroll Cue --- */}
+        <div
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/80 text-xs tracking-[0.2em] z-40"
+          style={{ opacity: 1 - scrollProgress }}
+        >
+          SCROLL
+          <span className="block w-px h-6 mx-auto mt-1 bg-white/70 animate-pulse" />
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="w-full py-24 bg-white">
-        <h2 className="text-4xl sm:text-4xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[12rem] font-semibold leading-none mb-8 text-gray-900 text-center break-words">
-          Yusrizalakbarstudio
-        </h2>
-        <div className="max-w-3xl mx-auto px-6 text-center space-y-10">
-  <p className="text-xl text-gray-600">
-    How do you capture the attention of a community that already has seen it all? <br />
-    Trends fade. <span className="font-semibold text-gray-900">But dreams last.</span>
-  </p>
-
-  <p className="text-lg text-gray-600 leading-relaxed">
-    We turn products into stories. <br />
-    Stories into experiences and aspirations. <br />
-    Experiences and aspirations into something people can hold, wear, and live.
-  </p>
-
-  <p className="text-lg text-gray-600 leading-relaxed">
-    <span className="font-semibold text-gray-900">Yusrizal Akbar Studios</span> is a UK-based 
-    production house specializing in visual storytelling through photography.  
-    We capture not just how it looks, but how it feels. Breathing life into fashion, brands, and ideas.
-  </p>
-
-  <p className="text-lg text-gray-600 leading-relaxed">
-    From bespoke tailoring by the sea to the surreal elegance coming of age of a graduation,  
-    we create imagery that lives beyond the frame.
-  </p>
-
-  <p className="text-2xl font-bold text-gray-900 pt-6">
-    Breathe life into your world.
-  </p>
-</div>
-
-      </section>
-
-      {/* Contact Section */}
-      <section className="py-12 px-6 bg-white" id="contact">
-        <h2 className="text-center text-3xl font-semibold mb-2 text-zinc-950">Contact Me</h2>
-        <p className="text-center text-base text-gray-600 mb-8">
-          Let's make it happen.
-        </p>
-
-        <form
-          action="https://formspree.io/f/xnndvvgd"
-          method="POST"
-          className="max-w-2xl mx-auto space-y-4"
-        >
-          <div className="flex flex-col sm:flex-row gap-4">
-            <input
-              type="text"
-              name="first-name"
-              placeholder="First Name"
-              required
-              className="flex-1 px-4 py-3 text-zinc-900 text-base border border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-            />
-            <input
-              type="text"
-              name="last-name"
-              placeholder="Last Name"
-              required
-              className="flex-1 px-4 py-3 text-base text-zinc-900 border border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-            />
+      {/* ---------------------------------------------------------------------- */}
+      {/*                           MANIFESTO SECTION                            */}
+      {/* ---------------------------------------------------------------------- */}
+      <section className="relative w-full bg-white">
+        <div className="max-w-[1600px] mx-auto px-6">
+          {/* --- Sticky Title (with extended scroll space) --- */}
+          <div className="relative h-[80vh] md:h-[100vh] mb-[10vh]">
+            <div className="sticky top-16 md:top-24">
+              <h2 className="text-[12vw] md:text-[9vw] font-semibold leading-none text-zinc-900 tracking-[-0.02em]">
+                Yusrizalakbar
+                <span className="block md:inline"> Studio</span>
+              </h2>
+              <p className="mt-3 text-[10px] md:text-xs tracking-[0.22em] text-zinc-500 uppercase">
+                Visual Narrative — UK / Worldwide
+              </p>
+            </div>
           </div>
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            required
-            className="w-full px-4 py-3 text-base border text-zinc-900 border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-          />
+          {/* --- Manifesto Copy with Reveal Animations --- */}
+          <div className="max-w-3xl mx-auto pb-24 space-y-10">
+            <Reveal>
+              <p className="text-xl text-gray-600">
+                How do you capture the attention of a community that has seen it all? <br />
+                Trends fade. <span className="font-semibold text-gray-900">But dreams last.</span>
+              </p>
+            </Reveal>
 
-          <input
-            type="text"
-            name="subject"
-            placeholder="Subject"
-            required
-            className="w-full px-4 py-3 text-base border text-zinc-900 border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-          />
+            <Reveal>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                We turn products into stories. <br />
+                Stories into Dreams <br />
+                Dreams into something real that people can hold, wear, and live.
+              </p>
+            </Reveal>
 
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            rows={5}
-            required
-            className="w-full px-4 py-3 text-base border border-gray-300 text-zinc-900 rounded-md bg-gray-50 resize-vertical focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-          />
+            <Reveal>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                <span className="font-semibold text-gray-900">Yusrizal Akbar Studios</span> is a UK-based
+                production house specializing in visual storytelling through photography. We capture not
+                just how it looks, but how it feels. Breathing life into fashion, brands, and ideas.
+              </p>
+            </Reveal>
 
-          <button
-            type="submit"
-            className="w-full px-4 py-4 bg-gray-900 text-white text-base font-medium uppercase border-none cursor-pointer rounded-md hover:bg-gray-800 transition-colors"
-          >
-            Send Message
-          </button>
-        </form>
+            <Reveal>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                From bespoke tailoring by the sea to the surreal elegance and coming-of-age of a Graduation,
+                we create imagery that lives beyond the frame.
+              </p>
+            </Reveal>
+
+            <Reveal>
+              <p className="text-2xl font-bold text-gray-900 pt-2">Breathe life into your Vision.</p>
+            </Reveal>
+
+            {/* ------------------------------------------------------------------ */}
+            {/*                     PORTFOLIO CTA BUTTON (NEW)                     */}
+            {/* ------------------------------------------------------------------ */}
+            <Reveal>
+              <div className="pt-20 flex justify-center">
+                <a
+                  href="/portfolio"
+                  className="inline-block border border-zinc-900 text-zinc-900 px-8 py-4 text-sm tracking-[0.25em] uppercase font-medium rounded-full hover:bg-zinc-900 hover:text-white transition-all duration-500 ease-out"
+                >
+                  View Portfolio
+                </a>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------------------- */}
+      {/*                            CONTACT SECTION                             */}
+      {/* ---------------------------------------------------------------------- */}
+      <section id="contact" className="relative py-16 md:py-20">
+        <div className="absolute inset-0 bg-gradient-to-b from-zinc-50 to-white" />
+        <div className="relative max-w-3xl mx-auto px-6">
+          <h2 className="text-center text-3xl font-semibold mb-2 text-zinc-950">
+            Let’s create something that lasts.
+          </h2>
+          <p className="text-center text-base text-gray-600 mb-8">Your story, in a new light.</p>
+
+          {/* --- Contact Form --- */}
+          <form action="https://formspree.io/f/xnndvvgd" method="POST" className="space-y-4">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <input
+                type="text"
+                name="first-name"
+                placeholder="First Name"
+                required
+                className="flex-1 px-4 py-3 text-zinc-900 text-base border border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+              />
+              <input
+                type="text"
+                name="last-name"
+                placeholder="Last Name"
+                required
+                className="flex-1 px-4 py-3 text-base text-zinc-900 border border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+              />
+            </div>
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              required
+              className="w-full px-4 py-3 text-base border text-zinc-900 border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+            />
+
+            <input
+              type="text"
+              name="subject"
+              placeholder="Subject"
+              required
+              className="w-full px-4 py-3 text-base border text-zinc-900 border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+            />
+
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              rows={5}
+              required
+              className="w-full px-4 py-3 text-base border border-gray-300 text-zinc-900 rounded-md bg-gray-50 resize-vertical focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+            />
+
+            <button
+              type="submit"
+              className="w-full px-4 py-4 bg-zinc-900 text-white text-base font-medium tracking-wide rounded-md hover:bg-zinc-800 transition-colors"
+            >
+              Begin Conversation
+            </button>
+          </form>
+        </div>
       </section>
 
       <Footer />

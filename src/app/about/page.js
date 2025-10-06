@@ -8,6 +8,7 @@ import Link from "next/link";
 // 1) EDIT YOUR UPDATES HERE (newest first)
 // ———————————————
 const UPDATES = [
+  
   {
     date: "2025-09-14",
     title: "Gift Shop is underway",
@@ -85,8 +86,7 @@ export default function UpdatesPage() {
           Updates
         </h1>
         <p className="mt-2 text-gray-700 max-w-2xl">
-          Studio notes, new work, and announcements. Occasional and
-          intentional, no noise.
+          Updates, new work, and announcements from Yusrizalakbar. 
         </p>
       </section>
 
