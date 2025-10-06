@@ -8,7 +8,7 @@ const Footer = () => {
   const footerLinks = [
     { href: '/about', label: 'Updates' },
     { href: '/portfolio', label: 'Portfolio' },
-    { href: '/shop', label: 'Booking' },
+    { href: '/bookings', label: 'Booking' },
     { href: '/journal', label: 'Journal' },
     { href: '/contact', label: 'Contact' }
   ];
