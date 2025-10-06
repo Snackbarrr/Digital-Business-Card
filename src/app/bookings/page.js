@@ -59,20 +59,20 @@ const PACKAGES = [
     bestFor: "Sell-in decks / line sheets / e-com",
   },
   {
-  id: "graduation",
-  name: "Graduation",
-  priceFrom: "from £350",
-  blurb:
-    "Cinematic portrait session with a fashion edge—simple setups, editorial polish.",
-  includes: [
-    "2–3 hour shoot · campus/city (studio hour optional)",
-    "Direction & light location scouting",
-    "6 retouched finals (web + print JPGs)",
-    "Delivery: contact sheet in 48–72h; finals in 5–7 working days",
-    "Usage: Personal & Social (non-commercial)",
-  ],
-  bestFor: "Graduates, small teams, alumni features"
-}
+    id: "graduation",
+    name: "Graduation",
+    priceFrom: "from £350",
+    blurb:
+      "Cinematic portrait session with a fashion edge—simple setups, editorial polish.",
+    includes: [
+      "2–3 hour shoot · campus/city (studio hour optional)",
+      "Direction & light location scouting",
+      "6 retouched finals (web + print JPGs)",
+      "Delivery: contact sheet in 48–72h; finals in 5–7 working days",
+      "Usage: Personal & Social (non-commercial)",
+    ],
+    bestFor: "Graduates, small teams, alumni features",
+  },
 ];
 
 /* ------------------------------ CONFIG: RATES ------------------------------ */
@@ -123,6 +123,19 @@ export default function BookingPage() {
         <div className="mt-4 text-[11px] uppercase tracking-[0.22em] text-zinc-600">
           UK / Worldwide · Fast turnarounds available
         </div>
+
+        {/* === NEW: DOWNLOAD TREATMENT (PDF) ===================================== */}
+        <div className="mt-4">
+          <a
+            href="/Client_Company_Name.pdf"
+            download="Client_Company_Name_Treatment.pdf"
+            className="inline-flex items-center gap-2 rounded-full border border-zinc-900 px-4 py-2 text-xs uppercase tracking-[0.22em] text-zinc-900 hover:bg-zinc-900 hover:text-white transition"
+            aria-label="Download example treatment PDF"
+          >
+            Download Sample Treatment (Spec .PDF) →
+          </a>
+        </div>
+        {/* ======================================================================= */}
       </section>
 
       {/* =========================================================================
