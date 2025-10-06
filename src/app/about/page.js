@@ -10,12 +10,14 @@ import Link from "next/link";
 const UPDATES = [
   
   {
-    date: "2025-09-14",
-    title: "Gift Shop is underway",
-    body:
-      "Three collections; Prints, Collaborations, and Merch under development. Focused on limited runs and small-batch drops.",
-    links: [{ label: "Visit the shop →", href: "/shop" }],
-    tags: ["Announcement", "Shop"],
+  date: "2025-10-06",
+  title: "Bookings now open!",
+  body:
+    "Bookings are open. Campaigns, editorials, lookbooks, graduation portraits and whatever new things we dream up together. Limited slots; first holds available.",
+  links: [
+    { label: "Start a booking →", href: "/bookings" },
+  ],
+  tags: ["Announcement", "Booking"],
   },
   {
     date: "2025-07-22",
