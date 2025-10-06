@@ -23,7 +23,7 @@ const Navbar = () => {
   const navLinks = [
     { href: '/about', label: 'Updates' },
     { href: '/portfolio', label: 'Portfolio' },
-    { href: '/shop', label: 'Shop' },
+    { href: '/shop', label: 'Booking' },
     { href: '/journal', label: 'Journal' },
     { href: '/contact', label: 'Contact' }
   ];
