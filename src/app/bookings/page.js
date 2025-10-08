@@ -16,58 +16,66 @@ import Footer from "@/app/components/footer";
 /* ------------------------------ CONFIG: PACKAGES --------------------------- */
 const PACKAGES = [
   {
-    id: "campaign",
-    name: "Campaign",
-    priceFrom: "from £1,800",
-    blurb:
-      "Lookbook / ad assets. Location or studio. Art direction and production handled.",
-    includes: [
-      "Pre-production: treatment, shot-list, schedule",
-      "Full-day shoot (8–10h)",
-      "Talent/crew coordination (core)",
-      "Up to 20 retouched finals",
-      "Usage: Social + Web + E-com (12 months)",
-    ],
-    bestFor: "Seasonal drops / brand campaigns",
+  id: "campaign",
+  name: "Campaign",
+  priceFrom: "from £2,300",
+  blurb:
+    "Concepted, art-directed shoot for polished hero assets. Best for launches and seasonal drops needing production support (assistant/studio) and multi-channel usage. For brands and agencies.",
+  includes: [
+    "Day (up to 8h); pre-production included",
+    "15 retouched finals (basic)",
+    "Extra finals £35/image; advanced from £55/image",
+    "Assistant/Digi & studio pass-through",
+    "Delivery: proofs 48–72h; finals 5–7 working days",
+    "Usage: Social + Web + E-com (12 months). Perpetual Social +£200",
+    "Overtime £90/hr"
+  ],
+  bestFor: "Seasonal drops / brand campaigns"
   },
+
   {
-    id: "editorial",
-    name: "Editorial",
-    priceFrom: "from £450 (half-day)",
-    blurb:
-      "Story-led imagery for press and owned media. Nimble crew; location-first.",
-    includes: [
-      "Half-day to full-day shoot (4h-9h)",
-      "Up to 10 retouched finals",
-      "Location scouting",
-      "Usage: Social + Web (12 months)",
-    ],
-    bestFor: "Brand world-building / PR features",
+  id: "editorial",
+  name: "Editorial",
+  priceFrom: "from £850 (half-day)",
+  blurb:
+    "Nimble, story-led session focused on mood and narrative. Great for press features, founder profiles and brand stories with light pre-prod. For PR teams, content leads and magazines.",
+  includes: [
+    "Half-day (up to 5h) or Full day (up to 8h)",
+    "6 finals (half) / 10 finals (full) — basic retouch",
+    "Extra finals £35/image; advanced from £55/image",
+    "Delivery: proofs 48h; finals 3–5 working days",
+    "Usage: Social + Web (12 months)",
+    "Overtime £90/hr"
+  ],
+  bestFor: "Brand world-building / PR features"
   },
+
   {
-    id: "lookbook",
-    name: "Lookbook",
-    priceFrom: "from £1,350",
-    blurb:
-      "Clean, consistent coverage of full collection: front, back, key details.",
-    includes: [
-      "Studio or on-location",
-      "Efficiency-led flow (per-look coverage)",
-      "Colour-consistent retouch",
-      "Usage: Social + Web + Wholesale (12 months)",
-    ],
-    bestFor: "Sell-in decks / line sheets / e-com",
+  id: "lookbook",
+  name: "Lookbook",
+  priceFrom: "from £1,200 (min) or £150/look",
+  blurb:
+    "Clean, repeatable coverage per look (front/side/back + details). Optimised for consistency, volume and fast turnaround. For designers, wholesalers and e-com teams.",
+  includes: [
+    "Studio or on-location",
+    "Per look: 5 images (front, side, back, 2 details) — basic retouch",
+    "Extra angles/colourways £20–£30/image; advanced from £55/image",
+    "Delivery: proofs 48–72h; finals 5–7 working days (volume-dependent)",
+    "Usage: Social + Web + Wholesale (12 months)",
+    "Overtime £90/hr"
+  ],
+  bestFor: "Sell-in decks / line sheets / e-com"
   },
   {
     id: "graduation",
     name: "Graduation",
     priceFrom: "from £350",
     blurb:
-      "Cinematic portrait session with a fashion edge—simple setups, editorial polish.",
+      "Cinematic session with a fashion edge. Simple setups, editorial polish.",
     includes: [
-      "2–3 hour shoot · campus/city (studio hour optional)",
+      "3 hour shoot · campus/city (studio hour optional)",
       "Direction & light location scouting",
-      "6 retouched finals (web + print JPGs)",
+      "10 retouched finals (web + print JPGs)",
       "Delivery: contact sheet in 48–72h; finals in 5–7 working days",
       "Usage: Personal & Social (non-commercial)",
     ],
@@ -80,8 +88,8 @@ const RATES = [
   { label: "Creative / Photographer Day (6–8h)", value: "£500" },
   { label: "Half Day (4–5h)", value: "£350" },
   { label: "Pre-production (treatment, scheduling)", value: "£150–£250 / project" },
-  { label: "Retouching (per final)", value: "£25–£35 / image" },
-  { label: "Studio & Lighting (typical)", value: "£25–£40 / hr (pass-through)" },
+  { label: "Retouching (per final)", value: "£30 / image" },
+  { label: "Studio & Lighting (typical)", value: "£40/ hr (pass-through)" },
   { label: "Assistant / Digital Tech (per day)", value: "£120–£180 / day" },
 ];
 
@@ -96,7 +104,7 @@ const USAGE = [
 
 /* ------------------------------- CONFIG: ADD-ONS --------------------------- */
 const ADDONS = [
-  { label: "Extra Finals (Retouched)", value: "£25–£35 each" },
+  { label: "Extra Finals (Retouched)", value: "£30 each" },
   { label: "Casting & Talent", value: "Coordination £100–£200 + talent fees" },
   { label: "Studio Hire", value: "Pass-through +10% handling (from £25–£40/hr)" },
   { label: "Behind-the-Scenes Stills", value: "£60 add-on (or included in Campaign)" },
@@ -215,8 +223,7 @@ export default function BookingPage() {
               ))}
             </ul>
             <p className="mt-2 text-xs text-zinc-600">
-              Notes: Usage defined by channel + term. Global paid or OOH use is quoted per market, term,
-              and exclusivity. Happy to align with brand/legal frameworks.
+              Notes: Usage defines where images can appear; term defines how long. Social+Web includes owned organic channels unless noted. Happy to align with brand/legal frameworks.
             </p>
           </div>
 
