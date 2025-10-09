@@ -71,7 +71,7 @@ const PACKAGES = [
     name: "Graduation",
     priceFrom: "from £350",
     blurb:
-      "Cinematic session with a fashion edge. Simple setups, editorial polish.",
+      "A cinematic session with a fashion edge. Simple setups, editorial polish.",
     includes: [
       "3 hour shoot · campus/city (studio hour optional)",
       "Direction & light location scouting",
@@ -125,8 +125,8 @@ export default function BookingPage() {
           Book Yusrizal Akbar Studio
         </h1>
         <p className="mt-2 max-w-3xl text-zinc-700">
-          Fashion, felt. Campaigns, editorials, and lookbooks produced with intention.
-          Share your brief, I'll shape the treatment and make it move.
+          Launching your next clothing brand, a lookbook for your next collection, or a graduation or something new?
+          To start a booking, share the details with us via the brief form and we'll make it happen for you.
         </p>
         <div className="mt-4 text-[11px] uppercase tracking-[0.22em] text-zinc-600">
           UK / Worldwide · Fast turnarounds available
