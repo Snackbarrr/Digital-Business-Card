@@ -9,22 +9,78 @@ import Footer from '@/app/components/footer';
 const inter = Inter({ subsets: ['latin'] });
 
 /* -------------------------------------------------------------------------- */
+/*                               UTILITY HOOKS                                */
+/* -------------------------------------------------------------------------- */
+
+// Desktop breakpoint watcher (Tailwind md: 768px)
+function useIsDesktop() {
+  const getMatch = () =>
+    typeof window !== 'undefined' ? window.matchMedia('(min-width: 768px)').matches : false;
+
+  const [isDesktop, setIsDesktop] = useState(getMatch);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(min-width: 768px)');
+    const onChange = () => setIsDesktop(mq.matches);
+    mq.addEventListener?.('change', onChange);
+    mq.addListener?.(onChange); // fallback
+    return () => {
+      mq.removeEventListener?.('change', onChange);
+      mq.removeListener?.(onChange);
+    };
+  }, []);
+
+  return isDesktop;
+}
+
+// Reduced motion preference
+function usePrefersReducedMotion() {
+  const getMatch = () =>
+    typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false;
+
+  const [reduced, setReduced] = useState(getMatch);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const onChange = () => setReduced(mq.matches);
+    mq.addEventListener?.('change', onChange);
+    mq.addListener?.(onChange); // fallback
+    return () => {
+      mq.removeEventListener?.('change', onChange);
+      mq.removeListener?.(onChange);
+    };
+  }, []);
+
+  return reduced;
+}
+
+/* -------------------------------------------------------------------------- */
 /*                               REVEAL LOGIC                                 */
 /* -------------------------------------------------------------------------- */
 
-// Hook that triggers fade-in when element enters viewport
 function useReveal() {
   const elRef = useRef(null);
   const [show, setShow] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const el = elRef.current;
     if (!el) return;
 
+    if (prefersReducedMotion) {
+      setShow(true); // reveal instantly if user prefers reduced motion
+      return;
+    }
+
     const observer = new IntersectionObserver(
-      (entries) => {
+      (entries, obs) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setShow(true);
+          if (entry.isIntersecting) {
+            setShow(true);
+            if (el) obs.unobserve(el); // precise unobserve
+          }
         });
       },
       { threshold: 0.2 }
@@ -32,21 +88,18 @@ function useReveal() {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [prefersReducedMotion]);
 
-  return { elRef, show };
+  return { elRef, show, prefersReducedMotion };
 }
 
-// Standalone Reveal component
 function Reveal({ children }) {
-  const { elRef, show } = useReveal();
+  const { elRef, show, prefersReducedMotion } = useReveal();
+  const base = 'transition-all duration-700';
+  const motionClasses = prefersReducedMotion ? '' : show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4';
+
   return (
-    <div
-      ref={elRef}
-      className={`transition-all duration-700 ${
-        show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-      }`}
-    >
+    <div ref={elRef} className={`${base} ${motionClasses}`}>
       {children}
     </div>
   );
@@ -58,21 +111,20 @@ function Reveal({ children }) {
 
 // ---------- Image Arrays ----------
 const mobileImages = [
-  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Montblanc.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Louis_BW_Mobile.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Mosesmobile.avif',
-  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Newborn.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Ka_Issey_Miyake_Mobile-min.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/renaissance.avif',
-  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/HkMarket.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/MosesBlueMobile.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Chongqing.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Library.avif',
 ];
 
 const desktopImages = [
-  'https://storage.googleapis.com/spurofthemoment/Landing/Montblancdesktop.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Louis_BW.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Moses.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Chongqingdesktop.avif',
-  'https://storage.googleapis.com/spurofthemoment/Landing/Beijing.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Ka_Issey_Miyake.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/MosesBlueDesktop.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Italy.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Umbrellas.avif',
@@ -97,33 +149,68 @@ export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const heroRef = useRef(null);
 
+  const isDesktop = useIsDesktop();
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   /* ----------------------------- Slideshow Logic ----------------------------- */
   useEffect(() => {
-    const mobileInterval = setInterval(() => {
-      setCurrentMobile((prev) => (prev + 1) % mobileImages.length);
-      setCaptionIdx((c) => (c + 1) % captions.length);
-    }, 7000);
+    if (prefersReducedMotion) return; // skip autoplay with reduced motion
 
-    const desktopInterval = setInterval(() => {
-      setCurrentDesktop((prev) => (prev + 1) % desktopImages.length);
+    let intervalId = null;
+
+    const step = () => {
+      if (isDesktop) {
+        setCurrentDesktop((prev) => (prev + 1) % desktopImages.length);
+      } else {
+        setCurrentMobile((prev) => (prev + 1) % mobileImages.length);
+      }
       setCaptionIdx((c) => (c + 1) % captions.length);
-    }, 7000);
+    };
+
+    const start = () => {
+      if (intervalId != null) return;
+      intervalId = window.setInterval(step, 7000);
+    };
+
+    const stop = () => {
+      if (intervalId != null) {
+        window.clearInterval(intervalId);
+        intervalId = null;
+      }
+    };
+
+    start();
+
+    const onVisibility = () => {
+      if (document.hidden) stop();
+      else start();
+    };
+    document.addEventListener('visibilitychange', onVisibility);
 
     return () => {
-      clearInterval(mobileInterval);
-      clearInterval(desktopInterval);
+      stop();
+      document.removeEventListener('visibilitychange', onVisibility);
     };
-  }, []);
+  }, [isDesktop, prefersReducedMotion]);
 
   /* --------------------------- Scroll-linked Fade --------------------------- */
   useEffect(() => {
+    if (!heroRef.current) return;
+
+    let ticking = false;
+
     const onScroll = () => {
-      if (!heroRef.current) return;
-      const rect = heroRef.current.getBoundingClientRect();
-      const viewport = window.innerHeight || document.documentElement.clientHeight;
-      const progress = Math.min(1, Math.max(0, (viewport - rect.bottom) / viewport + 0.05));
-      setScrollProgress(progress);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const rect = heroRef.current.getBoundingClientRect();
+        const viewport = window.innerHeight || document.documentElement.clientHeight;
+        const progress = Math.min(1, Math.max(0, (viewport - rect.bottom) / viewport + 0.05));
+        setScrollProgress(progress);
+        ticking = false;
+      });
     };
+
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -143,12 +230,12 @@ export default function Home() {
       {/* ---------------------------------------------------------------------- */}
       <section ref={heroRef} className="relative w-full h-[90vh] overflow-hidden" aria-label="Featured work">
         {/* --- Mobile Slideshow --- */}
-        <div className="md:hidden w-full h-full absolute inset-0">
+        <div className="md:hidden w-full h-full absolute inset-0" aria-hidden>
           {mobileImages.map((src, index) => (
             <Image
               key={index}
               src={src}
-              alt={`Mobile slide ${index + 1}`}
+              alt="" // decorative
               fill
               sizes="(max-width: 767px) 100vw, 0vw"
               quality={85}
@@ -163,12 +250,12 @@ export default function Home() {
         </div>
 
         {/* --- Desktop Slideshow --- */}
-        <div className="hidden md:block w-full h-full absolute inset-0">
+        <div className="hidden md:block w-full h-full absolute inset-0" aria-hidden>
           {desktopImages.map((src, index) => (
             <Image
               key={index}
               src={src}
-              alt={`Desktop slide ${index + 1}`}
+              alt="" // decorative
               fill
               sizes="(min-width: 768px) 100vw, 0vw"
               quality={85}
@@ -210,6 +297,7 @@ export default function Home() {
         <div
           className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/80 text-xs tracking-[0.2em] z-40"
           style={{ opacity: 1 - scrollProgress }}
+          aria-hidden
         >
           SCROLL
           <span className="block w-px h-6 mx-auto mt-1 bg-white/70 animate-pulse" />
@@ -299,47 +387,71 @@ export default function Home() {
           <p className="text-center text-base text-gray-600 mb-8">Your story, in a new light.</p>
 
           {/* --- Contact Form --- */}
-          <form action="https://formspree.io/f/xnndvvgd" method="POST" className="space-y-4">
+          <form action="https://formspree.io/f/xnndvvgd" method="POST" className="space-y-4" noValidate>
             <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex-1">
+                <label htmlFor="first-name" className="sr-only">First Name</label>
+                <input
+                  id="first-name"
+                  type="text"
+                  name="first-name"
+                  placeholder="First Name"
+                  required
+                  className="w-full px-4 py-3 text-zinc-900 text-base border border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+                  autoComplete="given-name"
+                />
+              </div>
+              <div className="flex-1">
+                <label htmlFor="last-name" className="sr-only">Last Name</label>
+                <input
+                  id="last-name"
+                  type="text"
+                  name="last-name"
+                  placeholder="Last Name"
+                  required
+                  className="w-full px-4 py-3 text-base text-zinc-900 border border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+                  autoComplete="family-name"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="email" className="sr-only">Email Address</label>
               <input
-                type="text"
-                name="first-name"
-                placeholder="First Name"
+                id="email"
+                type="email"
+                name="email"
+                placeholder="Email Address"
                 required
-                className="flex-1 px-4 py-3 text-zinc-900 text-base border border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
-              />
-              <input
-                type="text"
-                name="last-name"
-                placeholder="Last Name"
-                required
-                className="flex-1 px-4 py-3 text-base text-zinc-900 border border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+                className="w-full px-4 py-3 text-base border text-zinc-900 border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+                autoComplete="email"
+                inputMode="email"
               />
             </div>
 
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              required
-              className="w-full px-4 py-3 text-base border text-zinc-900 border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
-            />
+            <div>
+              <label htmlFor="subject" className="sr-only">Subject</label>
+              <input
+                id="subject"
+                type="text"
+                name="subject"
+                placeholder="Subject"
+                required
+                className="w-full px-4 py-3 text-base border text-zinc-900 border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+              />
+            </div>
 
-            <input
-              type="text"
-              name="subject"
-              placeholder="Subject"
-              required
-              className="w-full px-4 py-3 text-base border text-zinc-900 border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
-            />
-
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              rows={5}
-              required
-              className="w-full px-4 py-3 text-base border border-gray-300 text-zinc-900 rounded-md bg-gray-50 resize-vertical focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
-            />
+            <div>
+              <label htmlFor="message" className="sr-only">Your Message</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Your Message"
+                rows={5}
+                required
+                className="w-full px-4 py-3 text-base border border-gray-300 text-zinc-900 rounded-md bg-gray-50 resize-vertical focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+              />
+            </div>
 
             <button
               type="submit"
