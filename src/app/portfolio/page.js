@@ -16,7 +16,7 @@ const ALL_ITEMS = [
     kind: "project",
     href: "/portfolio/boaaa",
     image:
-      "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Close_up_Portrait.avif",
+      "https://storage.googleapis.com/spurofthemoment/Landing/Ka_Issey_Miyake.avif",
     title: "Always Another Angle",
     subtitle: "Visual Experimentation. Learning & Growth",
     alt: "Always Another Angle cover",
@@ -64,7 +64,7 @@ const ALL_ITEMS = [
   kind: "video",
   title: "Behind the Scenes",
   subtitle: "From the Urban Tailor suits shoot.",
-  tag: "Lookbook",
+  tag: "Behind the Scenes",
   year: "2025",
   video: {
     // Put your actual GCS URLs here:

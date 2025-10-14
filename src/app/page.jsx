@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import Navbar from '@/app/components/navbar';
@@ -9,97 +10,47 @@ import Footer from '@/app/components/footer';
 const inter = Inter({ subsets: ['latin'] });
 
 /* -------------------------------------------------------------------------- */
-/*                               UTILITY HOOKS                                */
-/* -------------------------------------------------------------------------- */
-
-// Desktop breakpoint watcher (Tailwind md: 768px)
-function useIsDesktop() {
-  const getMatch = () =>
-    typeof window !== 'undefined' ? window.matchMedia('(min-width: 768px)').matches : false;
-
-  const [isDesktop, setIsDesktop] = useState(getMatch);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const mq = window.matchMedia('(min-width: 768px)');
-    const onChange = () => setIsDesktop(mq.matches);
-    mq.addEventListener?.('change', onChange);
-    mq.addListener?.(onChange); // fallback
-    return () => {
-      mq.removeEventListener?.('change', onChange);
-      mq.removeListener?.(onChange);
-    };
-  }, []);
-
-  return isDesktop;
-}
-
-// Reduced motion preference
-function usePrefersReducedMotion() {
-  const getMatch = () =>
-    typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false;
-
-  const [reduced, setReduced] = useState(getMatch);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const onChange = () => setReduced(mq.matches);
-    mq.addEventListener?.('change', onChange);
-    mq.addListener?.(onChange); // fallback
-    return () => {
-      mq.removeEventListener?.('change', onChange);
-      mq.removeListener?.(onChange);
-    };
-  }, []);
-
-  return reduced;
-}
-
-/* -------------------------------------------------------------------------- */
 /*                               REVEAL LOGIC                                 */
 /* -------------------------------------------------------------------------- */
 
+// Hook that triggers fade-in when element enters viewport
 function useReveal() {
   const elRef = useRef(null);
   const [show, setShow] = useState(false);
-  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const el = elRef.current;
     if (!el) return;
 
-    if (prefersReducedMotion) {
-      setShow(true); // reveal instantly if user prefers reduced motion
-      return;
-    }
-
     const observer = new IntersectionObserver(
-      (entries, obs) => {
+      (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setShow(true);
-            if (el) obs.unobserve(el); // precise unobserve
-          }
+          if (entry.isIntersecting) setShow(true);
         });
       },
       { threshold: 0.2 }
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
-  }, [prefersReducedMotion]);
+    return () => {
+      if (el) observer.unobserve(el);
+      observer.disconnect();
+    };
+  }, []);
 
-  return { elRef, show, prefersReducedMotion };
+  return { elRef, show };
 }
 
+// Standalone Reveal component
 function Reveal({ children }) {
-  const { elRef, show, prefersReducedMotion } = useReveal();
-  const base = 'transition-all duration-700';
-  const motionClasses = prefersReducedMotion ? '' : show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4';
-
+  const { elRef, show } = useReveal();
   return (
-    <div ref={elRef} className={`${base} ${motionClasses}`}>
+    <div
+      ref={elRef}
+      className={`transition-all duration-700 ${
+        show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+      }`}
+    >
       {children}
     </div>
   );
@@ -112,22 +63,24 @@ function Reveal({ children }) {
 // ---------- Image Arrays ----------
 const mobileImages = [
   'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Louis_BW_Mobile.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/FLOATER2_mobile-min.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Mosesmobile.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Ka_Issey_Miyake_Mobile-min.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/renaissance.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/MosesBlueMobile.avif',
-  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Chongqing.avif',
-  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Library.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/FLOATER_mobile-min.avif',
 ];
 
 const desktopImages = [
   'https://storage.googleapis.com/spurofthemoment/Landing/Louis_BW.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/FLOATER2.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Moses.avif',
-  'https://storage.googleapis.com/spurofthemoment/Landing/Chongqingdesktop.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/DoubleRL.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Ka_Issey_Miyake.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/MosesBlueDesktop.avif',
-  'https://storage.googleapis.com/spurofthemoment/Landing/Italy.avif',
-  'https://storage.googleapis.com/spurofthemoment/Landing/Umbrellas.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Chromecut.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/Chromebrah.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/FLOATER.avif',
 ];
 
 // ---------- Hero Captions ----------
@@ -147,70 +100,53 @@ export default function Home() {
   const [currentDesktop, setCurrentDesktop] = useState(0);
   const [captionIdx, setCaptionIdx] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const heroRef = useRef(null);
 
-  const isDesktop = useIsDesktop();
-  const prefersReducedMotion = usePrefersReducedMotion();
+  // ---------- Media Query (so only one slideshow advances) ----------
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)');
+    const onChange = (e) => setIsDesktop(e.matches);
+    setIsDesktop(mq.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+
+  // ---------- Page Visibility (pause when tab hidden) ----------
+  useEffect(() => {
+    const onVis = () => setIsVisible(document.visibilityState === 'visible');
+    onVis();
+    document.addEventListener('visibilitychange', onVis);
+    return () => document.removeEventListener('visibilitychange', onVis);
+  }, []);
 
   /* ----------------------------- Slideshow Logic ----------------------------- */
   useEffect(() => {
-    if (prefersReducedMotion) return; // skip autoplay with reduced motion
+    if (!isVisible) return; // pause when tab is hidden
 
-    let intervalId = null;
-
-    const step = () => {
+    const interval = setInterval(() => {
       if (isDesktop) {
         setCurrentDesktop((prev) => (prev + 1) % desktopImages.length);
       } else {
         setCurrentMobile((prev) => (prev + 1) % mobileImages.length);
       }
+      // advance a single caption step per tick
       setCaptionIdx((c) => (c + 1) % captions.length);
-    };
+    }, 5000); // 5 seconds
 
-    const start = () => {
-      if (intervalId != null) return;
-      intervalId = window.setInterval(step, 7000);
-    };
-
-    const stop = () => {
-      if (intervalId != null) {
-        window.clearInterval(intervalId);
-        intervalId = null;
-      }
-    };
-
-    start();
-
-    const onVisibility = () => {
-      if (document.hidden) stop();
-      else start();
-    };
-    document.addEventListener('visibilitychange', onVisibility);
-
-    return () => {
-      stop();
-      document.removeEventListener('visibilitychange', onVisibility);
-    };
-  }, [isDesktop, prefersReducedMotion]);
+    return () => clearInterval(interval);
+  }, [isDesktop, isVisible]);
 
   /* --------------------------- Scroll-linked Fade --------------------------- */
   useEffect(() => {
-    if (!heroRef.current) return;
-
-    let ticking = false;
-
     const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const rect = heroRef.current.getBoundingClientRect();
-        const viewport = window.innerHeight || document.documentElement.clientHeight;
-        const progress = Math.min(1, Math.max(0, (viewport - rect.bottom) / viewport + 0.05));
-        setScrollProgress(progress);
-        ticking = false;
-      });
+      if (!heroRef.current) return;
+      const rect = heroRef.current.getBoundingClientRect();
+      const viewport = window.innerHeight || document.documentElement.clientHeight;
+      const progress = Math.min(1, Math.max(0, (viewport - rect.bottom) / viewport + 0.05));
+      setScrollProgress(progress);
     };
-
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -230,43 +166,61 @@ export default function Home() {
       {/* ---------------------------------------------------------------------- */}
       <section ref={heroRef} className="relative w-full h-[90vh] overflow-hidden" aria-label="Featured work">
         {/* --- Mobile Slideshow --- */}
-        <div className="md:hidden w-full h-full absolute inset-0" aria-hidden>
-          {mobileImages.map((src, index) => (
-            <Image
-              key={index}
-              src={src}
-              alt="" // decorative
-              fill
-              sizes="(max-width: 767px) 100vw, 0vw"
-              quality={85}
-              priority={index === 0}
-              className={`transition-opacity duration-1000 ease-in-out ${
-                index === currentMobile ? 'opacity-100 z-20' : 'opacity-0 z-10'
-              }`}
-              style={{ objectFit: 'cover' }}
-              draggable={false}
-            />
-          ))}
+        <div className="md:hidden w-full h-full absolute inset-0" aria-hidden="true">
+          {mobileImages.map((src, index) => {
+            const isActive = index === currentMobile;
+            return (
+              <Link
+                key={index}
+                href="/portfolio"
+                aria-label="Open portfolio"
+                className={`absolute inset-0 ${isActive ? 'z-20 pointer-events-auto' : 'z-10 pointer-events-none'}`}
+              >
+                <Image
+                  src={src}
+                  alt="" // decorative; link has the label
+                  fill
+                  sizes="(max-width: 767px) 100vw, 0vw"
+                  quality={85}
+                  priority={index === 0}
+                  className={`transition-opacity duration-1000 ease-in-out ${
+                    isActive ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  style={{ objectFit: 'cover' }}
+                  draggable={false}
+                />
+              </Link>
+            );
+          })}
         </div>
 
         {/* --- Desktop Slideshow --- */}
-        <div className="hidden md:block w-full h-full absolute inset-0" aria-hidden>
-          {desktopImages.map((src, index) => (
-            <Image
-              key={index}
-              src={src}
-              alt="" // decorative
-              fill
-              sizes="(min-width: 768px) 100vw, 0vw"
-              quality={85}
-              priority={index === 0}
-              className={`transition-opacity duration-1000 ease-in-out ${
-                index === currentDesktop ? 'opacity-100 z-20' : 'opacity-0 z-10'
-              }`}
-              style={{ objectFit: 'cover' }}
-              draggable={false}
-            />
-          ))}
+        <div className="hidden md:block w-full h-full absolute inset-0" aria-hidden="true">
+          {desktopImages.map((src, index) => {
+            const isActive = index === currentDesktop;
+            return (
+              <Link
+                key={index}
+                href="/portfolio"
+                aria-label="Open portfolio"
+                className={`absolute inset-0 ${isActive ? 'z-20 pointer-events-auto' : 'z-10 pointer-events-none'}`}
+              >
+                <Image
+                  src={src}
+                  alt="" // decorative; link has the label
+                  fill
+                  sizes="(min-width: 768px) 100vw, 0vw"
+                  quality={85}
+                  priority={index === 0}
+                  className={`transition-opacity duration-1000 ease-in-out ${
+                    isActive ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  style={{ objectFit: 'cover' }}
+                  draggable={false}
+                />
+              </Link>
+            );
+          })}
         </div>
 
         {/* --- Gradient for readability --- */}
@@ -277,6 +231,7 @@ export default function Home() {
               'linear-gradient(to left, rgba(0,0,0,0.32), rgba(0,0,0,0.18) 20%, rgba(0,0,0,0.06) 45%, rgba(0,0,0,0) 70%)',
             opacity: 0.65 * (1 - scrollProgress),
           }}
+          aria-hidden="true"
         />
 
         {/* --- Hero Text --- */}
@@ -297,7 +252,7 @@ export default function Home() {
         <div
           className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/80 text-xs tracking-[0.2em] z-40"
           style={{ opacity: 1 - scrollProgress }}
-          aria-hidden
+          aria-hidden="true"
         >
           SCROLL
           <span className="block w-px h-6 mx-auto mt-1 bg-white/70 animate-pulse" />
@@ -378,16 +333,22 @@ export default function Home() {
       {/* ---------------------------------------------------------------------- */}
       {/*                            CONTACT SECTION                             */}
       {/* ---------------------------------------------------------------------- */}
-      <section id="contact" className="relative py-16 md:py-20">
-        <div className="absolute inset-0 bg-gradient-to-b from-zinc-50 to-white" />
+      <section id="contact" className="relative py-16 md:py-20" aria-labelledby="contact-heading">
+        <div className="absolute inset-0 bg-gradient-to-b from-zinc-50 to-white" aria-hidden="true" />
         <div className="relative max-w-3xl mx-auto px-6">
-          <h2 className="text-center text-3xl font-semibold mb-2 text-zinc-950">
+          <h2 id="contact-heading" className="text-center text-3xl font-semibold mb-2 text-zinc-950">
             Let’s create something that lasts.
           </h2>
           <p className="text-center text-base text-gray-600 mb-8">Your story, in a new light.</p>
 
           {/* --- Contact Form --- */}
-          <form action="https://formspree.io/f/xnndvvgd" method="POST" className="space-y-4" noValidate>
+          <form action="https://formspree.io/f/xnndvvgd" method="POST" className="space-y-4">
+            {/* Honeypot anti-spam */}
+            <div className="hidden" aria-hidden="true">
+              <label htmlFor="company">Company</label>
+              <input id="company" name="_gotcha" type="text" tabIndex={-1} autoComplete="off" />
+            </div>
+
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex-1">
                 <label htmlFor="first-name" className="sr-only">First Name</label>
@@ -398,7 +359,6 @@ export default function Home() {
                   placeholder="First Name"
                   required
                   className="w-full px-4 py-3 text-zinc-900 text-base border border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
-                  autoComplete="given-name"
                 />
               </div>
               <div className="flex-1">
@@ -410,7 +370,6 @@ export default function Home() {
                   placeholder="Last Name"
                   required
                   className="w-full px-4 py-3 text-base text-zinc-900 border border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
-                  autoComplete="family-name"
                 />
               </div>
             </div>
@@ -424,8 +383,6 @@ export default function Home() {
                 placeholder="Email Address"
                 required
                 className="w-full px-4 py-3 text-base border text-zinc-900 border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
-                autoComplete="email"
-                inputMode="email"
               />
             </div>
 
