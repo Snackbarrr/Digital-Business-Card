@@ -132,15 +132,15 @@ export default function BookingPage() {
           UK / Worldwide · Fast turnarounds available
         </div>
 
-        {/* === NEW: DOWNLOAD TREATMENT (PDF) ===================================== */}
+        {/* === NEW: DOWNLOAD CLIENT DISCOVERY (PDF) ===================================== */}
         <div className="mt-4">
           <a
-            href="/Client_Company_Name.pdf"
-            download="Client_Company_Name_Treatment.pdf"
+            href="/Client_Discovery.pdf"
+            download="Client_Discovery.pdf"
             className="inline-flex items-center gap-2 rounded-full border border-zinc-900 px-4 py-2 text-xs uppercase tracking-[0.22em] text-zinc-900 hover:bg-zinc-900 hover:text-white transition"
-            aria-label="Download example treatment PDF"
+            aria-label="Download Client Discovery PDF"
           >
-            Download Sample Treatment (Spec .PDF) →
+            Let's Get Started! Download Client Discovery (Spec .PDF) →
           </a>
         </div>
         {/* ======================================================================= */}

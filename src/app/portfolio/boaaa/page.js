@@ -46,7 +46,7 @@ const CATEGORIES = ["All", "Studio", "Arvin", "Clothingxchange",];
    Start with "Set 1"/"Set 2"/"Set 3", then rename freely later.
    ------------------------------------------------------------------------- */
 const ALL_IMAGES = [
-  { id: 1,  src: "https://storage.googleapis.com/spurofthemoment/Landing/Ka_Issey_Miyake.avif",     alt: "ka issey miyake",      category: "Studio" },
+  { id: 1,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/HERO%20KA.avif",     alt: "ka issey miyake",      category: "Studio" },
 
   { id: 2,  src: "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Louis_BW_Mobile.avif",     alt: "Louis black and white",      category: "Studio" },
   { id: 3,  src: "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/FLOATER_mobile-min.avif",     alt: "Floater",      category: "Studio" },
