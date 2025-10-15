@@ -7,7 +7,10 @@ import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/footer";
 
 /* ============================================================================
-   PORTFOLIO PAGE — adds a drop-in VIDEO card, identical chrome, unclickable
+   PORTFOLIO PAGE (fixed)
+   - Per-card `sizes` (hero gets 50vw)
+   - Priority vs loading: mutually exclusive
+   - Video tile autoplay on view
    ========================================================================== */
 
 const ALL_ITEMS = [
@@ -20,7 +23,7 @@ const ALL_ITEMS = [
     title: "Always Another Angle",
     subtitle: "Visual Experimentation. Learning & Growth",
     alt: "Always Another Angle cover",
-    tag: "Editorial",
+    tag: "Custom",
     year: "2025",
   },
   {
@@ -31,7 +34,7 @@ const ALL_ITEMS = [
     title: "Urban Tailor Suits",
     subtitle: "Tailoring lookbook; studio + location.",
     alt: "Urban Tailor Suits cover",
-    tag: "Lookbook",
+    tag: "Campaign",
     year: "2025",
   },
   {
@@ -42,7 +45,7 @@ const ALL_ITEMS = [
     title: "Graduation Portraits",
     subtitle: "Graduation editorial; Hybrid location.",
     alt: "Graduation portraits cover",
-    tag: "Graduations",
+    tag: "Portraits",
     year: "2024",
   },
   {
@@ -50,37 +53,30 @@ const ALL_ITEMS = [
     kind: "project",
     href: "/portfolio/nusaantara",
     image:
-      "https://storage.googleapis.com/spurofthemoment/Portfolio/NusaAntara/Batik-Neck-tie-Close-up",
+      "https://storage.googleapis.com/spurofthemoment/Portfolio/NusaAntara/Close_up_tie",
     title: "Nusa Antara",
     subtitle: "The Global Cultural Exchange. Campaign for Nusa Antara.",
     alt: "Nusa Antara cover",
-    tag: "Campaign",
+    tag: "Custom",
     year: "2024",
   },
-
-  // Example BTS video card (unclickable)
   {
-  id: 99,
-  kind: "video",
-  title: "Behind the Scenes",
-  subtitle: "From the Urban Tailor suits shoot.",
-  tag: "Behind the Scenes",
-  year: "2025",
-  video: {
-    // Put your actual GCS URLs here:
-  
-    mp4:  "https://storage.googleapis.com/spurofthemoment/Portfolio/bts/My%20Movie%2011.mp4",
-    
+    id: 99,
+    kind: "video",
+    title: "Behind the Scenes",
+    subtitle: "From the Urban Tailor suits shoot.",
+    tag: "Behind the Scenes",
+    year: "2025",
+    video: {
+      mp4: "https://storage.googleapis.com/spurofthemoment/Portfolio/bts/My%20Movie%2011.mp4",
+    },
   },
-  }
 ];
-
-/* --------------------------- shared overlay chrome ------------------------- */
 
 function CardOverlay({ tag, year, title, subtitle }) {
   return (
     <>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-80 group-hover:opacity-90 transition" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-80 group-hover:opacity-90 transition" />
       {(tag || year) && (
         <div className="absolute top-3 left-3 text-[10px] tracking-[0.22em] text-white/85 uppercase">
           {tag}
@@ -97,30 +93,23 @@ function CardOverlay({ tag, year, title, subtitle }) {
   );
 }
 
-/* ------------------------------- video card -------------------------------- */
-
 function VideoCard({ mp4, webm, poster, title, subtitle, tag, year }) {
   const ref = useRef(null);
-
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) el.play().catch(() => {});
-        else el.pause();
-      },
+      ([e]) => (e.isIntersecting ? el.play().catch(() => {}) : el.pause()),
       { threshold: 0.35 }
     );
     io.observe(el);
     return () => io.disconnect();
   }, []);
-
   return (
     <div
       className="group relative block overflow-hidden rounded-2xl ring-1 ring-zinc-200 hover:ring-zinc-900 hover:shadow-xl transition"
       role="img"
-      aria-label={`${title} — ${subtitle || ""}`}
+      aria-label={`${title}${subtitle ? ` — ${subtitle}` : ""}`}
     >
       <div className="relative aspect-[4/5]">
         <video
@@ -131,11 +120,10 @@ function VideoCard({ mp4, webm, poster, title, subtitle, tag, year }) {
           loop
           playsInline
           poster={poster}
-          preload="none"
+          preload="metadata"
         >
           {webm && <source src={webm} type="video/webm" />}
           <source src={mp4} type="video/mp4" />
-          Your browser does not support the video tag.
         </video>
         <CardOverlay tag={tag} year={year} title={title} subtitle={subtitle} />
       </div>
@@ -143,10 +131,11 @@ function VideoCard({ mp4, webm, poster, title, subtitle, tag, year }) {
   );
 }
 
-/* --------------------------------- page ------------------------------------ */
-
 export default function PortfolioPage() {
-  const FILTERS = ["All", "Campaign", "Editorial", "Lookbook", "Personal", "Graduations"];
+  const derivedTags = Array.from(
+    new Set(ALL_ITEMS.filter((i) => i.tag).map((i) => i.tag))
+  ).sort();
+  const FILTERS = ["All", ...derivedTags];
   const [active, setActive] = useState("All");
 
   const items = useMemo(() => {
@@ -190,8 +179,25 @@ export default function PortfolioPage() {
 
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-6 md:px-8 pb-12">
         {items.map((item, idx) => {
-          const heroClasses =
-            idx === 0 ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : "";
+          const isHero = idx === 0;
+          const heroClasses = isHero ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : "";
+          const cardSizes = isHero
+            ? "(min-width:1280px) 50vw, (min-width:1024px) 50vw, (min-width:640px) 100vw, 100vw"
+            : "(min-width:1280px) 25vw, (min-width:1024px) 25vw, (min-width:640px) 50vw, 100vw";
+
+          // decide priority or lazy (never both)
+          const isPriority = isHero || idx < 4;
+          const imageProps = {
+            src: item.image,
+            alt: item.alt || item.title,
+            fill: true,
+            decoding: "async",
+            quality: isPriority ? 90 : 85,
+            className:
+              "object-cover transition-transform duration-700 group-hover:scale-[1.03]",
+            sizes: cardSizes,
+            ...(isPriority ? { priority: true } : { loading: "lazy" }),
+          };
 
           return (
             <article key={item.id} className={heroClasses}>
@@ -208,18 +214,11 @@ export default function PortfolioPage() {
               ) : (
                 <Link
                   href={item.href}
-                  aria-label={`${item.title} — ${item.subtitle}`}
+                  aria-label={`${item.title}${item.subtitle ? ` — ${item.subtitle}` : ""}`}
                   className="group relative block overflow-hidden rounded-2xl ring-1 ring-zinc-200 hover:ring-zinc-900 hover:shadow-xl transition focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900"
                 >
                   <div className="relative aspect-[4/5]">
-                    <Image
-                      src={item.image}
-                      alt={item.alt}
-                      fill
-                      priority={idx < 4}
-                      className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                      sizes="(min-width:1280px) 25vw, (min-width:1024px) 25vw, (min-width:640px) 50vw, 100vw"
-                    />
+                    <Image {...imageProps} />
                     <CardOverlay
                       tag={item.tag}
                       year={item.year}
