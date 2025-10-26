@@ -76,6 +76,7 @@ const desktopImages = [
   'https://storage.googleapis.com/spurofthemoment/Landing/cropped-daniel%20(1).avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Moses.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/RRL_BUDA.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/faded%20cliff.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Ka_Issey_Miyake.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/MosesBlueDesktop.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/cartierAA.avif',

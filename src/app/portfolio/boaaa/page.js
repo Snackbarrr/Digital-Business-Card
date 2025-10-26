@@ -52,7 +52,7 @@ const ALL_IMAGES = [
   { id: 3,  src: "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/FLOATER_mobile-min.avif",     alt: "Floater",      category: "Studio" },
   { id: 4,  src: "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/FLOATER2_mobile-min.avif",     alt: "Floater2",      category: "Studio" },
   { id: 5,  src: "https://storage.googleapis.com/spurofthemoment/Landing/cartierAA.avif",     alt: "amos",      category: "Studio" },
-  { id: 6,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Fightclub-min.avif",     alt: "Fightclub",      category: "Studio" },
+  { id: 6,  src: "https://storage.googleapis.com/spurofthemoment/Landing/faded%20cliff.avif",     alt: "Fightclub",      category: "Studio" },
   { id: 7,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/DSCF4094-Edit.avif",     alt: "Fightclub",      category: "Studio" },
 
   { id: 8,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/hands_on_face.avif",     alt: "Hands on face portrait",      category: "Outdoors" },
