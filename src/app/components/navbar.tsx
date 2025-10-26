@@ -24,7 +24,6 @@ const Navbar = () => {
     { href: '/about', label: 'Updates' },
     { href: '/portfolio', label: 'Portfolio' },
     { href: '/bookings', label: 'Booking' },
-    { href: '/journal', label: 'Journal' },
     { href: '/contact', label: 'Contact' }
   ];
 

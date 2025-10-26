@@ -18,8 +18,7 @@ const ALL_ITEMS = [
     id: 1,
     kind: "project",
     href: "/portfolio/boaaa",
-    image:
-      "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/HERO%20KA.avif",
+    image: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/HERO%20KA-2.avif",
     title: "Always Another Angle",
     subtitle: "Visual Experimentation. Learning & Growth",
     alt: "Always Another Angle cover",

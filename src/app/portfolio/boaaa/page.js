@@ -39,36 +39,37 @@ function FullscreenButton({ onClick, className = "" }) {
 /* ------------------------------- CATEGORIES --------------------------------
    Rename these to whatever you want (e.g., "Street", "Motion", "Portrait", …)
    ------------------------------------------------------------------------- */
-const CATEGORIES = ["All", "Studio", "Arvin", "Clothingxchange",];
+const CATEGORIES = ["All",];
 
 /* ------------------------------- IMAGE DATA --------------------------------
    Tag each image with a `category` that matches one of your CATEGORIES above.
    Start with "Set 1"/"Set 2"/"Set 3", then rename freely later.
    ------------------------------------------------------------------------- */
 const ALL_IMAGES = [
-  { id: 1,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/HERO%20KA.avif",     alt: "ka issey miyake",      category: "Studio" },
+  { id: 1,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/HERO%20KA-2.avif",     alt: "ka issey miyake",      category: "Studio" },
 
   { id: 2,  src: "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Louis_BW_Mobile.avif",     alt: "Louis black and white",      category: "Studio" },
   { id: 3,  src: "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/FLOATER_mobile-min.avif",     alt: "Floater",      category: "Studio" },
   { id: 4,  src: "https://storage.googleapis.com/spurofthemoment/Landing/Mobile/FLOATER2_mobile-min.avif",     alt: "Floater2",      category: "Studio" },
   { id: 5,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Amos-min.avif",     alt: "amos",      category: "Studio" },
   { id: 6,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Fightclub-min.avif",     alt: "Fightclub",      category: "Studio" },
-  { id: 7,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Fightclub2-min.avif",     alt: "Fightclub",      category: "Studio" },
+  { id: 7,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/DSCF4094-Edit.avif",     alt: "Fightclub",      category: "Studio" },
 
-  { id: 8,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/hands_on_face.avif",     alt: "Hands on face portrait",      category: "Arvin" },
-  { id: 9,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Through_arm.avif",       alt: "Through the arm",             category: "Clothingxchange" },
-  { id: 10,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Distance_carpark.avif",  alt: "Carpark distance shot",       category: "Clothingxchange" },
-  { id: 11,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Face_away.avif",         alt: "Face turned away",            category: "Set 2" },
-  { id: 12,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Graffiti.avif",          alt: "Graffiti backdrop",           category: "Arvin" },
-  { id: 13,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Smoke_Blur.avif",        alt: "Smoke blur",                  category: "Arvin" },
-  { id: 14,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Bus_blur.avif",          alt: "Bus blur street frame",       category: "Clothingxchange" },
-  { id: 15,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Close_up_Portrait.avif", alt: "Close-up portrait",           category: "Arvin" },
-  { id: 16,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Through_window.avif",    alt: "Through the window",          category: "Arvin" },
-  { id: 17, src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Vogue_apparently.avif",  alt: "Editorial frame",             category: "Clothingxchange" },
-  { id: 18, src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Walk_cross_blur.avif",   alt: "Street crossing blur",        category: "Clothingxchange" },
-  { id: 19, src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Arvin_blur.avif",        alt: "Arvin motion blur portrait", category: "Arvin" },
-  { id: 20, src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/stand_car.avif",         alt: "Standing by car",             category: "Clothingxchange" },
-  { id: 21, src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Cafe_blur.avif",         alt: "Cafe motion blur",            category: "Arvin" },
+  { id: 8,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/hands_on_face.avif",     alt: "Hands on face portrait",      category: "Outdoors" },
+  { id: 9,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Through_arm.avif",       alt: "Through the arm",             category: "Outdoors" },
+  { id: 10,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Distance_carpark.avif",  alt: "Carpark distance shot",       category: "Outdoors" },
+  { id: 11,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Face_away.avif",         alt: "Face turned away",            category: "Outdoors" },
+  { id: 12,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Graffiti.avif",          alt: "Graffiti backdrop",           category: "Outdoors" },
+  { id: 13,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Smoke_Blur.avif",        alt: "Smoke blur",                  category: "Outdoors" },
+  { id: 14,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Bus_blur.avif",          alt: "Bus blur street frame",       category: "Outdoors" },
+  { id: 15,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Close_up_Portrait.avif", alt: "Close-up portrait",           category: "Outdoors" },
+  { id: 16,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Through_window.avif",    alt: "Through the window",          category: "Outdoors" },
+  { id: 17, src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Tom_Ford_Cliff-5.avif",  alt: "Editorial frame",             category: "Studio" },
+  { id: 18, src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Walk_cross_blur.avif",   alt: "Street crossing blur",        category: "Outdoors" },
+  { id: 19, src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/daniel.avif",        alt: "Arvin motion blur portrait", category: "Studio" },
+  { id: 20, src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Our_YSL-12.avif",         alt: "Standing by car",             category: "Studio" },
+  { id: 21, src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Our_YSL-23.avif",         alt: "Cafe motion blur",            category: "Studio" },
+  { id: 22, src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/shiiiirley.avif",         alt: "Cafe motion blur",            category: "Outdoors" },
 ];
 
 export default function AlwaysAnotherAnglePage() {
