@@ -73,12 +73,12 @@ const mobileImages = [
 
 const desktopImages = [
   'https://storage.googleapis.com/spurofthemoment/Landing/Louis_BW.avif',
-  'https://storage.googleapis.com/spurofthemoment/Landing/FLOATER2.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/cropped-daniel%20(1).avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Moses.avif',
-  'https://storage.googleapis.com/spurofthemoment/Landing/DoubleRL.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/RRL_BUDA.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Ka_Issey_Miyake.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/MosesBlueDesktop.avif',
-  'https://storage.googleapis.com/spurofthemoment/Landing/Chromecut.avif',
+  'https://storage.googleapis.com/spurofthemoment/Landing/cartierAA.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Chromebrah.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/FLOATER.avif',
 ];
