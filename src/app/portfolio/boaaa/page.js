@@ -58,9 +58,9 @@ const ALL_IMAGES = [
 
   { id: 8,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Kerry/_DSF4438.avif",     alt: "Hands on face portrait",      category: "Outdoors" },
   { id: 9,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Kerry/_DSF4203.avif",     alt: "Hands on face portrait",      category: "Outdoors" },
-  { id: 10,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Kerry/_DSF4424.avif",     alt: "Hands on face portrait",      category: "Outdoors" },
+  { id: 10,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Kerry/_DSF4307.avif",     alt: "Hands on face portrait",      category: "Outdoors" },
   { id: 11,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Kerry/_DSF4503.avif",     alt: "Hands on face portrait",      category: "Outdoors" },
-  { id: 12,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Kerry/_DSF4638.avif",     alt: "Hands on face portrait",      category: "Outdoors" },
+  { id: 12,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Kerry/_DSF4603.avif",     alt: "Hands on face portrait",      category: "Outdoors" },
 
   { id: 13,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/hands_on_face.avif",     alt: "Hands on face portrait",      category: "Outdoors" },
   { id: 14,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Through_arm.avif",       alt: "Through the arm",             category: "Outdoors" },
