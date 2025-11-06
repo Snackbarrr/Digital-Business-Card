@@ -63,7 +63,7 @@ function Reveal({ children }) {
 // ---------- Image Arrays ----------
 const mobileImages = [
   'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Louis_BW_Mobile.avif',
-  'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/FLOATER2_mobile-min.avif',
+  'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Kerry/_DSF4438.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Mosesmobile.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/Ka_Issey_Miyake_Mobile-min.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Mobile/renaissance.avif',
@@ -81,7 +81,7 @@ const desktopImages = [
   'https://storage.googleapis.com/spurofthemoment/Landing/MosesBlueDesktop.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/cartierAA.avif',
   'https://storage.googleapis.com/spurofthemoment/Landing/Chromebrah.avif',
-  'https://storage.googleapis.com/spurofthemoment/Landing/FLOATER.avif',
+  'https://storage.googleapis.com/spurofthemoment/Portfolio/AlwaysAnotherAngle/Kerry/_DSF4438%20landscape.avif',
 ];
 
 // ---------- Hero Captions ----------
