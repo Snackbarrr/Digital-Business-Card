@@ -5,9 +5,9 @@ import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/footer";
 
 /* ============================================================================
-   GRADUATION — MULTI-CLIENT CASE STUDY
-   - Client filter chips (sticky)
-   - Hero with fullscreen button (for active client)
+   ALWAYS ANOTHER ANGLE — MULTI-CATEGORY CASE STUDY
+   - Category filter chips (you name them)
+   - Hero with fullscreen button (for active category)
    - Lightbox (Esc/←/→)
    - Masonry for remaining images
    ========================================================================== */
@@ -36,44 +36,50 @@ function FullscreenButton({ onClick, className = "" }) {
   );
 }
 
+/* ------------------------------- CATEGORIES --------------------------------
+   Rename these to whatever you want (e.g., "Street", "Motion", "Portrait", …)
+   ------------------------------------------------------------------------- */
+const CATEGORIES = ["All",];
+
 /* ------------------------------- IMAGE DATA --------------------------------
-   Add images with `client` to create new filter categories automatically.
-   Example:
-   { id: 5, src: ".../XYZ.avif", alt: "…", client: "Kingston University", year: "2024" }
------------------------------------------------------------------------------ */
+   Tag each image with a `category` that matches one of your CATEGORIES above.
+   Start with "Set 1"/"Set 2"/"Set 3", then rename freely later.
+   ------------------------------------------------------------------------- */
 const ALL_IMAGES = [
-  { id: 1,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/Yoon/_DSF6038.avif",     alt: "Graduate portrait outdoor",        client: "Yoon", year: "2025" },
-  { id: 2,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/Yoon/_DSF6121.avif",     alt: "Graduate portrait outdoor",        client: "Yoon", year: "2025" },
-  { id: 3,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/Yoon/_DSF6196.avif",     alt: "Graduate portrait outdoor",        client: "Yoon", year: "2025" },
-  { id: 4,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/Yoon/_DSF6332.avif",     alt: "Graduate portrait outdoor",        client: "Yoon", year: "2025" },
+  { id: 1,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4732.avif",     alt: "ka issey miyake",      category: "Studio" },
 
-  { id: 5,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/Thadar/_DSF5491.avif",     alt: "Graduate portrait outdoor",        client: "Thadar", year: "2025" },
-  { id: 6,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/Thadar/_DSF5513.avif",     alt: "Graduate portrait outdoor",        client: "Thadar", year: "2025" },
-  { id: 7,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/Thadar/_DSF5677.avif",     alt: "Graduate portrait outdoor",        client: "Thadar", year: "2025" },
-  { id: 8,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/Thadar/_DSF5764.avif",     alt: "Graduate portrait outdoor",        client: "Thadar", year: "2025" },
+  { id: 2,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4656.avif",     alt: "Louis black and white",      category: "Studio" },
+  { id: 3,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4668.avif",     alt: "Floater",      category: "Studio" },
+  { id: 4,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4671.avif",     alt: "Floater2",      category: "Studio" },
+  { id: 5,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4673.avif",     alt: "amos",      category: "Studio" },
+  { id: 6,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4677.avif",     alt: "Fightclub",      category: "Studio" },
+  { id: 7,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4682.avif",     alt: "Fightclub",      category: "Studio" },
+  
 
-  { id: 9,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05583-Edit.avif",     alt: "Graduate portrait with diploma", client: "Aung Hein Kyaw", year: "2025" },
-  { id: 10,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05259.avif",     alt: "Graduation ceremony moment",      client: "Aung Hein Kyaw", year: "2025" },
-  { id: 11,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05531.avif",     alt: "Graduation celebration",           client: "Aung Hein Kyaw", year: "2025" },
-  { id: 12,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad/DSC05545.avif",     alt: "Graduate portrait outdoor",        client: "Aung Hein Kyaw", year: "2025" },
+  { id: 8,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4686.avif",     alt: "Hands on face portrait",      category: "Outdoors" },
+  { id: 9,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4694.avif",     alt: "Hands on face portrait",      category: "Outdoors" },
+  { id: 10,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4702.avif",     alt: "Hands on face portrait",      category: "Outdoors" },
+  { id: 11,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4705.avif",     alt: "Hands on face portrait",      category: "Outdoors" },
+  { id: 12,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4709.avif",     alt: "Hands on face portrait",      category: "Outdoors" },
 
-  // ── Add more clients below (these are sample placeholders; replace or extend)
-  // { id: 5,  src: "https://…/kingston_01.avif", alt: "Cap toss on quad", client: "Kingston University", year: "2024" },
-  // { id: 6,  src: "https://…/kingston_02.avif", alt: "Family hug",       client: "Kingston University", year: "2024" },
+  { id: 13,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4721.jpg",     alt: "Hands on face portrait",      category: "Outdoors" },
+  { id: 14,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4727.avif",       alt: "Through the arm",             category: "Outdoors" },
+  { id: 15,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4737.avif",  alt: "Carpark distance shot",       category: "Outdoors" },
+  { id: 16,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4743.avif",          alt: "Graffiti backdrop",           category: "Outdoors" },
+  { id: 17,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4747.avif",        alt: "Smoke blur",                  category: "Outdoors" },
+  { id: 18,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4768.avif",          alt: "Bus blur street frame",       category: "Outdoors" },
+  { id: 19,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4781.avif", alt: "Close-up portrait",           category: "Outdoors" },
+  { id: 20,  src: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4786.avif",    alt: "Through the window",          category: "Outdoors" },
 ];
 
-export default function GraduationPage() {
-  /* -------------------------- FILTER: CLIENT SELECTION ---------------------- */
-  const CLIENTS = useMemo(
-    () => ["All", ...Array.from(new Set(ALL_IMAGES.map(i => i.client)))],
-    []
-  );
-  const [activeClient, setActiveClient] = useState(CLIENTS[1] || "All");
+export default function AlwaysAnotherAnglePage() {
+  /* -------------------------- FILTER: CATEGORY SELECTION -------------------- */
+  const [activeCategory, setActiveCategory] = useState(CATEGORIES[1] || "All");
 
   const filtered = useMemo(() => {
-    if (activeClient === "All") return ALL_IMAGES;
-    return ALL_IMAGES.filter(i => i.client === activeClient);
-  }, [activeClient]);
+    if (activeCategory === "All") return ALL_IMAGES;
+    return ALL_IMAGES.filter(i => i.category === activeCategory);
+  }, [activeCategory]);
 
   /* -------------------------------- LIGHTBOX -------------------------------- */
   const [open, setOpen] = useState(false);
@@ -95,38 +101,37 @@ export default function GraduationPage() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open, closeLightbox, prev, next]);
 
-  /* --------------------------------- RENDER --------------------------------- */
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
 
       {/* ---------------------------------------------------------------------- */}
-      {/*                                HEADER                                  */}
+      {/*                                 HEADER                                 */}
       {/* ---------------------------------------------------------------------- */}
       <section className="px-8 py-5 border-b border-gray-200 flex justify-between items-end gap-4">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Graduation</h1>
-          <div className="text-gray-600 text-base mt-1">Your Finest Hour · 2025</div>
+          <h1 className="text-2xl font-semibold text-gray-900">The Merchant Fox</h1>
+          <div className="text-gray-600 text-base mt-1">The Classic British Fox Brothers Bristol Store.</div>
           <p className="text-gray-700 text-base mt-2 max-w-3xl leading-relaxed">
-            Your Finest Hour. Years of hard work, frame by frame. Live out your future endeavours to the fullest.
+            It's not Fashion. it's Timeless Identity. 
             <br />
-            Scroll the collage for their stories.
+            Explore the Heritage.
           </p>
         </div>
       </section>
 
       {/* ---------------------------------------------------------------------- */}
-      {/*                         CLIENT FILTER (STICKY)                          */}
+      {/*                          CATEGORY FILTER (STICKY)                      */}
       {/* ---------------------------------------------------------------------- */}
       <div className="sticky top-16 z-10 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60 px-6 md:px-8 py-3 border-b border-zinc-100">
         <ul className="flex flex-wrap gap-2">
-          {CLIENTS.map((c) => {
-            const active = c === activeClient;
+          {CATEGORIES.map((c) => {
+            const active = c === activeCategory;
             return (
               <li key={c}>
                 <button
                   type="button"
-                  onClick={() => setActiveClient(c)}
+                  onClick={() => setActiveCategory(c)}
                   aria-pressed={active}
                   className={[
                     "px-3 py-2 text-[10px] md:text-xs uppercase tracking-[0.22em] rounded-full border transition",
@@ -144,7 +149,7 @@ export default function GraduationPage() {
       </div>
 
       {/* ---------------------------------------------------------------------- */}
-      {/*                      HERO (ACTIVE CLIENT) + FULLSCREEN                   */}
+      {/*                     HERO (ACTIVE CATEGORY) + FULLSCREEN                 */}
       {/* ---------------------------------------------------------------------- */}
       {filtered.length > 0 && (
         <figure className="mx-2 md:mx-4 mt-4 mb-3 aspect-[3/2] relative overflow-hidden rounded-xl group">
@@ -163,15 +168,15 @@ export default function GraduationPage() {
             onClick={() => openLightbox(0)}
             className="opacity-100 md:opacity-0 md:group-hover:opacity-100"
           />
-          {/* Optional meta chip */}
+          {/* Optional meta chip (shows current category) */}
           <span className="absolute left-3 bottom-3 text-[10px] tracking-[0.22em] text-white/85 uppercase">
-            {activeClient !== "All" ? activeClient : filtered[0].client} {filtered[0].year ? `· ${filtered[0].year}` : ""}
+            {activeCategory !== "All" ? activeCategory : (filtered[0].category || "Unsorted")}
           </span>
         </figure>
       )}
 
       {/* ---------------------------------------------------------------------- */}
-      {/*                              MASONRY GRID                                */}
+      {/*                               MASONRY GRID                              */}
       {/* ---------------------------------------------------------------------- */}
       <main
         className="p-2 bg-white"

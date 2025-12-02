@@ -28,6 +28,17 @@ const ALL_ITEMS = [
   {
     id: 2,
     kind: "project",
+    href: "/portfolio/merchantfox",
+    image: "https://storage.googleapis.com/spurofthemoment/Portfolio/Merchant%20fox/_DSF4732.avif",
+    title: "The Merchant Fox ",
+    subtitle: "Product shots + Store location photography @ The Fox Brothers Bristol.",
+    alt: "The Merchant Fox cover",
+    tag: "Custom",
+    year: "2025",
+  },
+  {
+    id: 3,
+    kind: "project",
     href: "/portfolio/urbantailor",
     image: "https://storage.googleapis.com/spurofthemoment/Portfolio/Moses",
     title: "Urban Tailor Suits",
@@ -37,7 +48,7 @@ const ALL_ITEMS = [
     year: "2025",
   },
   {
-    id: 3,
+    id: 4,
     kind: "project",
     href: "/portfolio/graduation",
     image: "https://storage.googleapis.com/spurofthemoment/Portfolio/Grad",
@@ -48,7 +59,7 @@ const ALL_ITEMS = [
     year: "2024",
   },
   {
-    id: 4,
+    id: 5,
     kind: "project",
     href: "/portfolio/nusaantara",
     image:
@@ -60,7 +71,7 @@ const ALL_ITEMS = [
     year: "2024",
   },
   {
-    id: 99,
+    id: 6,
     kind: "video",
     title: "Behind the Scenes",
     subtitle: "From the Urban Tailor suits shoot.",
